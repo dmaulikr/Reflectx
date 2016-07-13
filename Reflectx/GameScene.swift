@@ -17,7 +17,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var paddle: SKSpriteNode!
     var sinceTouch : CFTimeInterval = 0
     var spawnTimer: CFTimeInterval = 0
-    let fixedDelta: CFTimeInterval = 1.0/60.0 // 60 FPS, fix later on (phones with 40 fps etc) 
+    let fixedDelta: CFTimeInterval = 1.0/60.0 // 60 FPS, fix later on (phones with 40 fps etc)
     var obstacleLayer: SKNode!
     var scoreLabel: SKLabelNode!
     var points = 0
@@ -197,7 +197,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let ballPosition = obstacleLayer.convertPoint(ball.position, toNode: self)
             
             /* Check if obstacle has left the scene */
-            if ballPosition.y <= 30 {
+            if ballPosition.y <= 70 {
                 
                 ball.connectedEnemy?.removeFromParent()
                 ball.removeFromParent()
@@ -220,9 +220,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func makeNewBall() -> Ball{
         let newBall = Ball()
-        newBall.size = CGSize(width: 15, height: 15)
         let randomPosition = CGPointMake(CGFloat.random(min: 50, max: 325), 600)
         newBall.position = self.convertPoint(randomPosition, toNode: obstacleLayer)
+        newBall.size = CGSize(width: 15, height: 15)
         newBall.physicsBody = SKPhysicsBody(rectangleOfSize: newBall.size)
         newBall.physicsBody?.affectedByGravity = false
         newBall.physicsBody?.dynamic = true
@@ -233,7 +233,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         newBall.physicsBody?.mass = 1
         newBall.physicsBody?.angularDamping = 0
         newBall.physicsBody?.linearDamping = 0
-        newBall.physicsBody?.restitution = 1
+        newBall.physicsBody?.restitution = 1 
         
         obstacleLayer.addChild(newBall)
         
@@ -243,9 +243,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func makeNewEnemy(ball: Ball) {
         
         let newEnemy = SKSpriteNode(texture: SKTexture(imageNamed: "enemy"))
-        newEnemy.size = CGSize(width: 40, height: 12)
         let enemyPosition = CGPoint (x: ball.position.x+0, y: ball.position.y+10)
         newEnemy.position = enemyPosition
+        newEnemy.size = CGSize(width: 40, height: 12)
         newEnemy.physicsBody = SKPhysicsBody(rectangleOfSize: newEnemy.size)
         newEnemy.physicsBody?.affectedByGravity = false
         newEnemy.physicsBody?.dynamic = true

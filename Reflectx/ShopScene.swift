@@ -1,5 +1,5 @@
 //
-//  EndScene.swift
+//  ShopScene.swift
 //  Reflectx
 //
 //  Created by Jacky Chen on 7/13/16.
@@ -8,6 +8,6 @@
 
 import SpriteKit
 
-class EndScene: SKScene {
+class ShopScene: SKScene {
     
 }
