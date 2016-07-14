@@ -10,4 +10,21 @@ import SpriteKit
 
 class TutorialScene: SKScene {
     
+    var homeButton: MSButtonNode!
+    
+    override func didMoveToView(view: SKView) {
+        
+        homeButton = self.childNodeWithName("homeButton") as! MSButtonNode
+        
+        homeButton.selectedHandler = {
+            
+            let skView = self.view as SKView!
+            let scene = MainScene(fileNamed:"MainScene") as MainScene!
+            scene.scaleMode = .AspectFill
+            skView.presentScene(scene)
+            
+        }
+        
+    }
+    
 }

@@ -10,4 +10,21 @@ import SpriteKit
 
 class HighScoreScene: SKScene {
     
+    var backButton: MSButtonNode!
+    
+    override func didMoveToView(view: SKView) {
+        
+        backButton = self.childNodeWithName("backButton") as! MSButtonNode
+        
+        backButton.selectedHandler = {
+            
+            let skView = self.view as SKView!
+            let scene = MainScene(fileNamed:"MainScene") as MainScene!
+            scene.scaleMode = .AspectFill
+            skView.presentScene(scene)
+            
+        }
+        
+    }
+    
 }

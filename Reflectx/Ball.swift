@@ -14,7 +14,7 @@ class Ball: SKSpriteNode {
     
     init() {
 
-        let texture = SKTexture(imageNamed: "blackDot")
+        let texture = SKTexture(imageNamed: "ballBlue")
         super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
         zPosition = 1
         

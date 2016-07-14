@@ -11,36 +11,70 @@ import SpriteKit
 class MainScene: SKScene {
     
     var playButton: MSButtonNode!
+    var leftArrow: MSButtonNode!
+    var rightArrow: MSButtonNode!
+    var highScoreButton: MSButtonNode!
+    var rateButton: MSButtonNode!
+    var shopButton: MSButtonNode!
+    var infoButton: MSButtonNode!
+    var selectLevelBack: MSButtonNode!
     var state: GameState = .Title
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         
         playButton = self.childNodeWithName("playButton") as! MSButtonNode
-        
+        leftArrow = self.childNodeWithName("leftArrow") as! MSButtonNode
+        rightArrow = self.childNodeWithName("rightArrow") as! MSButtonNode
+        highScoreButton = self.childNodeWithName("highScoreButton") as! MSButtonNode
+        rateButton = self.childNodeWithName("rateButton") as! MSButtonNode
+        shopButton = self.childNodeWithName("shopButton") as! MSButtonNode
+        infoButton = self.childNodeWithName("infoButton") as! MSButtonNode
+        selectLevelBack = self.childNodeWithName("selectLevelBack") as! MSButtonNode
+    
         playButton.selectedHandler = {
             
-            /* Start game */
             self.state = .Playing
-            
-            /* Grab reference to our SpriteKit view */
             let skView = self.view as SKView!
-            
-            /* Load Game scene */
             let scene = GameScene(fileNamed:"GameScene") as GameScene!
-            
-            /* Ensure correct aspect mode */
             scene.scaleMode = .AspectFill
-            
-            /* Show debug */
             skView.showsPhysics = true
             skView.showsDrawCount = true
             skView.showsFPS = true
-            
-            /* Start game scene */
             skView.presentScene(scene)
+            
+        }
+        
+        highScoreButton.selectedHandler = {
+            
+            self.state = .Browse
+            let skView = self.view as SKView!
+            let scene = HighScoreScene(fileNamed:"HighScoreScene") as HighScoreScene!
+            scene.scaleMode = .AspectFill
+            skView.presentScene(scene)
+            
+        }
+        
+        shopButton.selectedHandler = {
+            
+            self.state = .Browse
+            let skView = self.view as SKView!
+            let scene = ShopScene(fileNamed:"ShopScene") as ShopScene!
+            scene.scaleMode = .AspectFill
+            skView.presentScene(scene)
+            
+        }
+        
+        infoButton.selectedHandler = {
+            
+            self.state = .Browse
+            let skView = self.view as SKView!
+            let scene = InfoScene(fileNamed:"InfoScene") as InfoScene!
+            scene.scaleMode = .AspectFill
+            skView.presentScene(scene)
+            
         }
     }
-        
+    
 }
     

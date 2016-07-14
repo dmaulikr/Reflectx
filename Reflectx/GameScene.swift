@@ -9,12 +9,12 @@
 import SpriteKit
 
 enum GameState {
-    case Title, Playing, GameOver
+    case Title, Browse, Playing, GameOver
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    var paddle: SKSpriteNode!
+    var paddleBlue: SKSpriteNode!
     var sinceTouch : CFTimeInterval = 0
     var spawnTimer: CFTimeInterval = 0
     let fixedDelta: CFTimeInterval = 1.0/60.0 // 60 FPS, fix later on (phones with 40 fps etc)
@@ -26,7 +26,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var instructions: SKLabelNode!
     var health: Int = 1
     var state: GameState = .Title
-    let paddleName: String = "paddle"
+    let paddleName: String = "paddleBlue"
     let popSFX = SKAction.playSoundFileNamed("pop", waitForCompletion: false)
     let pop2SFX = SKAction.playSoundFileNamed("pop2", waitForCompletion: false)
     let successSFX = SKAction.playSoundFileNamed("success", waitForCompletion: false)
@@ -35,7 +35,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         /* Set up your scene here */
         
         physicsWorld.contactDelegate = self
-        paddle = self.childNodeWithName("//paddle") as! SKSpriteNode
+        paddleBlue = self.childNodeWithName("//paddleBlue") as! SKSpriteNode
         obstacleLayer = self.childNodeWithName("obstacleLayer")
         scoreLabel = self.childNodeWithName("scoreLabel") as! SKLabelNode
         instructions = self.childNodeWithName("instructions") as! SKLabelNode
@@ -79,7 +79,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let touch = touches.first
             let touchLocation = touch!.locationInNode(self)
             let previousLocation = touch!.previousLocationInNode(self)
-            let paddleX = paddle.position.x + (touchLocation.x - previousLocation.x)
+            let paddleX = paddleBlue.position.x + (touchLocation.x - previousLocation.x)
             
             /* print("paddle-> " + String(paddleX) + " vs " + String(size.width - paddle.size.width/2))
              paddleX = min(paddleX, size.width - paddle.size.width/2)
@@ -89,7 +89,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
              print("paddle-> " + String(paddleX))
              print(String(paddle.size.width/2)) */
             
-            paddle.position = CGPoint(x: paddleX, y: paddle.position.y)
+            paddleBlue.position = CGPoint(x: paddleX, y: paddleBlue.position.y)
         }
     }
     
@@ -242,7 +242,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func makeNewEnemy(ball: Ball) {
         
-        let newEnemy = SKSpriteNode(texture: SKTexture(imageNamed: "enemy"))
+        let newEnemy = SKSpriteNode(texture: SKTexture(imageNamed: "cloud"))
         let enemyPosition = CGPoint (x: ball.position.x+0, y: ball.position.y+10)
         newEnemy.position = enemyPosition
         newEnemy.size = CGSize(width: 40, height: 12)
@@ -268,19 +268,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         /* Game over! */
         
         state = .GameOver
-        
-        /* Grab reference to the SpriteKit view */
         let skView = self.view as SKView!
-        
-        /* Load Game scene */
-        let scene = GameScene(fileNamed:"GameScene") as GameScene!
-        
-        /* Ensure correct aspect mode */
+        let scene = EndScene(fileNamed:"EndScene") as EndScene!
         scene.scaleMode = .AspectFill
-        
-        /* Restart GameScene */
         skView.presentScene(scene)
         
     }
+    
 }
 
