@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8598E52A1D398521006F62AD /* kenvector_future_thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8598E5291D3984CA006F62AD /* kenvector_future_thin.ttf */; };
+		8598E52C1D3987A3006F62AD /* CharacterActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8598E52B1D3987A3006F62AD /* CharacterActions.sks */; };
 		85A459471D36DD84005C94CC /* HighScoreScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A459461D36DD84005C94CC /* HighScoreScene.swift */; };
 		85A459491D36DD8F005C94CC /* ShopScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A459481D36DD8F005C94CC /* ShopScene.swift */; };
 		85A4594B1D36DD9A005C94CC /* InfoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A4594A1D36DD9A005C94CC /* InfoScene.swift */; };
@@ -37,6 +39,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8598E5291D3984CA006F62AD /* kenvector_future_thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = kenvector_future_thin.ttf; sourceTree = "<group>"; };
+		8598E52B1D3987A3006F62AD /* CharacterActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = CharacterActions.sks; path = ../CharacterActions.sks; sourceTree = "<group>"; };
 		85A459461D36DD84005C94CC /* HighScoreScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighScoreScene.swift; sourceTree = "<group>"; };
 		85A459481D36DD8F005C94CC /* ShopScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopScene.swift; sourceTree = "<group>"; };
 		85A4594A1D36DD9A005C94CC /* InfoScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoScene.swift; sourceTree = "<group>"; };
@@ -100,6 +104,8 @@
 			children = (
 				85DBC7681D36AD6800E7FE09 /* Sounds */,
 				85DBC75D1D36AB7B00E7FE09 /* Assets.xcassets */,
+				8598E52B1D3987A3006F62AD /* CharacterActions.sks */,
+				8598E5291D3984CA006F62AD /* kenvector_future_thin.ttf */,
 				85DBC76F1D36ADCF00E7FE09 /* MSButtonNode.swift */,
 				85DBC7711D36ADFF00E7FE09 /* MSReferenceNode.swift */,
 				85DBC77F1D36B57000E7FE09 /* CGFloat+Extensions.swift */,
@@ -206,6 +212,8 @@
 			files = (
 				85DBC77E1D36AEF500E7FE09 /* EndScene.sks in Resources */,
 				85A459511D36DDD7005C94CC /* ShopScene.sks in Resources */,
+				8598E52C1D3987A3006F62AD /* CharacterActions.sks in Resources */,
+				8598E52A1D398521006F62AD /* kenvector_future_thin.ttf in Resources */,
 				85DBC7551D36AB7B00E7FE09 /* GameScene.sks in Resources */,
 				85DBC7611D36AB7B00E7FE09 /* LaunchScreen.storyboard in Resources */,
 				85DBC76B1D36AD9C00E7FE09 /* pop.wav in Resources */,

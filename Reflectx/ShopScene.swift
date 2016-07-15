@@ -12,7 +12,7 @@ class ShopScene: SKScene {
     
     var backButton: MSButtonNode!
     
-    var paddlePic: MSButtonNode!
+    var paddleBluePic: MSButtonNode!
     
     var paddleBox1: MSButtonNode!
     var paddleBox2: MSButtonNode!
@@ -21,18 +21,18 @@ class ShopScene: SKScene {
     var paddleBox5: MSButtonNode!
     var paddleBox6: MSButtonNode!
 
-    var rectangle1: MSButtonNode!
-    var rectangle2: MSButtonNode!
-    var rectangle3: MSButtonNode!
-    var rectangle4: MSButtonNode!
-    var rectangle5: MSButtonNode!
-    var rectangle6: MSButtonNode!
+    var rectangleBlue: MSButtonNode!
+    var rectangleGreen: MSButtonNode!
+    var rectangleYellow: MSButtonNode!
+    var rectangleRed: MSButtonNode!
+    var rectangleBlue2: MSButtonNode!
+    var rectangleGreen2: MSButtonNode!
     
     override func didMoveToView(view: SKView) {
         
         backButton = self.childNodeWithName("backButton") as! MSButtonNode
         
-        paddlePic = self.childNodeWithName("paddlePic") as! MSButtonNode
+        paddleBluePic = self.childNodeWithName("paddleBluePic") as! MSButtonNode
 
         paddleBox1 = self.childNodeWithName("paddleBox1") as! MSButtonNode
         paddleBox2 = self.childNodeWithName("paddleBox2") as! MSButtonNode
@@ -41,12 +41,12 @@ class ShopScene: SKScene {
         paddleBox5 = self.childNodeWithName("paddleBox5") as! MSButtonNode
         paddleBox6 = self.childNodeWithName("paddleBox6") as! MSButtonNode
 
-        rectangle1 = self.childNodeWithName("rectangle1") as! MSButtonNode
-        rectangle2 = self.childNodeWithName("rectangle2") as! MSButtonNode
-        rectangle3 = self.childNodeWithName("rectangle3") as! MSButtonNode
-        rectangle4 = self.childNodeWithName("rectangle4") as! MSButtonNode
-        rectangle5 = self.childNodeWithName("rectangle5") as! MSButtonNode
-        rectangle6 = self.childNodeWithName("rectangle6") as! MSButtonNode
+        rectangleBlue = self.childNodeWithName("rectangleBlue") as! MSButtonNode
+        rectangleGreen = self.childNodeWithName("rectangleGreen") as! MSButtonNode
+        rectangleYellow = self.childNodeWithName("rectangleYellow") as! MSButtonNode
+        rectangleRed = self.childNodeWithName("rectangleRed") as! MSButtonNode
+        rectangleBlue2 = self.childNodeWithName("rectangleBlue2") as! MSButtonNode
+        rectangleGreen2 = self.childNodeWithName("rectangleGreen2") as! MSButtonNode
         
         backButton.selectedHandler = {
             
