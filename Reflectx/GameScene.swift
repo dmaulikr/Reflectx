@@ -24,6 +24,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isFingerOnPaddle = false
     var pauseButton: MSButtonNode!
     var instructions: SKLabelNode!
+    var smallLeftArrow: SKSpriteNode!
+    var smallRightArrow: SKSpriteNode!
     var health: Int = 1
     var state: GameState = .Title
     let paddleName: String = "paddleBlue"
@@ -38,6 +40,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         paddleBlue = self.childNodeWithName("//paddleBlue") as! SKSpriteNode
         obstacleLayer = self.childNodeWithName("obstacleLayer")
         scoreLabel = self.childNodeWithName("scoreLabel") as! SKLabelNode
+        smallLeftArrow = self.childNodeWithName("smallLeftArrow") as! SKSpriteNode
+        smallRightArrow = self.childNodeWithName("smallRightArrow") as! SKSpriteNode
         instructions = self.childNodeWithName("instructions") as! SKLabelNode
         scoreLabel.text = String(points)
         pauseButton = childNodeWithName("pauseButton") as! MSButtonNode
@@ -90,6 +94,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
              print(String(paddle.size.width/2)) */
             
             paddleBlue.position = CGPoint(x: paddleX, y: paddleBlue.position.y)
+            
+                smallLeftArrow.hidden = true
+                smallRightArrow.hidden = true
         }
     }
     
@@ -222,45 +229,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let newBall = Ball()
         let randomPosition = CGPointMake(CGFloat.random(min: 50, max: 325), 600)
         newBall.position = self.convertPoint(randomPosition, toNode: obstacleLayer)
-        newBall.size = CGSize(width: 15, height: 15)
-        newBall.physicsBody = SKPhysicsBody(rectangleOfSize: newBall.size)
-        newBall.physicsBody?.affectedByGravity = false
-        newBall.physicsBody?.dynamic = true
-        newBall.physicsBody?.friction = 0
-        newBall.physicsBody?.categoryBitMask = 8
-        newBall.physicsBody?.contactTestBitMask = 8
-        newBall.physicsBody?.velocity = CGVector(dx: 0, dy: -250)
-        newBall.physicsBody?.mass = 1
-        newBall.physicsBody?.angularDamping = 0
-        newBall.physicsBody?.linearDamping = 0
-        newBall.physicsBody?.restitution = 1 
         
         obstacleLayer.addChild(newBall)
         
         return newBall
     }
     
-    func makeNewEnemy(ball: Ball) {
+    func makeNewEnemy(ball: Ball) -> Enemy{
         
-        let newEnemy = SKSpriteNode(texture: SKTexture(imageNamed: "cloud"))
+        let newEnemy = Enemy()
         let enemyPosition = CGPoint (x: ball.position.x+0, y: ball.position.y+10)
         newEnemy.position = enemyPosition
-        newEnemy.size = CGSize(width: 40, height: 12)
-        newEnemy.physicsBody = SKPhysicsBody(rectangleOfSize: newEnemy.size)
-        newEnemy.physicsBody?.affectedByGravity = false
-        newEnemy.physicsBody?.dynamic = true
-        newEnemy.physicsBody?.friction = 0
-        newEnemy.physicsBody?.categoryBitMask = 8
-        newEnemy.physicsBody?.contactTestBitMask = 8
-        newEnemy.physicsBody?.velocity = CGVector(dx: 0, dy: -200)
-        newEnemy.physicsBody?.mass = 1
-        newEnemy.physicsBody?.angularDamping = 0
-        newEnemy.physicsBody?.linearDamping = 0
-        newEnemy.physicsBody?.restitution = 1
         
         self.addChild(newEnemy)
         
         ball.connectedEnemy = newEnemy
+        
+        return newEnemy
         
     }
     
