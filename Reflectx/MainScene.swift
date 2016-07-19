@@ -18,7 +18,11 @@ class MainScene: SKScene {
     var shopButton: MSButtonNode!
     var infoButton: MSButtonNode!
     var selectLevelBack: MSButtonNode!
+    var goldNumber: SKLabelNode!
+    var selectLevel: SKLabelNode!
     var state: GameState = .Title
+    var index = 0
+    let difficulties = ["Easy", "Medium", "Hard"]
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -31,8 +35,10 @@ class MainScene: SKScene {
         shopButton = self.childNodeWithName("shopButton") as! MSButtonNode
         infoButton = self.childNodeWithName("infoButton") as! MSButtonNode
         selectLevelBack = self.childNodeWithName("selectLevelBack") as! MSButtonNode
+        goldNumber = self.childNodeWithName("goldNumber") as! SKLabelNode
+        selectLevel = self.childNodeWithName("selectLevel") as! SKLabelNode
     
-        playButton.selectedHandler = {
+        func playButtonClicked () {
             
             self.state = .Playing
             let skView = self.view as SKView!
@@ -45,7 +51,7 @@ class MainScene: SKScene {
             
         }
         
-        highScoreButton.selectedHandler = {
+        func highScoreButtonClicked () {
             
             self.state = .Browse
             let skView = self.view as SKView!
@@ -55,7 +61,7 @@ class MainScene: SKScene {
             
         }
         
-        shopButton.selectedHandler = {
+        func shopButtonClicked () {
             
             self.state = .Browse
             let skView = self.view as SKView!
@@ -65,7 +71,7 @@ class MainScene: SKScene {
             
         }
         
-        infoButton.selectedHandler = {
+        func infoButtonClicked () {
             
             self.state = .Browse
             let skView = self.view as SKView!
@@ -74,7 +80,39 @@ class MainScene: SKScene {
             skView.presentScene(scene)
             
         }
+        
+        func rightArrowClicked () {
+            
+            self.state = .Browse
+            self.index += 1
+            if self.index > 2 {
+                self.index = 2
+            }
+            self.selectLevel.text = String(self.difficulties[self.index])
+            
+        }
+        
+        func leftArrowClicked () {
+            
+            self.state = .Browse
+            self.index -= 1
+            if self.index < 0 {
+                self.index = 0
+            }
+            self.selectLevel.text = String(self.difficulties[self.index])
+            
+        }
+        
+        leftArrow.selectedHandler = leftArrowClicked
+        rightArrow.selectedHandler = rightArrowClicked
+        playButton.selectedHandler = playButtonClicked
+        highScoreButton.selectedHandler = highScoreButtonClicked
+        shopButton.selectedHandler = shopButtonClicked
+        infoButton.selectedHandler = infoButtonClicked
+
     }
     
 }
+
+
     

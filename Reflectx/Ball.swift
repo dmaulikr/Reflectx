@@ -13,11 +13,12 @@ class Ball: SKSpriteNode {
     var connectedEnemy : Enemy?
     
     init() {
-
+        
         let texture = SKTexture(imageNamed: "ballBlue")
         super.init(texture: texture, color: UIColor.clearColor(), size: CGSize(width: 15, height: 15))
         zPosition = 1
         addPhysicsBody()
+        name = "ball"
     }
     
     func addPhysicsBody () {
@@ -25,8 +26,9 @@ class Ball: SKSpriteNode {
         physicsBody?.affectedByGravity = false
         physicsBody?.dynamic = true
         physicsBody?.friction = 0
-        physicsBody?.categoryBitMask = 8
-        physicsBody?.contactTestBitMask = 8
+        physicsBody?.categoryBitMask = BallCategory
+        physicsBody?.collisionBitMask = EnemyCategory | PaddleCategory
+        physicsBody?.contactTestBitMask = EnemyCategory
         physicsBody?.velocity = CGVector(dx: 0, dy: -250)
         physicsBody?.mass = 1
         physicsBody?.angularDamping = 0

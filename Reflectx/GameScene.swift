@@ -12,6 +12,10 @@ enum GameState {
     case Title, Browse, Playing, GameOver
 }
 
+public let BallCategory : UInt32 = 4
+public let EnemyCategory : UInt32 = 2
+public let PaddleCategory : UInt32 = 1
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var paddleBlue: SKSpriteNode!
@@ -32,6 +36,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let popSFX = SKAction.playSoundFileNamed("pop", waitForCompletion: false)
     let pop2SFX = SKAction.playSoundFileNamed("pop2", waitForCompletion: false)
     let successSFX = SKAction.playSoundFileNamed("success", waitForCompletion: false)
+    var waveFinished: Bool = true
+    var previousNumber: UInt32?
+    var scoreLabel2: SKLabelNode!
     
     override func didMoveToView(view: SKView) {
         /* Set up your scene here */
@@ -40,6 +47,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         paddleBlue = self.childNodeWithName("//paddleBlue") as! SKSpriteNode
         obstacleLayer = self.childNodeWithName("obstacleLayer")
         scoreLabel = self.childNodeWithName("scoreLabel") as! SKLabelNode
+        scoreLabel2 = self.childNodeWithName("scoreLabel2") as! SKLabelNode
         smallLeftArrow = self.childNodeWithName("smallLeftArrow") as! SKSpriteNode
         smallRightArrow = self.childNodeWithName("smallRightArrow") as! SKSpriteNode
         instructions = self.childNodeWithName("instructions") as! SKLabelNode
@@ -75,6 +83,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             sinceTouch = 0
             
         }
+        
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -95,8 +104,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             paddleBlue.position = CGPoint(x: paddleX, y: paddleBlue.position.y)
             
-                smallLeftArrow.hidden = true
-                smallRightArrow.hidden = true
+            smallLeftArrow.hidden = true
+            smallRightArrow.hidden = true
+            
         }
     }
     
@@ -115,7 +125,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         sinceTouch+=fixedDelta
         
         /* Process obstacles */
-        spawnNewBall()
+        spawnNewWave()
         updateObstacles()
         
         spawnTimer += fixedDelta
@@ -138,51 +148,66 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let nodeB = contactB.node as! SKSpriteNode
         
         /* Check if either physics bodies was an enemy */
-        if contactA.categoryBitMask == 8 || contactB.categoryBitMask == 8 {
+        if contactA.categoryBitMask == BallCategory || contactB.categoryBitMask == BallCategory {
             
             /* Was the collision more than a gentle nudge? */
             if contact.collisionImpulse > 0 {
                 
                 /* Kill Enemy(s) */
-                if contactA.categoryBitMask == 8 { dieEnemy(nodeA) }
-                if contactB.categoryBitMask == 8 { dieEnemy(nodeB) }
+                if contactA.categoryBitMask == BallCategory || contactA.categoryBitMask == EnemyCategory { dieEnemy(nodeA) }
+                if contactB.categoryBitMask == BallCategory || contactB.categoryBitMask == EnemyCategory { dieEnemy(nodeB) }
                 
                 points += 1
                 scoreLabel.text = String(points)
+                scoreLabel2.text = String(points)
                 
                 self.runAction(popSFX)
                 
                 if points == 5 || points == 10 || points == 20 || points == 40 || points == 80 {
-
+                    
                     self.runAction(successSFX)
                     
                 }
                 
-                if points >= 5 {
-                    scoreLabel.fontColor = UIColor.greenColor()
-                }
+                scoreColor()
                 
-                if points >= 10 {
-                    scoreLabel.fontColor = UIColor.orangeColor()
-                    
-                }
-                
-                if points >= 20 {
-                    scoreLabel.fontColor = UIColor.blueColor()
-                    
-                }
-                
-                if points >= 40 {
-                    scoreLabel.fontColor = UIColor.redColor()
-                    
-                }
-                
-                if points >= 80 {
-                    scoreLabel.fontColor = UIColor.yellowColor()
-                    
-                }
             }
         }
+        
+        /* if Int(scoreLabel.text!) >= Int(scoreLabel2.text!) {
+         let userDefaults = NSUserDefaults.standardUserDefaults()
+         userDefaults.setValue(scoreLabel2.text, forKey: "points")
+         userDefaults.synchronize()
+         
+         }
+         
+         else if Int(scoreLabel.text!) < Int(scoreLabel2.text!) {
+         
+         }
+         
+         NSUserDefaults.standardUserDefaults().setObject(scoreLabel2, forKey:"scoreLabel2")
+         NSUserDefaults.standardUserDefaults().synchronize() */
+        
+    }
+    
+    func scoreColor () {
+        switch (points) {
+            
+        case 5...9:
+            scoreLabel.fontColor = UIColor.greenColor()
+        case 10...19:
+            scoreLabel.fontColor = UIColor.orangeColor()
+        case 20...39:
+            scoreLabel.fontColor = UIColor.blueColor()
+        case 40...79:
+            scoreLabel.fontColor = UIColor.redColor()
+        case 80:
+            scoreLabel.fontColor = UIColor.yellowColor()
+        default:
+            break
+            
+        }
+        
     }
     
     func dieEnemy(node: SKNode) {
@@ -212,41 +237,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.runAction(pop2SFX)
                 
             }
-        }
-    }
-    
-    func spawnNewBall(){
-        if spawnTimer >= 0.25 { // change to more seconds cause real iphone different
-            let ballPosition = makeNewBall()
-            makeNewEnemy(ballPosition)
             
-            // Reset spawn timer
-            spawnTimer = 0
+            if ball.connectedEnemy?.position.y < 600 && ball.connectedEnemy?.position.y > 550 {
+                ball.connectedEnemy?.physicsBody?.velocity = CGVector(dx: 0, dy: -105)
+            }
+            
+            if ball.connectedEnemy?.position.y <= 500 {
+                ball.connectedEnemy?.physicsBody?.velocity = CGVector(dx: 0, dy: -320)
+            }
+            
+            if ballPosition.y < 600 && ballPosition.y > 550 {
+                ball.physicsBody?.velocity = CGVector(dx: 0, dy: -115)
+            }
+            
+            if ballPosition.y <= 500 && ballPosition.y >= 450 {
+                ball.physicsBody?.velocity = CGVector(dx: 0, dy: -280)
+            }
         }
-    }
-    
-    func makeNewBall() -> Ball{
-        let newBall = Ball()
-        let randomPosition = CGPointMake(CGFloat.random(min: 50, max: 325), 600)
-        newBall.position = self.convertPoint(randomPosition, toNode: obstacleLayer)
-        
-        obstacleLayer.addChild(newBall)
-        
-        return newBall
-    }
-    
-    func makeNewEnemy(ball: Ball) -> Enemy{
-        
-        let newEnemy = Enemy()
-        let enemyPosition = CGPoint (x: ball.position.x+0, y: ball.position.y+10)
-        newEnemy.position = enemyPosition
-        
-        self.addChild(newEnemy)
-        
-        ball.connectedEnemy = newEnemy
-        
-        return newEnemy
-        
     }
     
     func gameOver() {
@@ -260,5 +267,158 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    func spawnNewWave(){
+        if spawnTimer >= 0.9 && waveFinished { // change to more seconds cause real iphone different
+            
+            var random = arc4random_uniform(3)
+            while previousNumber == random {
+                random = arc4random_uniform(3)
+            }
+            
+            previousNumber = random
+            
+            switch (random) {
+                
+            case 0:
+                wave5()
+            case 1:
+                wave2()
+            case 2:
+                wave3()
+            case 3:
+                wave4()
+            case 4:
+                wave5()
+            default:
+                break
+                
+            }
+            
+            spawnTimer = 0
+        }
+    }
+    
+    func createNewGroup(position: CGPoint){
+        
+        let newBall = Ball()
+        let randomPosition = position
+        newBall.position = self.convertPoint(randomPosition, toNode: obstacleLayer)
+        obstacleLayer.addChild(newBall)
+        let newEnemy = Enemy()
+        let enemyPosition = CGPoint (x: newBall.position.x+0, y: newBall.position.y+110)
+        newEnemy.position = enemyPosition
+        self.addChild(newEnemy)
+        newBall.connectedEnemy = newEnemy
+        
+    }
+    
+    func createNewBullet(position: CGPoint) {
+        
+        let newBullet = Bullet()
+        let randomPosition = position
+        newBullet.position = self.convertPoint(randomPosition, toNode: obstacleLayer)
+        self.addChild(newBullet)
+        
+    }
+    
+    func wave1() {
+        
+        self.waveFinished = false
+        
+        let wavePositionsX = [40, 100, 160, 335, 280, 220]
+        var index = 0
+        let wait = SKAction.waitForDuration(0.35)
+        let run = SKAction.runBlock {
+            self.createNewGroup(CGPoint(x: wavePositionsX[index], y: 650))
+            index += 1
+            
+        }
+        let finish = SKAction.runBlock {
+            self.waveFinished = true
+        }
+        
+        self.runAction(SKAction.sequence([wait, run, wait, run, wait, run, wait, run, wait, run, wait, run, finish]))
+        
+    }
+    
+    func wave2() {
+        
+        self.waveFinished = false
+        
+        let wavePositionsX = [40, 80, 335, 100, 280]
+        var index = 0
+        let wait = SKAction.waitForDuration(0.35)
+        let run = SKAction.runBlock {
+            self.createNewGroup(CGPoint(x: wavePositionsX[index], y: 650))
+            index += 1
+            
+        }
+        let finish = SKAction.runBlock {
+            self.waveFinished = true
+        }
+        
+        self.runAction(SKAction.sequence([wait, run, run, wait, wait, run, wait, run, wait, run, finish]))
+        
+    }
+    
+    func wave3() {
+        
+        self.waveFinished = false
+        
+        let wavePositionsX = [40, 280, 100, 220, 140, 180]
+        var index = 0
+        let wait = SKAction.waitForDuration(0.4)
+        let run = SKAction.runBlock {
+            self.createNewGroup(CGPoint(x: wavePositionsX[index], y: 650))
+            index += 1
+            
+        }
+        let finish = SKAction.runBlock {
+            self.waveFinished = true
+        }
+        
+        self.runAction(SKAction.sequence([wait, run, wait, run, wait, run, wait, run, wait, run, run, finish]))
+        
+    }
+    
+    func wave4() {
+        
+        self.waveFinished = false
+        
+        let wavePositionsX = [60, 60, 100, 250]
+        var index = 0
+        let wait = SKAction.waitForDuration(0.25)
+        let run = SKAction.runBlock {
+            self.createNewGroup(CGPoint(x: wavePositionsX[index], y: 650))
+            index += 1
+            
+        }
+        let finish = SKAction.runBlock {
+            self.waveFinished = true
+        }
+        
+        self.runAction(SKAction.sequence([wait, run, wait, run, wait, run, wait, run, finish]))
+        
+    }
+    
+    func wave5() {
+        
+        self.waveFinished = false
+        
+        let wavePositionsX = [60, 100, 160]
+        var index = 0
+        let wait = SKAction.waitForDuration(0.3)
+        let run = SKAction.runBlock {
+            self.createNewBullet(CGPoint(x: wavePositionsX[index], y: 650))
+            index += 1
+            
+        }
+        let finish = SKAction.runBlock {
+            self.waveFinished = true
+        }
+        
+        self.runAction(SKAction.sequence([wait, run, wait, run, wait, run, finish]))
+        
+    }
+    
 }
-

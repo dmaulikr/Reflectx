@@ -1,22 +1,22 @@
 //
-//  Enemy.swift
+//  Bullet.swift
 //  Reflectx
 //
-//  Created by Jacky Chen on 7/14/16.
+//  Created by Jacky Chen on 7/19/16.
 //  Copyright © 2016 Jacky. All rights reserved.
 //
 
 import SpriteKit
 
-class Enemy: SKSpriteNode {
-        
+class Bullet: SKSpriteNode {
+    
     init() {
         
-        let texture = SKTexture(imageNamed: "cloud")
-        super.init(texture: texture, color: UIColor.clearColor(), size: CGSize(width: 40, height: 12))
-        zPosition = 1
+        let texture = SKTexture(imageNamed: "yellowDot")
+        super.init(texture: texture, color: UIColor.clearColor(), size: CGSize(width: 15, height: 15))
+        zPosition = 2
         addPhysicsBody()
-        name = "enemy"
+        name = "bullet"
     }
     
     func addPhysicsBody () {

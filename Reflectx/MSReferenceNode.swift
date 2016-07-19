@@ -15,5 +15,6 @@ class MSReferenceNode: SKReferenceNode {
     override func didLoadReferenceNode(node: SKNode?) {
         
         blackBall = childNodeWithName("//blackBall") as! SKSpriteNode
+        
     }
 }

@@ -11,10 +11,20 @@ import SpriteKit
 class HighScoreScene: SKScene {
     
     var backButton: MSButtonNode!
+    var highScoreLabel1: SKLabelNode!
+    var highScoreLabel2: SKLabelNode!
+    var highScoreLabel3: SKLabelNode!
+    var gamesPlayedLabel: SKLabelNode!
+    var timePlayedLabel: SKLabelNode!
     
     override func didMoveToView(view: SKView) {
         
         backButton = self.childNodeWithName("backButton") as! MSButtonNode
+        highScoreLabel1 = self.childNodeWithName("highScoreLabel1") as! SKLabelNode
+        highScoreLabel2 = self.childNodeWithName("highScoreLabel2") as! SKLabelNode
+        highScoreLabel3 = self.childNodeWithName("highScoreLabel3") as! SKLabelNode
+        gamesPlayedLabel = self.childNodeWithName("gamesPlayedLabel") as! SKLabelNode
+        timePlayedLabel = self.childNodeWithName("timePlayedLabel") as! SKLabelNode
         
         backButton.selectedHandler = {
             

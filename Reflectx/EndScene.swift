@@ -16,6 +16,10 @@ class EndScene: SKScene {
     var rateButton: MSButtonNode!
     var shopButton: MSButtonNode!
     var shareButton: MSButtonNode!
+    var goldNumber: SKLabelNode!
+    var scoreLabel2: SKLabelNode!
+    var highScoreLabel: SKLabelNode!
+    var addGold: SKLabelNode!
     
     override func didMoveToView(view: SKView) {
         
@@ -25,6 +29,13 @@ class EndScene: SKScene {
         rateButton = self.childNodeWithName("rateButton") as! MSButtonNode
         shopButton = self.childNodeWithName("shopButton") as! MSButtonNode
         shareButton = self.childNodeWithName("shareButton") as! MSButtonNode
+        goldNumber = self.childNodeWithName("goldNumber") as! SKLabelNode
+        scoreLabel2 = self.childNodeWithName("scoreLabel2") as! SKLabelNode
+        highScoreLabel = self.childNodeWithName("highScoreLabel") as! SKLabelNode
+        addGold = self.childNodeWithName("addGold") as! SKLabelNode
+        
+        /* let savedScore: Int = NSUserDefaults.standardUserDefaults().objectForKey("scoreLabel2") as! Int
+         scoreLabel2.text = String(savedScore) */
         
         homeButton.selectedHandler = {
             
