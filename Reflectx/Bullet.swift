@@ -27,7 +27,7 @@ class Bullet: SKSpriteNode {
         physicsBody?.affectedByGravity = false
         physicsBody?.dynamic = true
         physicsBody?.friction = 0
-        physicsBody?.categoryBitMask = BallCategory 
+        physicsBody?.categoryBitMask = BulletCategory
         physicsBody?.collisionBitMask = EnemyCategory | PaddleCategory
         physicsBody?.contactTestBitMask = EnemyCategory
         physicsBody?.velocity = CGVector(dx: 0, dy: -250)

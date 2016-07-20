@@ -15,7 +15,6 @@ class HighScoreScene: SKScene {
     var highScoreLabel2: SKLabelNode!
     var highScoreLabel3: SKLabelNode!
     var gamesPlayedLabel: SKLabelNode!
-    var timePlayedLabel: SKLabelNode!
     
     override func didMoveToView(view: SKView) {
         
@@ -24,7 +23,9 @@ class HighScoreScene: SKScene {
         highScoreLabel2 = self.childNodeWithName("highScoreLabel2") as! SKLabelNode
         highScoreLabel3 = self.childNodeWithName("highScoreLabel3") as! SKLabelNode
         gamesPlayedLabel = self.childNodeWithName("gamesPlayedLabel") as! SKLabelNode
-        timePlayedLabel = self.childNodeWithName("timePlayedLabel") as! SKLabelNode
+        
+        let savedScore: Int = NSUserDefaults.standardUserDefaults().objectForKey("highScore") as! Int
+        highScoreLabel1.text = "Easy -  \(savedScore)"
         
         backButton.selectedHandler = {
             

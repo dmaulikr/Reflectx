@@ -39,6 +39,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let successSFX = SKAction.playSoundFileNamed("success", waitForCompletion: false)
     var waveFinished: Bool = true
     var previousNumber: UInt32?
+    var bulletJoint: SKPhysicsJoint?
     
     override func didMoveToView(view: SKView) {
         /* Set up your scene here */
@@ -52,7 +53,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         instructions = self.childNodeWithName("instructions") as! SKLabelNode
         scoreLabel.text = String(points)
         pauseButton = childNodeWithName("pauseButton") as! MSButtonNode
-                
+        
         pauseButton.selectedHandler = {
             self.paused = !self.paused
         }
@@ -60,6 +61,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         NSUserDefaults.standardUserDefaults().setInteger(0, forKey: "localScore")
         
         self.state = .Playing
+        
+        // test
+        
+        /* let savedScore: Int = NSUserDefaults.standardUserDefaults().objectForKey("highScore") as! Int
+         highScoreLabel.text = String(savedScore)
+         
+         func playerLocalScoreUpdate() {
+         let localScore = NSUserDefaults().integerForKey("localScore")
+         if points > localScore {
+         NSUserDefaults().setInteger(points, forKey: "localScore")
+         NSUserDefaults.standardUserDefaults().synchronize()
+         }
+         scoreLabel.text = "\(points)"
+         } */
         
         self.runAction(SKAction.waitForDuration(1.5), completion: {() -> Void in
             self.instructions.hidden = true
@@ -113,6 +128,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         isFingerOnPaddle = false
+        
+        if let bulletJoint = bulletJoint {
+            
+            if let bullet = bulletJoint.bodyA.node as? Bullet {
+                bullet.physicsBody?.velocity = CGVectorMake(0, 200)
+            }
+                
+            else if let bullet = bulletJoint.bodyB.node as? Bullet {
+                bullet.physicsBody?.velocity = CGVectorMake(0, 200)
+            }
+            
+            physicsWorld.removeJoint(bulletJoint)
+            self.bulletJoint = nil
+            
+            
+        }
+        
+        
     }
     
     override func update(currentTime: CFTimeInterval) {
@@ -148,33 +181,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let nodeA = contactA.node as! SKSpriteNode
         let nodeB = contactB.node as! SKSpriteNode
         
-        /* if contactA.categoryBitMask == PaddleCategory || contactB.categoryBitMask == PaddleCategory {
+        if bulletJoint == nil {
             
-            if contact.collisionImpulse > 0 {
+            if (contactA.categoryBitMask == PaddleCategory && contactB.categoryBitMask == BulletCategory) || (contactA.categoryBitMask == BulletCategory && contactB.categoryBitMask == PaddleCategory) {
                 
-                if contactA.categoryBitMask == BulletCategory || contactA.categoryBitMask == PaddleCategory {}
-                if contactB.categoryBitMask == BulletCategory || contactB.categoryBitMask == PaddleCategory {}
-                
-                    let bullet = Bullet()
-                    bullet.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                if let bullet = nodeA as? Bullet {
+                    addBulletJoint(bullet)
+                }
+                    
+                else if let bullet = nodeB as? Bullet {
+                    addBulletJoint(bullet)
+                }
                 
             }
-            
-        } */
+        }
         
         /* Check if either physics bodies was an enemy */
         if contactA.categoryBitMask == BallCategory || contactB.categoryBitMask == BallCategory {
             
             if contact.collisionImpulse > 0 {
                 
-                if contactA.categoryBitMask == BallCategory || contactA.categoryBitMask == EnemyCategory { dieEnemy(nodeA) }
-                if contactB.categoryBitMask == BallCategory || contactB.categoryBitMask == EnemyCategory { dieEnemy(nodeB) }
+                if contactA.categoryBitMask == BallCategory || contactA.categoryBitMask == EnemyCategory { dieEnemy(nodeA)
+                }
+                if contactB.categoryBitMask == BallCategory || contactB.categoryBitMask == EnemyCategory { dieEnemy(nodeB)
+                }
                 
                 points += 1
                 
                 playerLocalScoreUpdate()
                 playerHighScoreUpdate()
-                print( NSUserDefaults().integerForKey("highScore") )
+                print(NSUserDefaults().integerForKey("highScore"))
                 
                 self.runAction(popSFX)
                 
@@ -190,6 +226,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         }
         
+    }
+    
+    func addBulletJoint (bullet: Bullet) {
+        bullet.physicsBody?.velocity = CGVectorMake(0, 0)
+        bulletJoint = SKPhysicsJointPin.jointWithBodyA(paddleBlue.physicsBody!, bodyB: bullet.physicsBody!, anchor: bullet.position)
+        
+        physicsWorld.addJoint(bulletJoint!)
     }
     
     func scoreColor () {
@@ -227,17 +270,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         /* Update Obstacles */
         
         // make it so - health when bullet/enemy 2
-      /*  for bullet in self.children as! [Bullet] {
-            let bulletPosition = obstacleLayer.convertPoint(bullet.position, toNode: self)
-            
-            if bulletPosition.y <= 70 {
-                bullet.connectedEnemy2?.removeFromParent()
-                bullet.removeFromParent()
-                health -= 1
-                self.runAction(pop2SFX)
-            }
-            
-        } */
+        /*  for bullet in self.children as! [Bullet] {
+         let bulletPosition = obstacleLayer.convertPoint(bullet.position, toNode: self)
+         
+         if bulletPosition.y <= 70 {
+         bullet.connectedEnemy2?.removeFromParent()
+         bullet.removeFromParent()
+         health -= 1
+         self.runAction(pop2SFX)
+         }
+         
+         } */
         
         for ball in obstacleLayer.children as! [Ball] {
             /* Get obstacle node position, convert node position to scene space */
@@ -294,22 +337,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         scoreLabel.text = "\(points)"
     }
-
+    
     func playerLocalScoreUpdate() {
         let localScore = NSUserDefaults().integerForKey("localScore")
         if points > localScore {
             NSUserDefaults().setInteger(points, forKey: "localScore")
             NSUserDefaults.standardUserDefaults().synchronize()
-     }
+        }
         scoreLabel.text = "\(points)"
     }
     
     func spawnNewWave(){
         if spawnTimer >= 0.9 && waveFinished { // change to more seconds cause real iphone different
             
-            var random = arc4random_uniform(4) // 4 or 5 // 2
+            var random = arc4random_uniform(2) // 4 or 5 // 2
             while previousNumber == random {
-                random = arc4random_uniform(4) // 4 or 5 // 2
+                random = arc4random_uniform(2) // 4 or 5 // 2
             }
             
             previousNumber = random
@@ -317,7 +360,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             switch (random) {
                 
             case 0:
-                wave1() // 5 // 1
+                wave5() // 5 // 1
             case 1:
                 wave2()
             case 2:
@@ -462,5 +505,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.runAction(SKAction.sequence([wait, run, wait, run, wait, run, finish]))
         
     }
+    
     
 }
