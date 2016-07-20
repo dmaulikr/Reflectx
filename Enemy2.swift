@@ -27,7 +27,7 @@ class Enemy2: SKSpriteNode {
         physicsBody?.friction = 0
         physicsBody?.categoryBitMask = EnemyCategory
         physicsBody?.collisionBitMask = BallCategory | PaddleCategory
-        physicsBody?.contactTestBitMask = BallCategory | BulletCategory // bullet category
+        physicsBody?.contactTestBitMask = BallCategory  
         physicsBody?.velocity = CGVector(dx: 0, dy: -250)
         physicsBody?.mass = 1
         physicsBody?.angularDamping = 0

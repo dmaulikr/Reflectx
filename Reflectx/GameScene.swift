@@ -39,7 +39,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let successSFX = SKAction.playSoundFileNamed("success", waitForCompletion: false)
     var waveFinished: Bool = true
     var previousNumber: UInt32?
-    var scoreLabel2: SKLabelNode!
     
     override func didMoveToView(view: SKView) {
         /* Set up your scene here */
@@ -48,16 +47,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         paddleBlue = self.childNodeWithName("//paddleBlue") as! SKSpriteNode
         obstacleLayer = self.childNodeWithName("obstacleLayer")
         scoreLabel = self.childNodeWithName("scoreLabel") as! SKLabelNode
-        scoreLabel2 = self.childNodeWithName("scoreLabel2") as! SKLabelNode
         smallLeftArrow = self.childNodeWithName("smallLeftArrow") as! SKSpriteNode
         smallRightArrow = self.childNodeWithName("smallRightArrow") as! SKSpriteNode
         instructions = self.childNodeWithName("instructions") as! SKLabelNode
         scoreLabel.text = String(points)
         pauseButton = childNodeWithName("pauseButton") as! MSButtonNode
-        
+                
         pauseButton.selectedHandler = {
             self.paused = !self.paused
         }
+        
+        NSUserDefaults.standardUserDefaults().setInteger(0, forKey: "localScore")
         
         self.state = .Playing
         
@@ -131,7 +131,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         spawnTimer += fixedDelta
         
-        if health == 0 {
+        if health <= 0 {
             gameOver()
         }
         
@@ -148,7 +148,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let nodeA = contactA.node as! SKSpriteNode
         let nodeB = contactB.node as! SKSpriteNode
         
-        /* if contactA.categoryBitMask == PaddleCategory || contactB.categoryBitMask == BulletCategory {
+        /* if contactA.categoryBitMask == PaddleCategory || contactB.categoryBitMask == PaddleCategory {
             
             if contact.collisionImpulse > 0 {
                 
@@ -156,7 +156,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if contactB.categoryBitMask == BulletCategory || contactB.categoryBitMask == PaddleCategory {}
                 
                     let bullet = Bullet()
-                    bullet.connectedEnemy2?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                    bullet.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
                 
             }
             
@@ -171,8 +171,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if contactB.categoryBitMask == BallCategory || contactB.categoryBitMask == EnemyCategory { dieEnemy(nodeB) }
                 
                 points += 1
-                scoreLabel.text = String(points)
-                scoreLabel2.text = String(points)
+                
+                playerLocalScoreUpdate()
+                playerHighScoreUpdate()
+                print( NSUserDefaults().integerForKey("highScore") )
                 
                 self.runAction(popSFX)
                 
@@ -187,20 +189,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
         }
-        
-        /* if Int(scoreLabel.text!) >= Int(scoreLabel2.text!) {
-         let userDefaults = NSUserDefaults.standardUserDefaults()
-         userDefaults.setValue(scoreLabel2.text, forKey: "points")
-         userDefaults.synchronize()
-         
-         }
-         
-         else if Int(scoreLabel.text!) < Int(scoreLabel2.text!) {
-         
-         }
-         
-         NSUserDefaults.standardUserDefaults().setObject(scoreLabel2, forKey:"scoreLabel2")
-         NSUserDefaults.standardUserDefaults().synchronize() */
         
     }
     
@@ -298,12 +286,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    func playerHighScoreUpdate() {
+        let highScore = NSUserDefaults().integerForKey("highScore")
+        if points > highScore {
+            NSUserDefaults().setInteger(points, forKey: "highScore")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+        scoreLabel.text = "\(points)"
+    }
+
+    func playerLocalScoreUpdate() {
+        let localScore = NSUserDefaults().integerForKey("localScore")
+        if points > localScore {
+            NSUserDefaults().setInteger(points, forKey: "localScore")
+            NSUserDefaults.standardUserDefaults().synchronize()
+     }
+        scoreLabel.text = "\(points)"
+    }
+    
     func spawnNewWave(){
         if spawnTimer >= 0.9 && waveFinished { // change to more seconds cause real iphone different
             
-            var random = arc4random_uniform(2) // 4 or 5
+            var random = arc4random_uniform(4) // 4 or 5 // 2
             while previousNumber == random {
-                random = arc4random_uniform(2) // 4 or 5
+                random = arc4random_uniform(4) // 4 or 5 // 2
             }
             
             previousNumber = random
@@ -311,7 +317,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             switch (random) {
                 
             case 0:
-                wave5() // 1
+                wave1() // 5 // 1
             case 1:
                 wave2()
             case 2:

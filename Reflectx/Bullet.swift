@@ -14,7 +14,7 @@ class Bullet: SKSpriteNode {
     
     init() {
         
-        let texture = SKTexture(imageNamed: "yellowDot")
+        let texture = SKTexture(imageNamed: "ballYellow")
         super.init(texture: texture, color: UIColor.clearColor(), size: CGSize(width: 15, height: 15))
         zPosition = 2
         addPhysicsBody()
