@@ -87,6 +87,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		85A947721D403C09008D89C6 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				85DBC7751D36AE8400E7FE09 /* Ball.swift */,
+				85A7D72D1D3EA15F0041C26E /* Bullet.swift */,
+				85BD17521D38597300D2FBAC /* Enemy.swift */,
+				85081DC41D3FE390009CB64D /* Enemy2.swift */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
+		85A947731D403C3C008D89C6 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				85DBC76F1D36ADCF00E7FE09 /* MSButtonNode.swift */,
+				85DBC7711D36ADFF00E7FE09 /* MSReferenceNode.swift */,
+				85DBC77F1D36B57000E7FE09 /* CGFloat+Extensions.swift */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
+		85A947741D403C5F008D89C6 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				8598E52B1D3987A3006F62AD /* CharacterActions.sks */,
+				85DBC77B1D36AEE800E7FE09 /* MainScene.sks */,
+				85DBC7541D36AB7B00E7FE09 /* GameScene.sks */,
+				85DBC77D1D36AEF500E7FE09 /* EndScene.sks */,
+				85A4594E1D36DDCA005C94CC /* HighScoreScene.sks */,
+				85A459501D36DDD7005C94CC /* ShopScene.sks */,
+				85A459521D36DDE4005C94CC /* InfoScene.sks */,
+				85A459541D36DDF0005C94CC /* TutorialScene.sks */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		85A947751D403C7F008D89C6 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				85DBC7521D36AB7B00E7FE09 /* AppDelegate.swift */,
+				85DBC7581D36AB7B00E7FE09 /* GameViewController.swift */,
+				85DBC7561D36AB7B00E7FE09 /* GameScene.swift */,
+				85DBC7771D36AECC00E7FE09 /* MainScene.swift */,
+				85DBC7791D36AED900E7FE09 /* EndScene.swift */,
+				85A459461D36DD84005C94CC /* HighScoreScene.swift */,
+				85A459481D36DD8F005C94CC /* ShopScene.swift */,
+				85A4594A1D36DD9A005C94CC /* InfoScene.swift */,
+				85A4594C1D36DDA5005C94CC /* TutorialScene.swift */,
+			);
+			name = Swift;
+			sourceTree = "<group>";
+		};
 		85DBC7461D36AB7A00E7FE09 = {
 			isa = PBXGroup;
 			children = (
@@ -106,34 +158,13 @@
 		85DBC7511D36AB7B00E7FE09 /* Reflectx */ = {
 			isa = PBXGroup;
 			children = (
+				85A947751D403C7F008D89C6 /* Swift */,
+				85A947741D403C5F008D89C6 /* Scenes */,
+				85A947731D403C3C008D89C6 /* Tools */,
+				85A947721D403C09008D89C6 /* Objects */,
 				85DBC7681D36AD6800E7FE09 /* Sounds */,
-				85DBC75D1D36AB7B00E7FE09 /* Assets.xcassets */,
-				8598E52B1D3987A3006F62AD /* CharacterActions.sks */,
-				8598E5291D3984CA006F62AD /* kenvector_future_thin.ttf */,
-				85DBC76F1D36ADCF00E7FE09 /* MSButtonNode.swift */,
-				85DBC7711D36ADFF00E7FE09 /* MSReferenceNode.swift */,
-				85DBC77F1D36B57000E7FE09 /* CGFloat+Extensions.swift */,
-				85DBC7521D36AB7B00E7FE09 /* AppDelegate.swift */,
-				85DBC7751D36AE8400E7FE09 /* Ball.swift */,
-				85A7D72D1D3EA15F0041C26E /* Bullet.swift */,
-				85BD17521D38597300D2FBAC /* Enemy.swift */,
-				85081DC41D3FE390009CB64D /* Enemy2.swift */,
-				85DBC7581D36AB7B00E7FE09 /* GameViewController.swift */,
-				85DBC77B1D36AEE800E7FE09 /* MainScene.sks */,
-				85DBC7771D36AECC00E7FE09 /* MainScene.swift */,
-				85DBC7541D36AB7B00E7FE09 /* GameScene.sks */,
-				85DBC7561D36AB7B00E7FE09 /* GameScene.swift */,
-				85DBC77D1D36AEF500E7FE09 /* EndScene.sks */,
-				85DBC7791D36AED900E7FE09 /* EndScene.swift */,
-				85A4594E1D36DDCA005C94CC /* HighScoreScene.sks */,
-				85A459461D36DD84005C94CC /* HighScoreScene.swift */,
-				85A459501D36DDD7005C94CC /* ShopScene.sks */,
-				85A459481D36DD8F005C94CC /* ShopScene.swift */,
-				85A459521D36DDE4005C94CC /* InfoScene.sks */,
-				85A4594A1D36DD9A005C94CC /* InfoScene.swift */,
-				85A459541D36DDF0005C94CC /* TutorialScene.sks */,
-				85A4594C1D36DDA5005C94CC /* TutorialScene.swift */,
 				85DBC7811D36C31300E7FE09 /* Other */,
+				85DBC75D1D36AB7B00E7FE09 /* Assets.xcassets */,
 			);
 			path = Reflectx;
 			sourceTree = "<group>";
@@ -154,6 +185,7 @@
 				85DBC75F1D36AB7B00E7FE09 /* LaunchScreen.storyboard */,
 				85DBC75A1D36AB7B00E7FE09 /* Main.storyboard */,
 				85DBC7621D36AB7B00E7FE09 /* Info.plist */,
+				8598E5291D3984CA006F62AD /* kenvector_future_thin.ttf */,
 			);
 			name = Other;
 			sourceTree = "<group>";
