@@ -1,24 +1,22 @@
 //
-//  Bullet.swift
+//  Enemy.swift
 //  Reflectx
 //
-//  Created by Jacky Chen on 7/19/16.
+//  Created by Jacky Chen on 7/14/16.
 //  Copyright © 2016 Jacky. All rights reserved.
 //
 
 import SpriteKit
 
-class Bullet: SKSpriteNode {
-    
-    var connectedEnemy2 : Enemy2?
+class Enemy2: SKSpriteNode {
     
     init() {
         
-        let texture = SKTexture(imageNamed: "yellowDot")
-        super.init(texture: texture, color: UIColor.clearColor(), size: CGSize(width: 15, height: 15))
-        zPosition = 2
+        let texture = SKTexture(imageNamed: "wingMan1")
+        super.init(texture: texture, color: UIColor.clearColor(), size: CGSize(width: 40, height: 12))
+        zPosition = 1
         addPhysicsBody()
-        name = "bullet"
+        name = "enemy"
     }
     
     func addPhysicsBody () {
@@ -27,9 +25,9 @@ class Bullet: SKSpriteNode {
         physicsBody?.affectedByGravity = false
         physicsBody?.dynamic = true
         physicsBody?.friction = 0
-        physicsBody?.categoryBitMask = BallCategory 
-        physicsBody?.collisionBitMask = EnemyCategory | PaddleCategory
-        physicsBody?.contactTestBitMask = EnemyCategory
+        physicsBody?.categoryBitMask = EnemyCategory
+        physicsBody?.collisionBitMask = BallCategory | PaddleCategory
+        physicsBody?.contactTestBitMask = BallCategory | BulletCategory // bullet category
         physicsBody?.velocity = CGVector(dx: 0, dy: -250)
         physicsBody?.mass = 1
         physicsBody?.angularDamping = 0

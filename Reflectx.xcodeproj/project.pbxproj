@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		85081DC51D3FE390009CB64D /* Enemy2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85081DC41D3FE390009CB64D /* Enemy2.swift */; };
 		8598E52A1D398521006F62AD /* kenvector_future_thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8598E5291D3984CA006F62AD /* kenvector_future_thin.ttf */; };
 		8598E52C1D3987A3006F62AD /* CharacterActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8598E52B1D3987A3006F62AD /* CharacterActions.sks */; };
 		85A459471D36DD84005C94CC /* HighScoreScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A459461D36DD84005C94CC /* HighScoreScene.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		85081DC41D3FE390009CB64D /* Enemy2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Enemy2.swift; path = ../Enemy2.swift; sourceTree = "<group>"; };
 		8598E5291D3984CA006F62AD /* kenvector_future_thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = kenvector_future_thin.ttf; sourceTree = "<group>"; };
 		8598E52B1D3987A3006F62AD /* CharacterActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = CharacterActions.sks; path = ../CharacterActions.sks; sourceTree = "<group>"; };
 		85A459461D36DD84005C94CC /* HighScoreScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighScoreScene.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				85DBC7751D36AE8400E7FE09 /* Ball.swift */,
 				85A7D72D1D3EA15F0041C26E /* Bullet.swift */,
 				85BD17521D38597300D2FBAC /* Enemy.swift */,
+				85081DC41D3FE390009CB64D /* Enemy2.swift */,
 				85DBC7581D36AB7B00E7FE09 /* GameViewController.swift */,
 				85DBC77B1D36AEE800E7FE09 /* MainScene.sks */,
 				85DBC7771D36AECC00E7FE09 /* MainScene.swift */,
@@ -245,6 +248,7 @@
 				85A459491D36DD8F005C94CC /* ShopScene.swift in Sources */,
 				85DBC7801D36B57000E7FE09 /* CGFloat+Extensions.swift in Sources */,
 				85DBC7571D36AB7B00E7FE09 /* GameScene.swift in Sources */,
+				85081DC51D3FE390009CB64D /* Enemy2.swift in Sources */,
 				85DBC7591D36AB7B00E7FE09 /* GameViewController.swift in Sources */,
 				85DBC7781D36AECC00E7FE09 /* MainScene.swift in Sources */,
 				85A459471D36DD84005C94CC /* HighScoreScene.swift in Sources */,
