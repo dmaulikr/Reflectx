@@ -379,9 +379,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func spawnNewWave(){
         if spawnTimer >= 0.9  && waveFinished {
             
-            var random = arc4random_uniform(5) // 4 or 5 // 2
+            var random = arc4random_uniform(2) // 4 or 5 // 2
             while previousNumber == random {
-                random = arc4random_uniform(5) // 4 or 5 // 2
+                random = arc4random_uniform(2) // 4 or 5 // 2
             }
             
             previousNumber = random
@@ -389,7 +389,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             switch (random) {
                 
             case 0:
-                wave1() // 5 // 1
+                wave5() // 5 // 1
             case 1:
                 wave2()
             case 2:
