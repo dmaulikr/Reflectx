@@ -20,6 +20,7 @@
 		85A459551D36DDF0005C94CC /* TutorialScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85A459541D36DDF0005C94CC /* TutorialScene.sks */; };
 		85A7D72E1D3EA15F0041C26E /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A7D72D1D3EA15F0041C26E /* Bullet.swift */; };
 		85BD17531D38597300D2FBAC /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BD17521D38597300D2FBAC /* Enemy.swift */; };
+		85BF30381D4183B300104D1A /* EnemyBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BF30371D4183B300104D1A /* EnemyBall.swift */; };
 		85DBC7531D36AB7B00E7FE09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DBC7521D36AB7B00E7FE09 /* AppDelegate.swift */; };
 		85DBC7551D36AB7B00E7FE09 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85DBC7541D36AB7B00E7FE09 /* GameScene.sks */; };
 		85DBC7571D36AB7B00E7FE09 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DBC7561D36AB7B00E7FE09 /* GameScene.swift */; };
@@ -54,6 +55,7 @@
 		85A459541D36DDF0005C94CC /* TutorialScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TutorialScene.sks; sourceTree = "<group>"; };
 		85A7D72D1D3EA15F0041C26E /* Bullet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
 		85BD17521D38597300D2FBAC /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		85BF30371D4183B300104D1A /* EnemyBall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyBall.swift; sourceTree = "<group>"; };
 		85DBC74F1D36AB7A00E7FE09 /* Reflectx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reflectx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85DBC7521D36AB7B00E7FE09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85DBC7541D36AB7B00E7FE09 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				85A7D72D1D3EA15F0041C26E /* Bullet.swift */,
 				85BD17521D38597300D2FBAC /* Enemy.swift */,
 				85081DC41D3FE390009CB64D /* Enemy2.swift */,
+				85BF30371D4183B300104D1A /* EnemyBall.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -160,8 +163,8 @@
 			children = (
 				85A947751D403C7F008D89C6 /* Swift */,
 				85A947741D403C5F008D89C6 /* Scenes */,
-				85A947731D403C3C008D89C6 /* Tools */,
 				85A947721D403C09008D89C6 /* Objects */,
+				85A947731D403C3C008D89C6 /* Tools */,
 				85DBC7681D36AD6800E7FE09 /* Sounds */,
 				85DBC7811D36C31300E7FE09 /* Other */,
 				85DBC75D1D36AB7B00E7FE09 /* Assets.xcassets */,
@@ -222,6 +225,7 @@
 				TargetAttributes = {
 					85DBC74E1D36AB7A00E7FE09 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = QPPG2G8STX;
 					};
 				};
 			};
@@ -286,6 +290,7 @@
 				85A459471D36DD84005C94CC /* HighScoreScene.swift in Sources */,
 				85DBC7531D36AB7B00E7FE09 /* AppDelegate.swift in Sources */,
 				85A4594D1D36DDA5005C94CC /* TutorialScene.swift in Sources */,
+				85BF30381D4183B300104D1A /* EnemyBall.swift in Sources */,
 				85DBC7721D36ADFF00E7FE09 /* MSReferenceNode.swift in Sources */,
 				85DBC77A1D36AED900E7FE09 /* EndScene.swift in Sources */,
 				85DBC7701D36ADCF00E7FE09 /* MSButtonNode.swift in Sources */,
@@ -401,10 +406,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Reflectx/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jacky.Reflectx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -412,10 +421,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Reflectx/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jacky.Reflectx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

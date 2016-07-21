@@ -13,7 +13,7 @@ class Enemy2: SKSpriteNode {
     init() {
         
         let texture = SKTexture(imageNamed: "wingMan1")
-        super.init(texture: texture, color: UIColor.clearColor(), size: CGSize(width: 40, height: 12))
+        super.init(texture: texture, color: UIColor.clearColor(), size: CGSize(width: 55, height: 25))
         zPosition = 1
         addPhysicsBody()
         name = "enemy"
@@ -28,7 +28,7 @@ class Enemy2: SKSpriteNode {
         physicsBody?.categoryBitMask = EnemyCategory
         physicsBody?.collisionBitMask = BallCategory | PaddleCategory
         physicsBody?.contactTestBitMask = BallCategory  
-        physicsBody?.velocity = CGVector(dx: 0, dy: -250)
+        physicsBody?.velocity = CGVector(dx: 0, dy: -250) 
         physicsBody?.mass = 1
         physicsBody?.angularDamping = 0
         physicsBody?.linearDamping = 0
