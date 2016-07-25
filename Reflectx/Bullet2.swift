@@ -10,13 +10,15 @@ import SpriteKit
 
 class Bullet2: SKSpriteNode {
     
+    var connectedEnemy3 : Enemy3?
+    
     init() {
         
-        let texture = SKTexture(imageNamed: "wingMan3")
+        let texture = SKTexture(imageNamed: "ballYellow")
         super.init(texture: texture, color: UIColor.clearColor(), size: CGSize(width: 15, height: 15))
         zPosition = 2
         addPhysicsBody()
-        name = "bullet"
+        name = "bullet2"
     }
     
     func addPhysicsBody () {
@@ -25,7 +27,7 @@ class Bullet2: SKSpriteNode {
         physicsBody?.affectedByGravity = false
         physicsBody?.dynamic = true
         physicsBody?.friction = 0
-        physicsBody?.categoryBitMask = BallCategory
+        physicsBody?.categoryBitMask = BulletCategory
         physicsBody?.collisionBitMask = EnemyCategory | PaddleCategory
         physicsBody?.contactTestBitMask = EnemyCategory
         physicsBody?.velocity = CGVector(dx: 0, dy: -250)

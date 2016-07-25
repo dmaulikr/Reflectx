@@ -42,6 +42,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var waveFinished: Bool = true
     var previousNumber: UInt32?
     var bulletJoint: SKPhysicsJoint?
+    var bulletJoint2: SKPhysicsJoint?
     
     override func didMoveToView(view: SKView) {
         /* Set up your scene here */
@@ -122,11 +123,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let bulletJoint = bulletJoint {
             
             if let bullet = bulletJoint.bodyA.node as? Bullet {
-                bullet.physicsBody?.velocity = CGVectorMake(0, 400)
+                bullet.physicsBody?.velocity = CGVectorMake(0, 600)
             }
                 
             else if let bullet = bulletJoint.bodyB.node as? Bullet {
-                bullet.physicsBody?.velocity = CGVectorMake(0, 400)
+                bullet.physicsBody?.velocity = CGVectorMake(0, 600)
             }
             
             physicsWorld.removeJoint(bulletJoint)
@@ -135,6 +136,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         }
         
+        if let bulletJoint2 = bulletJoint2 {
+        
+            if let bullet2 = bulletJoint2.bodyA.node as? Bullet2 {
+            bullet2.physicsBody?.velocity = CGVectorMake(0, 600)
+            }
+            
+            else if let bullet2 = bulletJoint2.bodyB.node as? Bullet2 {
+            bullet2.physicsBody?.velocity = CGVectorMake(0, 600)
+            }
+            
+            physicsWorld.removeJoint(bulletJoint2)
+            self.bulletJoint2 = nil
+        }
         
     }
     
@@ -186,6 +200,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
+        if bulletJoint2 == nil {
+            
+            if (contactA.categoryBitMask == PaddleCategory && contactB.categoryBitMask == BulletCategory) || (contactA.categoryBitMask == BulletCategory && contactB.categoryBitMask == PaddleCategory) {
+            
+            if let bullet2 = nodeA as? Bullet2 {
+                addBulletJoint2(bullet2)
+            }
+                
+            else if let bullet2 = nodeB as? Bullet2 {
+                addBulletJoint2(bullet2)
+            }
+        }
+        }
+        
         /* Check if either physics bodies was an enemy */
         if contactA.categoryBitMask == EnemyCategory || contactB.categoryBitMask == EnemyCategory {
             
@@ -222,6 +250,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.addJoint(bulletJoint!)
     }
     
+    func addBulletJoint2 (bullet2: Bullet2) {
+        bullet2.physicsBody?.velocity = CGVectorMake(0, 0)
+        bulletJoint2 = SKPhysicsJointPin.jointWithBodyA(paddleBlue.physicsBody!, bodyB: bullet2.physicsBody!, anchor: bullet2.position)
+        
+        physicsWorld.addJoint(bulletJoint2!)
+    }
+    
     func scoreColor () {
         switch (points) {
             
@@ -249,7 +284,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //SKASDHAKJDKJASHDJKASDKJAHSJKDAKJSDHKJASKJDAHKJSDAAAAAAKJAKJKJKJKJKJKJKKJKJKJKJKJKJKJKJK
     
-    func createNewEnemyBall(position: CGPoint) {
+    /* func createNewEnemyBall(position: CGPoint) {
         
         let newEnemyBall = EnemyBall()
         let randomPosition = position
@@ -260,10 +295,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         newEnemy2.position = enemyPosition
         self.addChild(newEnemy2)
         newEnemyBall.connectedEnemy2 = newEnemy2
-    }
+    } */
     
     func updateObstacles() {
         /* Update Obstacles */
+        
+        // ADD HORIZONTAL VELOCITY HERE
+        
+        for bullet2 in obstacleLayer3.children as! [Bullet2] {
+            
+            let bullet2Position = obstacleLayer3.convertPoint(bullet2.position, toNode: self)
+            
+            if bullet2.connectedEnemy3?.position.x >= 335  {
+                health -= 1
+                self.runAction(pop2SFX)
+            }
+            
+            if bullet2Position.y > bullet2.connectedEnemy3?.position.y {
+                health -= 1
+                self.runAction(pop2SFX)
+            }
+            
+            if bullet2Position.y < 70 {
+                self.health -= 1
+                self.runAction(pop2SFX)
+            }
+            
+        }
         
         for bullet in obstacleLayer2.children as! [Bullet] {
             
@@ -286,7 +344,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if bullet.connectedEnemy2?.position.y <= 500 {
                 bullet.connectedEnemy2?.physicsBody?.velocity = CGVector(dx: 0, dy: -250)
             }
-            
+                        
             if bulletPosition.y < 600 && bulletPosition.y > 550 {
                 bullet.physicsBody?.velocity = CGVector(dx: 0, dy: -120)
             }
@@ -308,6 +366,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             if bullet.connectedEnemy2?.position.y < 180 {
                 self.health -= 1
+                self.runAction(pop2SFX)
             }
  
         }
@@ -379,9 +438,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func spawnNewWave(){
         if spawnTimer >= 0.9  && waveFinished {
             
-            var random = arc4random_uniform(2) // 4 or 5 // 2
+            var random = arc4random_uniform(6) // 4 or 5 // 2
             while previousNumber == random {
-                random = arc4random_uniform(2) // 4 or 5 // 2
+                random = arc4random_uniform(6) // 4 or 5 // 2
             }
             
             previousNumber = random
@@ -389,7 +448,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             switch (random) {
                 
             case 0:
-                wave5() // 5 // 1
+                wave1() // 6 // 5 // 1
             case 1:
                 wave2()
             case 2:
@@ -398,6 +457,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 wave4()
             case 4:
                 wave5()
+            case 5:
+                wave6()
             default:
                 break
                 
@@ -421,6 +482,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    // trying to set specific x values
+    /* let bulletPositionsX = [60, 100, 160]
+    var index3 = 0 */
+    
     func createNewBullet(position: CGPoint) {
         
         let newBullet = Bullet()
@@ -428,10 +493,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         newBullet.position = self.convertPoint(randomPosition, toNode: obstacleLayer2)
         obstacleLayer2.addChild(newBullet)
         let newEnemy2 = Enemy2()
-        let enemyPosition = CGPoint (x: newBullet.position.x+40, y: newBullet.position.y+200)
+        // trying to set specific x values where enemies spawn compared to bullets
+        let enemyPosition = CGPoint (x: newBullet.position.x+40 /* self.bulletPositionsX[index3] */, y: newBullet.position.y+200)
         newEnemy2.position = enemyPosition
         self.addChild(newEnemy2)
         newBullet.connectedEnemy2 = newEnemy2
+        
+    }
+    
+    func createNewBullet2(position: CGPoint) {
+        
+        let newBullet2 = Bullet2()
+        let randomPosition = position
+        newBullet2.position = self.convertPoint(randomPosition, toNode: obstacleLayer3)
+        obstacleLayer3.addChild(newBullet2)
+        let newEnemy3 = Enemy3()
+        let enemyPosition = CGPoint (x: newBullet2.position.x, y: newBullet2.position.y+150)
+        newEnemy3.position = enemyPosition
+        self.addChild(newEnemy3)
+        newBullet2.connectedEnemy3 = newEnemy3
         
     }
     
@@ -545,6 +625,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         self.runAction(SKAction.sequence([wait, run, wait, run, wait, run, wait2, run2, wait2, run2, wait2, run2, wait2, finish]))
+        
+    }
+    
+    func wave6() {
+        
+        self.waveFinished = false
+        
+        let wavePositionsY = [420, 420]
+        var index = 0
+        let wait = SKAction.waitForDuration(0.3)
+        let wait2 = SKAction.waitForDuration(2.1)
+        let run = SKAction.runBlock {
+            self.createNewBullet2(CGPoint(x: 40, y: wavePositionsY[index]))
+            index += 1
+            
+        }
+        let finish = SKAction.runBlock {
+            self.waveFinished = true
+        }
+        
+        self.runAction(SKAction.sequence([wait, wait, wait, run, wait2, wait, run, wait2, wait, wait, finish]))
         
     }
     
