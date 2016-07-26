@@ -23,7 +23,6 @@
 		85A7D72E1D3EA15F0041C26E /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A7D72D1D3EA15F0041C26E /* Bullet.swift */; };
 		85BD17531D38597300D2FBAC /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BD17521D38597300D2FBAC /* Enemy.swift */; };
 		85BE4FE01D42956D009BB875 /* Bullet2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BE4FDF1D42956D009BB875 /* Bullet2.swift */; };
-		85BF30381D4183B300104D1A /* EnemyBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BF30371D4183B300104D1A /* EnemyBall.swift */; };
 		85BF303A1D41941400104D1A /* Enemy3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BF30391D41941400104D1A /* Enemy3.swift */; };
 		85DBC7531D36AB7B00E7FE09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DBC7521D36AB7B00E7FE09 /* AppDelegate.swift */; };
 		85DBC7551D36AB7B00E7FE09 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85DBC7541D36AB7B00E7FE09 /* GameScene.sks */; };
@@ -62,7 +61,6 @@
 		85A7D72D1D3EA15F0041C26E /* Bullet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
 		85BD17521D38597300D2FBAC /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		85BE4FDF1D42956D009BB875 /* Bullet2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bullet2.swift; sourceTree = "<group>"; };
-		85BF30371D4183B300104D1A /* EnemyBall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyBall.swift; sourceTree = "<group>"; };
 		85BF30391D41941400104D1A /* Enemy3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy3.swift; sourceTree = "<group>"; };
 		85DBC74F1D36AB7A00E7FE09 /* Reflectx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reflectx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85DBC7521D36AB7B00E7FE09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -108,7 +106,6 @@
 				85081DC41D3FE390009CB64D /* Enemy2.swift */,
 				85BF30391D41941400104D1A /* Enemy3.swift */,
 				85367C7D1D467CA100A7ACC8 /* Enemy4.swift */,
-				85BF30371D4183B300104D1A /* EnemyBall.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -305,7 +302,6 @@
 				85367C7E1D467CA100A7ACC8 /* Enemy4.swift in Sources */,
 				85DBC7531D36AB7B00E7FE09 /* AppDelegate.swift in Sources */,
 				85A4594D1D36DDA5005C94CC /* TutorialScene.swift in Sources */,
-				85BF30381D4183B300104D1A /* EnemyBall.swift in Sources */,
 				85DBC7721D36ADFF00E7FE09 /* MSReferenceNode.swift in Sources */,
 				85DBC77A1D36AED900E7FE09 /* EndScene.swift in Sources */,
 				85BF303A1D41941400104D1A /* Enemy3.swift in Sources */,

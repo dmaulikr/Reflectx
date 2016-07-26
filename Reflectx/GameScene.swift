@@ -48,6 +48,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var bulletJoint: SKPhysicsJoint?
     var bulletJoint2: SKPhysicsJoint?
     var bulletJoint3: SKPhysicsJoint?
+    var difficulty: MainScene.DifficultyState!
     
     override func didMoveToView(view: SKView) {
         /* Set up your scene here */
@@ -345,21 +346,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         node.removeFromParent()
     }
     
-    //SKASDHAKJDKJASHDJKASDKJAHSJKDAKJSDHKJASKJDAHKJSDAAAAAAKJAKJKJKJKJKJKJKKJKJKJKJKJKJKJKJK
-    
-    /* func createNewEnemyBall(position: CGPoint) {
-     
-     let newEnemyBall = EnemyBall()
-     let randomPosition = position
-     newEnemyBall.position = self.convertPoint(randomPosition, toNode: obstacleLayer3)
-     obstacleLayer3.addChild(newEnemyBall)
-     let newEnemy2 = Enemy2()
-     let enemyPosition = CGPoint (x: newEnemyBall.position.x+0, y: newEnemyBall.position.y)
-     newEnemy2.position = enemyPosition
-     self.addChild(newEnemy2)
-     newEnemyBall.connectedEnemy2 = newEnemy2
-     } */
-    
     func updateObstacles() {
         /* Update Obstacles */
         
@@ -440,12 +426,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.runAction(pop2SFX)
             }
             
-            // TESTJSHAJDHASKJDHKASHDASKDASKDHAKJSHDKJASHKDKJKJKJKJKJKJKJKJKJKJKJKJKJ
-            
-            /* if bullet.connectedEnemy2?.position.y < 400  {
-             createNewEnemyBall(position)
-             } */
-            
             if bullet.connectedEnemy2?.position.y < 180 {
                 self.health -= 1
                 self.runAction(pop2SFX)
@@ -511,18 +491,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
             bullet3.connectedEnemy4?.physicsBody?.velocity = CGVector(dx: -100, dy: 0)
- 
+            
         }
- 
+        
         for bullet2 in obstacleLayer3.children as! [Bullet2] {
- 
+            
             let bullet2Position = obstacleLayer3.convertPoint(bullet2.position, toNode: self)
- 
+            
             if bullet2.connectedEnemy3?.position.x >= 335  {
                 health -= 1
                 self.runAction(pop2SFX)
             }
- 
+            
             if bullet2Position.y > bullet2.connectedEnemy3?.position.y {
                 health -= 1
                 self.runAction(pop2SFX)
@@ -571,12 +551,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 health -= 1
                 self.runAction(pop2SFX)
             }
-            
-            // TESTJSHAJDHASKJDHKASHDASKDASKDHAKJSHDKJASHKDKJKJKJKJKJKJKJKJKJKJKJKJKJ
-            
-            /* if bullet.connectedEnemy2?.position.y < 400  {
-             createNewEnemyBall(position)
-             } */
             
             if bullet.connectedEnemy2?.position.y < 180 {
                 self.health -= 1

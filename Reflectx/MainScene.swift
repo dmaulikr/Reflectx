@@ -22,7 +22,11 @@ class MainScene: SKScene {
     var selectLevel: SKLabelNode!
     var state: GameState = .Title
     var index = 0
-    let difficulties = ["Easy", "Medium", "Hard"]
+    let currentDifficulty: DifficultyState = .Easy
+    
+    enum DifficultyState : Int{
+        case Easy = 0, Medium, Hard
+    }
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -43,6 +47,7 @@ class MainScene: SKScene {
             self.state = .Playing
             let skView = self.view as SKView!
             let scene = GameScene(fileNamed:"GameScene") as GameScene!
+            scene.difficulty = currentDifficulty
             scene.scaleMode = .AspectFill
             skView.showsPhysics = true
             skView.showsDrawCount = true
@@ -85,8 +90,29 @@ class MainScene: SKScene {
             
         }
         
-        func rightArrowClicked () {
+/*     func playerHighScoreUpdate() {
+ let highScore = NSUserDefaults().integerForKey("highScore")
+ if points > highScore {
+ NSUserDefaults().setInteger(points, forKey: "highScore")
+ NSUserDefaults.standardUserDefaults().synchronize()
+ }
+ scoreLabel.text = "\(points)"
+ } 
+         
+         playerHighScoreUpdate()
+         print(NSUserDefaults().integerForKey("highScore"))
+         
+         var points = 0
+
+         */
+        
+        func difficultiesUpdate () {
+
             
+        }
+ 
+        func rightArrowClicked () {
+ 
             self.state = .Browse
             self.index += 1
             if self.index > 2 {
