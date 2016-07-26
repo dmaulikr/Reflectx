@@ -6,6 +6,8 @@
 //  Copyright © 2016 Jacky. All rights reserved.
 //
 
+// regular enemy
+
 import SpriteKit
 
 class Enemy: SKSpriteNode {

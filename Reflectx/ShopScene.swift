@@ -87,7 +87,8 @@ class ShopScene: SKScene {
             let skView = self.view as SKView!
             let scene = MainScene(fileNamed:"MainScene") as MainScene!
             scene.scaleMode = .AspectFill
-            skView.presentScene(scene)
+            let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
+            skView.presentScene(scene, transition: transition)
             
         }
         

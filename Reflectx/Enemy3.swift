@@ -6,6 +6,8 @@
 //  Copyright © 2016 Jacky. All rights reserved.
 //
 
+// enemy left -> right
+
 import SpriteKit
 
 class Enemy3: SKSpriteNode {

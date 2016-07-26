@@ -6,11 +6,11 @@
 //  Copyright © 2016 Jacky. All rights reserved.
 //
 
-// drops bullet
+// enemy left -> right
 
 import SpriteKit
 
-class Enemy2: SKSpriteNode {
+class Enemy4: SKSpriteNode {
     
     init() {
         
@@ -29,8 +29,8 @@ class Enemy2: SKSpriteNode {
         physicsBody?.friction = 0
         physicsBody?.categoryBitMask = EnemyCategory
         physicsBody?.collisionBitMask = BallCategory | PaddleCategory
-        physicsBody?.contactTestBitMask = BallCategory  
-        physicsBody?.velocity = CGVector(dx: 0, dy: -250) 
+        physicsBody?.contactTestBitMask = BallCategory
+        physicsBody?.velocity = CGVector(dx: -90, dy: 0)
         physicsBody?.mass = 1
         physicsBody?.angularDamping = 0
         physicsBody?.linearDamping = 0

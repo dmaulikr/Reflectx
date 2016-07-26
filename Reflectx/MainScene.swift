@@ -47,17 +47,19 @@ class MainScene: SKScene {
             skView.showsPhysics = true
             skView.showsDrawCount = true
             skView.showsFPS = true
-            skView.presentScene(scene)
+            let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
+            skView.presentScene(scene, transition: transition)
             
         }
-        
+            
         func highScoreButtonClicked () {
             
             self.state = .Browse
             let skView = self.view as SKView!
             let scene = HighScoreScene(fileNamed:"HighScoreScene") as HighScoreScene!
             scene.scaleMode = .AspectFill
-            skView.presentScene(scene)
+            let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
+            skView.presentScene(scene, transition: transition)
             
         }
         
@@ -67,7 +69,8 @@ class MainScene: SKScene {
             let skView = self.view as SKView!
             let scene = ShopScene(fileNamed:"ShopScene") as ShopScene!
             scene.scaleMode = .AspectFill
-            skView.presentScene(scene)
+            let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
+            skView.presentScene(scene, transition: transition)
             
         }
         
@@ -77,7 +80,8 @@ class MainScene: SKScene {
             let skView = self.view as SKView!
             let scene = InfoScene(fileNamed:"InfoScene") as InfoScene!
             scene.scaleMode = .AspectFill
-            skView.presentScene(scene)
+            let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
+            skView.presentScene(scene, transition: transition)
             
         }
         
