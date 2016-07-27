@@ -6,16 +6,15 @@
 //  Copyright © 2016 Jacky. All rights reserved.
 //
 
-// regular enemy
-
 import SpriteKit
 
 class Enemy: SKSpriteNode {
+    
+    init(imageName: String) {
         
-    init() {
-        
-        let texture = SKTexture(imageNamed: "cloud")
+        let texture = SKTexture(imageNamed: imageName)
         super.init(texture: texture, color: UIColor.clearColor(), size: CGSize(width: 55, height: 25))
+        
         zPosition = 1
         addPhysicsBody()
         name = "enemy"
@@ -30,7 +29,6 @@ class Enemy: SKSpriteNode {
         physicsBody?.categoryBitMask = EnemyCategory
         physicsBody?.collisionBitMask = BallCategory | PaddleCategory
         physicsBody?.contactTestBitMask = BallCategory
-        physicsBody?.velocity = CGVector(dx: 0, dy: -250)
         physicsBody?.mass = 1
         physicsBody?.angularDamping = 0
         physicsBody?.linearDamping = 0
@@ -38,6 +36,17 @@ class Enemy: SKSpriteNode {
         
     }
     
+    func goLeft () {
+        physicsBody?.velocity = CGVector(dx: -80, dy: 0)
+    }
+    
+    func goRight () {
+        physicsBody?.velocity = CGVector(dx: 80, dy: 0)
+    }
+    
+    func goDown() {
+        physicsBody?.velocity = CGVector(dx: 0, dy: -250)
+    }
     /* You are required to implement this for your subclass to work */
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

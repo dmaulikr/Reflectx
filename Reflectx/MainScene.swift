@@ -21,11 +21,10 @@ class MainScene: SKScene {
     var goldNumber: SKLabelNode!
     var selectLevel: SKLabelNode!
     var state: GameState = .Title
-    var index = 0
-    let currentDifficulty: DifficultyState = .Easy
+    var currentDifficulty: DifficultyState = .Easy
     
-    enum DifficultyState : Int{
-        case Easy = 0, Medium, Hard
+    enum DifficultyState : String{
+        case Easy = "Easy", Medium = "Medium", Hard = "Hard"
     }
     
     override func didMoveToView(view: SKView) {
@@ -114,22 +113,35 @@ class MainScene: SKScene {
         func rightArrowClicked () {
  
             self.state = .Browse
-            self.index += 1
-            if self.index > 2 {
-                self.index = 2
+            switch currentDifficulty {
+            case .Easy:
+                currentDifficulty = .Medium
+                break
+            case .Medium:
+                currentDifficulty = .Hard
+                break
+            case .Hard:
+                print ("already on highest")
             }
-            self.selectLevel.text = String(self.difficulties[self.index])
+            self.selectLevel.text = currentDifficulty.rawValue
             
         }
         
         func leftArrowClicked () {
             
             self.state = .Browse
-            self.index -= 1
-            if self.index < 0 {
-                self.index = 0
+            switch currentDifficulty {
+            case .Easy:
+                print ("already on lowest")
+                break
+            case .Medium:
+                currentDifficulty = .Easy
+                break
+            case .Hard:
+                currentDifficulty = .Medium
+                break
             }
-            self.selectLevel.text = String(self.difficulties[self.index])
+            self.selectLevel.text = currentDifficulty.rawValue
             
         }
         

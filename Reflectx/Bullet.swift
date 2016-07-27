@@ -10,7 +10,7 @@ import SpriteKit
 
 class Bullet: SKSpriteNode {
     
-    var connectedEnemy2 : Enemy2?
+    var connectedEnemy : Enemy?
     
     init() {
         
@@ -36,6 +36,24 @@ class Bullet: SKSpriteNode {
         physicsBody?.linearDamping = 0
         physicsBody?.restitution = 1
         
+    }
+    
+    func updateVelocity () {
+        if connectedEnemy?.position.y < 600 && connectedEnemy?.position.y > 550 {
+            connectedEnemy?.physicsBody?.velocity = CGVector(dx: 0, dy: -105)
+        }
+        
+        if connectedEnemy?.position.y <= 500 {
+            connectedEnemy?.physicsBody?.velocity = CGVector(dx: 0, dy: -250)
+        }
+        
+//        if position.y < 600 && position.y > 550 {
+//            physicsBody?.velocity = CGVector(dx: 0, dy: -120)
+//        }
+//        
+//        if position.y <= 500 && position.y >= 450 {
+//            physicsBody?.velocity = CGVector(dx: 0, dy: -300)
+//        }
     }
     
     /* You are required to implement this for your subclass to work */
