@@ -61,7 +61,30 @@ class Enemy: SKSpriteNode {
         }
         
         if position.y <= 500 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -325)
+            physicsBody?.velocity = CGVector(dx: 0, dy: -335)
+        }
+    }
+    
+    func goLeft2 () {
+        physicsBody?.velocity = CGVector(dx: -120, dy: 0)
+    }
+    
+    func goRight2 () {
+        physicsBody?.velocity = CGVector(dx: 120, dy: 0)
+    }
+    
+    func goDown2() {
+        physicsBody?.velocity = CGVector(dx: 0, dy: -260)
+    }
+    
+    func updateVelocity2 () {
+        
+        if position.y < 600 && position.y > 550 {
+            physicsBody?.velocity = CGVector(dx: 0, dy: -175)
+        }
+        
+        if position.y <= 500 {
+            physicsBody?.velocity = CGVector(dx: 0, dy: -385)
         }
     }
  

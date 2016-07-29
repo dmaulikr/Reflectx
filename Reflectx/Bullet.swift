@@ -24,7 +24,7 @@ class Bullet: Shootable {
         physicsBody?.categoryBitMask = BulletCategory
         physicsBody?.collisionBitMask = EnemyCategory | PaddleCategory
         physicsBody?.contactTestBitMask = EnemyCategory
-        physicsBody?.velocity = CGVector(dx: 0, dy: -250)
+        physicsBody?.velocity = CGVector(dx: 0, dy: -320)
         physicsBody?.mass = 1
         physicsBody?.angularDamping = 0
         physicsBody?.linearDamping = 0

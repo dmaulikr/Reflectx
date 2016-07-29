@@ -50,7 +50,24 @@ class Shootable: SKSpriteNode {
     
     func updateBulletSpeed () {
         if position.y < 650 && position.y > 666 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -300)
+            physicsBody?.velocity = CGVector(dx: 0, dy: -320)
+        }
+        
+    }
+    
+    func updateBallSpeed2 () {
+        if position.y < 620 && position.y > 500 {
+            physicsBody?.velocity = CGVector(dx: 0, dy: -165)
+        }
+        
+        if position.y <= 500 && position.y > 450 {
+            physicsBody?.velocity = CGVector(dx: 0, dy: -410)
+        }
+    }
+    
+    func updateBulletSpeed2 () {
+        if position.y < 650 && position.y > 666 {
+            physicsBody?.velocity = CGVector(dx: 0, dy: -380)
         }
         
     }
