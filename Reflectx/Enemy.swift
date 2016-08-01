@@ -22,10 +22,6 @@ class Enemy: SKSpriteNode {
         name = "enemy"
     }
     
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    
     func addPhysicsBody () {
         
         physicsBody = SKPhysicsBody(rectangleOfSize: size)
@@ -35,7 +31,7 @@ class Enemy: SKSpriteNode {
         physicsBody?.friction = 0
         physicsBody?.categoryBitMask = EnemyCategory
         physicsBody?.collisionBitMask = BallCategory | PaddleCategory
-        physicsBody?.contactTestBitMask = BallCategory
+        physicsBody?.contactTestBitMask = BallCategory | BallTwoCategory
         physicsBody?.mass = 1
         physicsBody?.angularDamping = 0
         physicsBody?.linearDamping = 0
@@ -66,14 +62,18 @@ class Enemy: SKSpriteNode {
     }
     
     func goLeft2 () {
-        physicsBody?.velocity = CGVector(dx: -120, dy: 0)
+        physicsBody?.velocity = CGVector(dx: -110, dy: 0)
     }
     
     func goRight2 () {
-        physicsBody?.velocity = CGVector(dx: 120, dy: 0)
+        physicsBody?.velocity = CGVector(dx: 110, dy: 0)
     }
     
     func goDown2() {
+        physicsBody?.velocity = CGVector(dx: 0, dy: -270)
+    }
+    
+    func go2Down2() {
         physicsBody?.velocity = CGVector(dx: 0, dy: -260)
     }
     
@@ -86,6 +86,33 @@ class Enemy: SKSpriteNode {
         if position.y <= 500 {
             physicsBody?.velocity = CGVector(dx: 0, dy: -385)
         }
+    }
+    
+    func updateVelocity3 () {
+        
+        if position.y < 600 && position.y > 550 {
+            physicsBody?.velocity = CGVector(dx: 0, dy: -225)
+        }
+        
+        if position.y <= 500 {
+            physicsBody?.velocity = CGVector(dx: 0, dy: -425)
+        }
+    }
+    
+    func goLeft3 () {
+        physicsBody?.velocity = CGVector(dx: -122, dy: 0)
+    }
+    
+    func goRight3 () {
+        physicsBody?.velocity = CGVector(dx: 122, dy: 0)
+    }
+    
+    func goDown3() {
+        physicsBody?.velocity = CGVector(dx: 0, dy: -320)
+    }
+    
+    func go2Down3() {
+        physicsBody?.velocity = CGVector(dx: 0, dy: -280)
     }
  
      // You are required to implement this for your subclass to work

@@ -10,6 +10,12 @@ import SpriteKit
 
 class Shootable: SKSpriteNode {
     
+    var doubleScore: Bool = false {
+        didSet{
+            texture = SKTexture(imageNamed: "alienGreen")
+        }
+    }
+    
     init(image: String) {
         let texture = SKTexture(imageNamed: image)
         super.init(texture: texture, color: UIColor.clearColor(), size: CGSize(width: 18, height: 18))
@@ -35,43 +41,7 @@ class Shootable: SKSpriteNode {
         physicsBody?.angularDamping = 0
         physicsBody?.linearDamping = 0
         physicsBody?.restitution = 1
-        
-    }
-    
-    func updateBallSpeed () {
-        if position.y < 620 && position.y > 500 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -125)
-        }
-        
-        if position.y <= 500 && position.y > 450 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -370)
-        }
-    }
-    
-    func updateBulletSpeed () {
-        if position.y < 650 && position.y > 666 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -320)
-        }
-        
-    }
-    
-    func updateBallSpeed2 () {
-        if position.y < 620 && position.y > 500 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -165)
-        }
-        
-        if position.y <= 500 && position.y > 450 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -410)
-        }
-    }
-    
-    func updateBulletSpeed2 () {
-        if position.y < 650 && position.y > 666 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -380)
-        }
-        
-    }
-    
+    }    
 }
 
 
