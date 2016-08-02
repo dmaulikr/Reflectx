@@ -25,20 +25,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var spawnTimer: CFTimeInterval = 0
     let fixedDelta: CFTimeInterval = 1.0/60.0 // 60 FPS, fix later on (phones with 40 fps etc)
     var obstacleLayer: SKNode!
-    var scoreLabel: SKLabelNode!
-    var points = 0
-    var instructionsNumber = 0
     var wavesDone = 0
     var isFingerOnPaddle = false
-    var pauseButton: MSButtonNode!
-    var instructions: SKLabelNode!
-    var hiddenLabel: SKLabelNode!
-    var instructions2: SKLabelNode!
-    var countLabel: SKLabelNode!
-    var buffLabel: SKLabelNode!
-    var fastForwardWhite: SKSpriteNode!
-    var smallLeftArrow: SKSpriteNode!
-    var smallRightArrow: SKSpriteNode!
     var health: Int = 1
     var state: GameState = .Title
     let paddleName: String = "paddleBlue"
@@ -57,6 +45,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var dimLeftUp: SKSpriteNode!
     var dimRightUp: SKSpriteNode!
     var savedGames = 0
+    var UILayer: UIClass!
+    var points = 0
     
     override func didMoveToView(view: SKView) {
         /* Set up your scene here */
@@ -64,49 +54,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         paddleBlue = self.childNodeWithName("//paddleBlue") as! SKSpriteNode
         obstacleLayer = self.childNodeWithName("obstacleLayer")
-        scoreLabel = self.childNodeWithName("scoreLabel") as! SKLabelNode
-        hiddenLabel = self.childNodeWithName("hiddenLabel") as! SKLabelNode
-        fastForwardWhite = self.childNodeWithName("fastForwardWhite") as! SKSpriteNode
-        smallLeftArrow = self.childNodeWithName("smallLeftArrow") as! SKSpriteNode
-        smallRightArrow = self.childNodeWithName("smallRightArrow") as! SKSpriteNode
         dimPanel = self.childNodeWithName("dimPanel") as! SKSpriteNode
         dimLeft = self.childNodeWithName("dimLeft") as! SKSpriteNode
         dimRight = self.childNodeWithName("dimRight") as! SKSpriteNode
         dimPanelUp = self.childNodeWithName("dimPanelUp") as! SKSpriteNode
         dimLeftUp = self.childNodeWithName("dimLeftUp") as! SKSpriteNode
         dimRightUp = self.childNodeWithName("dimRightUp") as! SKSpriteNode
-        instructions = self.childNodeWithName("instructions") as! SKLabelNode
-        instructions2 = self.childNodeWithName("instructions2") as! SKLabelNode
-        countLabel = self.childNodeWithName("countLabel") as! SKLabelNode
-        buffLabel = self.childNodeWithName("buffLabel") as! SKLabelNode
-        scoreLabel.text = String(points)
-        pauseButton = childNodeWithName("pauseButton") as! MSButtonNode
+        UILayer = self.childNodeWithName("UI") as! UIClass
         
-        self.instructions2.hidden = true
-        self.fastForwardWhite.hidden = true
-        self.countLabel.hidden = true
-        self.buffLabel.hidden = true
-        self.hiddenLabel.hidden = true
-        
-        pauseButton.selectedHandler = {
-            self.paused = !self.paused
-            
-            if self.paused {
-                self.pauseButton.texture = SKTexture(imageNamed: "rightTriangleWhite")
-            }
-                
-            else if !self.paused {
-                self.countLabel.hidden = false
-                self.countLabel.text = "3"
-                SKAction.waitForDuration(1)
-                self.countLabel.text = "2"
-                SKAction.waitForDuration(1)
-                self.countLabel.text = "1"
-                SKAction.waitForDuration(1)
-                self.pauseButton.texture = SKTexture(imageNamed: "pauseButtonWhite")
-                self.countLabel.hidden = true
-            }
-        }
+
         
         dimPanel.zPosition = -2
         dimLeft.zPosition = -2
@@ -126,10 +82,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         savedGames = NSUserDefaults.standardUserDefaults().integerForKey("savedGames2")
         
         self.state = .Playing
-        
-        self.runAction(SKAction.waitForDuration(1.5), completion: {() -> Void in
-            self.instructions.hidden = true
-        })
         
     }
     
@@ -171,8 +123,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             paddleBlue.position = CGPoint(x: paddleX, y: paddleBlue.position.y)
             
-            smallLeftArrow.hidden = true
-            smallRightArrow.hidden = true
+            UILayer.hideArrows ()
             
         }
     }
@@ -231,19 +182,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameOver()
         }
         // doesnt go into here, waves Done yes goes into there
-        if wavesDone == 7 && wavesDoneNumber == 0 {
-            self.fastForwardWhite.hidden = false
-            self.runAction(SKAction.waitForDuration(1.5), completion: {() -> Void in
-                self.fastForwardWhite.hidden = true
-            })
-            wavesDoneNumber += 1
-        }
-        
-        if wavesDone == 14 && wavesDoneNumber == 1 {
-            self.fastForwardWhite.hidden = false
-            self.runAction(SKAction.waitForDuration(1.5), completion: {() -> Void in
-                self.fastForwardWhite.hidden = true
-            })
+        if (wavesDone == 7 && wavesDoneNumber == 0) || (wavesDone == 14 && wavesDoneNumber == 1) {
+            UILayer.fastForwardAnimation ()
             wavesDoneNumber += 1
         }
         
@@ -255,10 +195,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             dimLeftUp.zPosition = 51
             dimRightUp.zPosition = 51
             
-            self.hiddenLabel.hidden = false
-            self.runAction(SKAction.waitForDuration(4), completion: {() -> Void in
-                self.hiddenLabel.hidden = true
-            })
+            UILayer.hiddenLabelAnimation()
             
             dimPanel.runAction(SKAction.sequence([
                 SKAction.fadeAlphaTo(1, duration: 30)
@@ -355,11 +292,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func killedEnemy () {
         points += 1
-        
-        playerLocalScoreUpdate()
-        playerHighScoreUpdate()
-        print(NSUserDefaults().integerForKey("highScore"))
-        
+        UILayer.updateScoreLabel(points)
+                
         self.runAction(popSFX) //popSFX
         
         if points == 5 || points == 10 || points == 20 || points == 40 || points == 80 {
@@ -368,31 +302,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         }
         
-        scoreColor()
+        UILayer.scoreColor(points)
         
     }
     
     func killedEnemy2 () {
         points += 2
-        
-        playerLocalScoreUpdate()
-        playerHighScoreUpdate()
-        print(NSUserDefaults().integerForKey("highScore"))
+        UILayer.updateScoreLabel(points)
         
         self.runAction(popSFX)
         
-        self.buffLabel.text = "2x"
-        self.buffLabel.hidden = false
-        self.runAction(SKAction.waitForDuration(2), completion: {() -> Void in
-            self.buffLabel.hidden = true
-        })
+        UILayer.setBuffLabel()
         
         if points >= 5 && points <= 6 || points >= 10 && points <= 11 || points >= 20 && points <= 21 || points >= 40 && points <= 41 || points >= 80 && points <= 81 {
             
             self.runAction(successSFX)
         }
         
-        scoreColor()
+        UILayer.scoreColor(points)
         
     }
     
@@ -401,26 +328,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bulletJoint = SKPhysicsJointPin.jointWithBodyA(paddleBlue.physicsBody!, bodyB: bullet.physicsBody!, anchor: bullet.position)
         
         physicsWorld.addJoint(bulletJoint!)
-    }
-    
-    func scoreColor () {
-        switch (points) {
-            
-        case 5...9:
-            scoreLabel.fontColor = UIColor.greenColor()
-        case 10...19:
-            scoreLabel.fontColor = UIColor.orangeColor()
-        case 20...39:
-            scoreLabel.fontColor = UIColor.blueColor()
-        case 40...79:
-            scoreLabel.fontColor = UIColor.redColor()
-        case 80:
-            scoreLabel.fontColor = UIColor.yellowColor()
-        default:
-            break
-            
-        }
-        
     }
     
     func dieEnemy(node: SKNode) {
@@ -492,6 +399,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func gameOver() {
         /* Game over! */
         
+        playerLocalScoreUpdate()
+        playerHighScoreUpdate()
         state = .GameOver
         let skView = self.view as SKView!
         let scene = EndScene(fileNamed:"EndScene") as EndScene!
@@ -508,7 +417,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             NSUserDefaults().setInteger(points, forKey: "highScore")
             NSUserDefaults.standardUserDefaults().synchronize()
         }
-        scoreLabel.text = "\(points)"
     }
     
     func playerLocalScoreUpdate() {
@@ -517,7 +425,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             NSUserDefaults().setInteger(points, forKey: "localScore")
             NSUserDefaults.standardUserDefaults().synchronize()
         }
-        scoreLabel.text = "\(points)"
     }
     
     func wavesDone2Update() {
@@ -627,8 +534,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createBulletGroup(position: CGPoint) -> Enemy{
-        instructionsNumber += 1
-        instructionsUpdate()
+        UILayer.instructionsUpdate()
         let bullet = createBullet(position)
         let enemy = createEnemy(CGPoint(x: bullet.position.x+40, y: bullet.position.y+220))
         enemy.shootable = bullet
@@ -660,18 +566,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         newEnemy.position = position
         obstacleLayer.addChild(newEnemy)
         return newEnemy
-    }
-    
-    func instructionsUpdate() {
-        if instructionsNumber > 1 {
-            self.instructions2.hidden = true
-        }
-        else if instructionsNumber <= 1 {
-            self.runAction(SKAction.waitForDuration(1), completion: {() -> Void in
-                self.instructions2.hidden = false
-            })
-        }
-        
     }
     
     func wave1() {

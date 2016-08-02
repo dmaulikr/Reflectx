@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8512C8F11D514BC700D23169 /* UIClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8512C8F01D514BC700D23169 /* UIClass.swift */; };
 		8598E52A1D398521006F62AD /* kenvector_future_thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8598E5291D3984CA006F62AD /* kenvector_future_thin.ttf */; };
 		8598E52C1D3987A3006F62AD /* CharacterActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8598E52B1D3987A3006F62AD /* CharacterActions.sks */; };
 		85A459471D36DD84005C94CC /* HighScoreScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A459461D36DD84005C94CC /* HighScoreScene.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8512C8F01D514BC700D23169 /* UIClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIClass.swift; sourceTree = "<group>"; };
 		8598E5291D3984CA006F62AD /* kenvector_future_thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = kenvector_future_thin.ttf; sourceTree = "<group>"; };
 		8598E52B1D3987A3006F62AD /* CharacterActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = CharacterActions.sks; path = ../CharacterActions.sks; sourceTree = "<group>"; };
 		85A459461D36DD84005C94CC /* HighScoreScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighScoreScene.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				85A459481D36DD8F005C94CC /* ShopScene.swift */,
 				85A4594A1D36DD9A005C94CC /* InfoScene.swift */,
 				85A4594C1D36DDA5005C94CC /* TutorialScene.swift */,
+				8512C8F01D514BC700D23169 /* UIClass.swift */,
 			);
 			name = Swift;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				85DBC7591D36AB7B00E7FE09 /* GameViewController.swift in Sources */,
 				85DBC7781D36AECC00E7FE09 /* MainScene.swift in Sources */,
 				85A459471D36DD84005C94CC /* HighScoreScene.swift in Sources */,
+				8512C8F11D514BC700D23169 /* UIClass.swift in Sources */,
 				85DBC7531D36AB7B00E7FE09 /* AppDelegate.swift in Sources */,
 				85A6212D1D49221D00F92ADE /* Shootable.swift in Sources */,
 				85A4594D1D36DDA5005C94CC /* TutorialScene.swift in Sources */,
