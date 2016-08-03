@@ -21,6 +21,7 @@
 		85A6212D1D49221D00F92ADE /* Shootable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A6212C1D49221D00F92ADE /* Shootable.swift */; };
 		85A7D72E1D3EA15F0041C26E /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A7D72D1D3EA15F0041C26E /* Bullet.swift */; };
 		85BD17531D38597300D2FBAC /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BD17521D38597300D2FBAC /* Enemy.swift */; };
+		85C6135A1D526376001F12C1 /* UIClassTutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C613591D526376001F12C1 /* UIClassTutorial.swift */; };
 		85DBC7531D36AB7B00E7FE09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DBC7521D36AB7B00E7FE09 /* AppDelegate.swift */; };
 		85DBC7551D36AB7B00E7FE09 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85DBC7541D36AB7B00E7FE09 /* GameScene.sks */; };
 		85DBC7571D36AB7B00E7FE09 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DBC7561D36AB7B00E7FE09 /* GameScene.swift */; };
@@ -56,6 +57,7 @@
 		85A6212C1D49221D00F92ADE /* Shootable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shootable.swift; sourceTree = "<group>"; };
 		85A7D72D1D3EA15F0041C26E /* Bullet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
 		85BD17521D38597300D2FBAC /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		85C613591D526376001F12C1 /* UIClassTutorial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIClassTutorial.swift; sourceTree = "<group>"; };
 		85DBC74F1D36AB7A00E7FE09 /* Reflectx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reflectx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85DBC7521D36AB7B00E7FE09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85DBC7541D36AB7B00E7FE09 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				85A4594A1D36DD9A005C94CC /* InfoScene.swift */,
 				85A4594C1D36DDA5005C94CC /* TutorialScene.swift */,
 				8512C8F01D514BC700D23169 /* UIClass.swift */,
+				85C613591D526376001F12C1 /* UIClassTutorial.swift */,
 			);
 			name = Swift;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				85DBC7801D36B57000E7FE09 /* CGFloat+Extensions.swift in Sources */,
 				85DBC7571D36AB7B00E7FE09 /* GameScene.swift in Sources */,
 				85DBC7591D36AB7B00E7FE09 /* GameViewController.swift in Sources */,
+				85C6135A1D526376001F12C1 /* UIClassTutorial.swift in Sources */,
 				85DBC7781D36AECC00E7FE09 /* MainScene.swift in Sources */,
 				85A459471D36DD84005C94CC /* HighScoreScene.swift in Sources */,
 				8512C8F11D514BC700D23169 /* UIClass.swift in Sources */,

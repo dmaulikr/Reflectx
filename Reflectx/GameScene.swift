@@ -9,7 +9,7 @@
 import SpriteKit
 
 enum GameState {
-    case Title, Browse, Playing, GameOver
+    case Title, Browse, Playing, GameOver, Restart
 }
 
 public let BallTwoCategory : UInt32 = 16
@@ -20,33 +20,33 @@ public let PaddleCategory : UInt32 = 1
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    var paddleBlue: SKSpriteNode!
     var sinceTouch : CFTimeInterval = 0
     var spawnTimer: CFTimeInterval = 0
     let fixedDelta: CFTimeInterval = 1.0/60.0 // 60 FPS, fix later on (phones with 40 fps etc)
     var obstacleLayer: SKNode!
     var wavesDone = 0
-    var isFingerOnPaddle = false
+    var wavesDoneNumber = 0
+    var savedGames = 0
+    var points = 0
     var health: Int = 1
+    var isFingerOnPaddle = false
     var state: GameState = .Title
     let paddleName: String = "paddleBlue"
     let popSFX = SKAction.playSoundFileNamed("pop", waitForCompletion: false)
     let pop2SFX = SKAction.playSoundFileNamed("pop2", waitForCompletion: false)
     let successSFX = SKAction.playSoundFileNamed("success", waitForCompletion: false)
     var waveFinished: Bool = true
+    var hitFirstDoubleScore: Bool = false
     var previousNumber: UInt32?
     var bulletJoint: SKPhysicsJoint?
-    var wavesDoneNumber = 0
-    var hitFirstDoubleScore: Bool = false
+    var paddleBlue: SKSpriteNode!
     var dimPanel: SKSpriteNode!
     var dimLeft: SKSpriteNode!
     var dimRight: SKSpriteNode!
     var dimPanelUp: SKSpriteNode!
     var dimLeftUp: SKSpriteNode!
     var dimRightUp: SKSpriteNode!
-    var savedGames = 0
     var UILayer: UIClass!
-    var points = 0
     
     override func didMoveToView(view: SKView) {
         /* Set up your scene here */
@@ -61,8 +61,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         dimLeftUp = self.childNodeWithName("dimLeftUp") as! SKSpriteNode
         dimRightUp = self.childNodeWithName("dimRightUp") as! SKSpriteNode
         UILayer = self.childNodeWithName("UI") as! UIClass
-        
-
         
         dimPanel.zPosition = -2
         dimLeft.zPosition = -2
@@ -102,7 +100,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             sinceTouch = 0
             
         }
-        
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -146,8 +143,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             
         }
-        
-        
     }
     
     override func update(currentTime: CFTimeInterval) {
@@ -181,7 +176,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             savedGamesUpdate()
             gameOver()
         }
-        // doesnt go into here, waves Done yes goes into there
+        
         if (wavesDone == 7 && wavesDoneNumber == 0) || (wavesDone == 14 && wavesDoneNumber == 1) {
             UILayer.fastForwardAnimation ()
             wavesDoneNumber += 1
@@ -274,6 +269,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 hitFirstDouble()
             }
         }
+            
         else {
             killedEnemy()
         }
@@ -293,7 +289,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func killedEnemy () {
         points += 1
         UILayer.updateScoreLabel(points)
-                
+        
         self.runAction(popSFX) //popSFX
         
         if points == 5 || points == 10 || points == 20 || points == 40 || points == 80 {
@@ -301,9 +297,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.runAction(successSFX)
             
         }
-        
         UILayer.scoreColor(points)
-        
     }
     
     func killedEnemy2 () {
@@ -318,9 +312,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             self.runAction(successSFX)
         }
-        
         UILayer.scoreColor(points)
-        
     }
     
     func addBulletJoint (bullet: Bullet) {
@@ -506,7 +498,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 break
                 
             }
-            
             spawnTimer = 0
         }
     }
@@ -585,7 +576,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.wavesDone += 1
             self.wavesDone2Update()
         }
-        
+
         self.runAction(SKAction.sequence([run, wait, run, wait, run, wait, run, wait, run, wait, run, finish]))
         
     }
@@ -714,7 +705,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let wait3 = SKAction.waitForDuration(1.2)
         
         let run = SKAction.runBlock {
-            let enemy = self.createBulletGroup(CGPoint(x: 30, y: 430))
+            let enemy = self.createBulletGroup(CGPoint(x: 30, y: 420))
             
             if self.wavesDone <= 6 {
                 enemy.goRight()
@@ -730,7 +721,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         let run2 = SKAction.runBlock {
-            let enemy = self.createBulletGroup(CGPoint(x: 335, y: 450))
+            let enemy = self.createBulletGroup(CGPoint(x: 335, y: 440))
             
             if self.wavesDone <= 6 {
                 enemy.goLeft()
@@ -790,7 +781,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let run2 = SKAction.runBlock {
             
-            let enemy = self.createBulletGroup(CGPoint(x: 30, y: 430))
+            let enemy = self.createBulletGroup(CGPoint(x: 30, y: 420))
             
             if self.wavesDone <= 6 {
                 enemy.goRight()
@@ -807,7 +798,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let run3 = SKAction.runBlock {
             
-            let enemy = self.createBulletGroup(CGPoint(x: 335, y: 450))
+            let enemy = self.createBulletGroup(CGPoint(x: 335, y: 440))
             
             if self.wavesDone <= 6 {
                 enemy.goLeft()

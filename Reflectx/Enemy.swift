@@ -50,6 +50,10 @@ class Enemy: SKSpriteNode {
         physicsBody?.velocity = CGVector(dx: 0, dy: -240)
     }
     
+    func goDownSlow() {
+        physicsBody?.velocity = CGVector(dx: 0, dy: -120)
+    }
+    
     func updateVelocity () {
         
         if position.y < 600 && position.y > 550 {

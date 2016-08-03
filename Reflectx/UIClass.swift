@@ -117,8 +117,8 @@ class UIClass: SKNode{
             self.instructions.hidden = true
         }
         else if instructionsNumber <= 1 {
-            self.runAction(SKAction.waitForDuration(1), completion: {() -> Void in
-                self.instructions.text = "Let it go"
+            self.runAction(SKAction.waitForDuration(1.5), completion: {() -> Void in
+                self.instructions.text = "Let go to shoot"
                 self.instructions.hidden = false
             })
         }
