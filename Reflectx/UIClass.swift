@@ -67,7 +67,7 @@ class UIClass: SKNode{
     func setBuffLabel () {
         self.buffLabel.text = "2x"
         self.buffLabel.hidden = false
-        self.runAction(SKAction.waitForDuration(2), completion: {() -> Void in
+        self.runAction(SKAction.waitForDuration(1.5), completion: {() -> Void in
             self.buffLabel.hidden = true
         })
     }

@@ -47,7 +47,15 @@ class Enemy: SKSpriteNode {
     }
     
     func goDown() {
-        physicsBody?.velocity = CGVector(dx: 0, dy: -240)
+        physicsBody?.velocity = CGVector(dx: 0, dy: -230)
+    }
+    
+    func goLeftSlow() {
+        physicsBody?.velocity = CGVector(dx: -70, dy: 0)
+    }
+    
+    func goRightSlow() {
+        physicsBody?.velocity = CGVector(dx: 70, dy: 0)
     }
     
     func goDownSlow() {
@@ -66,19 +74,19 @@ class Enemy: SKSpriteNode {
     }
     
     func goLeft2 () {
-        physicsBody?.velocity = CGVector(dx: -110, dy: 0)
+        physicsBody?.velocity = CGVector(dx: -105, dy: 0)
     }
     
     func goRight2 () {
-        physicsBody?.velocity = CGVector(dx: 110, dy: 0)
+        physicsBody?.velocity = CGVector(dx: 105, dy: 0)
     }
     
     func goDown2() {
-        physicsBody?.velocity = CGVector(dx: 0, dy: -270)
+        physicsBody?.velocity = CGVector(dx: 0, dy: -260)
     }
     
     func go2Down2() {
-        physicsBody?.velocity = CGVector(dx: 0, dy: -260)
+        physicsBody?.velocity = CGVector(dx: 0, dy: -250)
     }
     
     func updateVelocity2 () {
@@ -104,19 +112,19 @@ class Enemy: SKSpriteNode {
     }
     
     func goLeft3 () {
-        physicsBody?.velocity = CGVector(dx: -122, dy: 0)
+        physicsBody?.velocity = CGVector(dx: -110, dy: 0)
     }
     
     func goRight3 () {
-        physicsBody?.velocity = CGVector(dx: 122, dy: 0)
+        physicsBody?.velocity = CGVector(dx: 110, dy: 0)
     }
     
     func goDown3() {
-        physicsBody?.velocity = CGVector(dx: 0, dy: -320)
+        physicsBody?.velocity = CGVector(dx: 0, dy: -310)
     }
     
     func go2Down3() {
-        physicsBody?.velocity = CGVector(dx: 0, dy: -280)
+        physicsBody?.velocity = CGVector(dx: 0, dy: -270)
     }
  
      // You are required to implement this for your subclass to work
