@@ -20,6 +20,7 @@ class UIClass: SKNode{
     var smallLeftArrow: SKSpriteNode!
     var smallRightArrow: SKSpriteNode!
     var instructionsNumber = 0
+    let powerupSFX = SKAction.playSoundFileNamed("powerup", waitForCompletion: false)
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -70,6 +71,7 @@ class UIClass: SKNode{
         self.runAction(SKAction.waitForDuration(1.5), completion: {() -> Void in
             self.buffLabel.hidden = true
         })
+        self.runAction(powerupSFX)
     }
     
     func scoreColor (points: Int) {

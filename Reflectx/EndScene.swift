@@ -40,6 +40,9 @@ class EndScene: SKScene {
         let savedScore2: Int = NSUserDefaults.standardUserDefaults().objectForKey("localScore") as! Int
         scoreLabel2.text = String(savedScore2)
         
+        let savedCoins3: Int = NSUserDefaults.standardUserDefaults().objectForKey("savedCoins2") as! Int
+        goldNumber.text = "\(savedCoins3)"
+        
         homeButton.selectedHandler = {
             
             let skView = self.view as SKView!

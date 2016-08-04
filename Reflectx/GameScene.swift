@@ -20,6 +20,7 @@ public let PaddleCategory : UInt32 = 1
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    var backgroundMusic: SKAudioNode!
     var sinceTouch : CFTimeInterval = 0
     var spawnTimer: CFTimeInterval = 0
     let fixedDelta: CFTimeInterval = 1.0/60.0 // 60 FPS, fix later on (phones with 40 fps etc)
@@ -28,11 +29,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var wavesDone = 0
     var wavesDoneNumber = 0
     var savedGames = 0
+    var savedCoins = 0
     var points = 0
+    var pointsNumber = 0
+    var musicNumber = 0
     var health: Int = 1
     var isFingerOnPaddle = false
     var state: GameState = .Title
-    let paddleName: String = "paddleBlue"
+    let paddleName: String = "paddle"
     let popSFX = SKAction.playSoundFileNamed("pop", waitForCompletion: false)
     let pop2SFX = SKAction.playSoundFileNamed("pop2", waitForCompletion: false)
     let successSFX = SKAction.playSoundFileNamed("success", waitForCompletion: false)
@@ -40,7 +44,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var hitFirstDoubleScore: Bool = false
     var previousNumber: UInt32?
     var bulletJoint: SKPhysicsJoint?
-    var paddleBlue: SKSpriteNode!
+    var paddle: SKSpriteNode!
     var dimPanel: SKSpriteNode!
     var dimLeft: SKSpriteNode!
     var dimRight: SKSpriteNode!
@@ -53,7 +57,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         /* Set up your scene here */
         
         physicsWorld.contactDelegate = self
-        paddleBlue = self.childNodeWithName("//paddleBlue") as! SKSpriteNode
+        paddle = self.childNodeWithName("//paddle") as! SKSpriteNode
         obstacleLayer = self.childNodeWithName("obstacleLayer")
         dimPanel = self.childNodeWithName("dimPanel") as! SKSpriteNode
         dimLeft = self.childNodeWithName("dimLeft") as! SKSpriteNode
@@ -76,24 +80,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         dimLeftUp.alpha = 0
         dimRightUp.alpha = 0
         
+        /* if paddleSelected == 0 {
+        self.paddle.texture = SKTexture(imageNamed: "paddleBlue")
+        } */
+        
+        
+ 
+ 
+        
         NSUserDefaults.standardUserDefaults().setInteger(0, forKey: "localScore")
         NSUserDefaults.standardUserDefaults().setInteger(0, forKey: "wavesDone2")
         savedGames = NSUserDefaults.standardUserDefaults().integerForKey("savedGames2")
+        savedCoins = NSUserDefaults.standardUserDefaults().integerForKey("savedCoins2")
         
         self.state = .Playing
-        
-        /* let music1 = SKAudioNode(fileNamed: "music1.mp3")
-        music1.autoplayLooped = false
-        music.addChild(music1)
-        
-        music.runAction(SKAction.sequence([SKAction.waitForDuration(0.5), music1.runAction(SKAction.play())])
-        
-        music.runAction(SKAction.sequence([SKAction.waitForDuration(0.5), SKAction.runBlock(music1.runAction(SKAction.play())]))
-        
-        music.runAction(SKAction.sequence([SKAction.waitForDuration(0.5), SKAction.runBlock {
-                music1.runAction(SKAction.play())
-            }
-            ]) */
+    
     }
     
  
@@ -114,6 +115,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             sinceTouch = 0
             
         }
+        
+        if let musicURL = NSBundle.mainBundle().URLForResource("music1", withExtension: "mp3") {
+            if musicNumber == 0 {
+            backgroundMusic = SKAudioNode(URL: musicURL)
+            backgroundMusic.runAction(SKAction.changeVolumeTo(Float(0.5), duration: 0))
+            addChild(backgroundMusic)
+            musicNumber += 1
+            }
+        }
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -122,7 +132,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let touch = touches.first
             let touchLocation = touch!.locationInNode(self)
             let previousLocation = touch!.previousLocationInNode(self)
-            let paddleX = paddleBlue.position.x + (touchLocation.x - previousLocation.x)
+            let paddleX = paddle.position.x + (touchLocation.x - previousLocation.x)
             
             /* print("paddle-> " + String(paddleX) + " vs " + String(size.width - paddle.size.width/2))
              paddleX = min(paddleX, size.width - paddle.size.width/2)
@@ -132,7 +142,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
              print("paddle-> " + String(paddleX))
              print(String(paddle.size.width/2)) */
             
-            paddleBlue.position = CGPoint(x: paddleX, y: paddleBlue.position.y)
+            paddle.position = CGPoint(x: paddleX, y: paddle.position.y)
             
             UILayer.hideArrows ()
             
@@ -311,6 +321,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.runAction(successSFX)
             
         }
+        
+        if points >= 5 && pointsNumber == 0 || points >= 15 && pointsNumber == 1 || points >= 30 && pointsNumber == 2 || points >= 50 && pointsNumber == 3 || points >= 70 && pointsNumber == 4 || points >= 90 && pointsNumber == 5 || points >= 110 && pointsNumber == 6 || points >= 130 && pointsNumber == 7 || points >= 150 && pointsNumber == 8 || points >= 170 && pointsNumber == 9 || points >= 190 && pointsNumber == 10 || points >= 210 && pointsNumber == 11 || points >= 230 && pointsNumber == 12 || points >= 250 && pointsNumber == 13 || points >= 270 && pointsNumber == 14 || points >= 290 && pointsNumber == 15 {
+            
+            savedCoins += 1
+            pointsNumber += 1
+            savedCoinsUpdate()
+        }
+        
         UILayer.scoreColor(points)
     }
     
@@ -331,7 +349,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func addBulletJoint (bullet: Bullet) {
         bullet.physicsBody?.velocity = CGVectorMake(0, 0)
-        bulletJoint = SKPhysicsJointPin.jointWithBodyA(paddleBlue.physicsBody!, bodyB: bullet.physicsBody!, anchor: bullet.position)
+        bulletJoint = SKPhysicsJointPin.jointWithBodyA(paddle.physicsBody!, bodyB: bullet.physicsBody!, anchor: bullet.position)
         
         physicsWorld.addJoint(bulletJoint!)
     }
@@ -445,6 +463,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let savedGames2 = NSUserDefaults().integerForKey("savedGames2")
         if savedGames > savedGames2 {
             NSUserDefaults().setInteger(savedGames, forKey: "savedGames2")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
+    
+    func savedCoinsUpdate() {
+        let savedCoins2 = NSUserDefaults().integerForKey("savedCoins2")
+        if savedCoins > savedCoins2 {
+            NSUserDefaults().setInteger(savedCoins, forKey: "savedCoins2")
             NSUserDefaults.standardUserDefaults().synchronize()
         }
     }

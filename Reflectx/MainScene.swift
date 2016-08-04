@@ -32,6 +32,9 @@ class MainScene: SKScene {
         tutorialButton = self.childNodeWithName("tutorialButton") as! MSButtonNode
         goldNumber = self.childNodeWithName("goldNumber") as! SKLabelNode
     
+        let savedCoins3: Int = NSUserDefaults.standardUserDefaults().objectForKey("savedCoins2") as! Int
+        goldNumber.text = "\(savedCoins3)"
+        
         func playButtonClicked () {
             
             self.state = .Playing

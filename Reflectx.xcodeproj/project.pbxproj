@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8512C8F11D514BC700D23169 /* UIClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8512C8F01D514BC700D23169 /* UIClass.swift */; };
 		8547F96F1D53B7F800BFBA0D /* music1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8547F96E1D53B7F800BFBA0D /* music1.mp3 */; };
+		8547F9711D53BE9E00BFBA0D /* powerup.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8547F9701D53BE9E00BFBA0D /* powerup.wav */; };
 		8598E52A1D398521006F62AD /* kenvector_future_thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8598E5291D3984CA006F62AD /* kenvector_future_thin.ttf */; };
 		8598E52C1D3987A3006F62AD /* CharacterActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8598E52B1D3987A3006F62AD /* CharacterActions.sks */; };
 		85A459471D36DD84005C94CC /* HighScoreScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A459461D36DD84005C94CC /* HighScoreScene.swift */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		8512C8F01D514BC700D23169 /* UIClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIClass.swift; sourceTree = "<group>"; };
 		8547F96E1D53B7F800BFBA0D /* music1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music1.mp3; sourceTree = "<group>"; };
+		8547F9701D53BE9E00BFBA0D /* powerup.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = powerup.wav; sourceTree = "<group>"; };
 		8598E5291D3984CA006F62AD /* kenvector_future_thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = kenvector_future_thin.ttf; sourceTree = "<group>"; };
 		8598E52B1D3987A3006F62AD /* CharacterActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = CharacterActions.sks; path = ../CharacterActions.sks; sourceTree = "<group>"; };
 		85A459461D36DD84005C94CC /* HighScoreScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighScoreScene.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			children = (
 				85DBC7691D36AD9C00E7FE09 /* pop.wav */,
 				85DBC76D1D36ADA200E7FE09 /* pop2.wav */,
+				8547F9701D53BE9E00BFBA0D /* powerup.wav */,
 				85DBC76A1D36AD9C00E7FE09 /* success.mp3 */,
 				8547F96E1D53B7F800BFBA0D /* music1.mp3 */,
 			);
@@ -273,6 +276,7 @@
 				85DBC76C1D36AD9C00E7FE09 /* success.mp3 in Resources */,
 				85A459551D36DDF0005C94CC /* TutorialScene.sks in Resources */,
 				85DBC75C1D36AB7B00E7FE09 /* Main.storyboard in Resources */,
+				8547F9711D53BE9E00BFBA0D /* powerup.wav in Resources */,
 				85DBC77C1D36AEE800E7FE09 /* MainScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

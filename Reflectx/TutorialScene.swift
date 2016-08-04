@@ -16,14 +16,14 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
     var health: Int = 1
     var points = 0
     var homeButton: MSButtonNode!
-    var paddleBlue: SKSpriteNode!
+    var paddle: SKSpriteNode!
     var sinceTouch : CFTimeInterval = 0
     var spawnTimer: CFTimeInterval = 0
     let fixedDelta: CFTimeInterval = 1.0/60.0 // 60 FPS, fix later on (phones with 40 fps etc)
     var isFingerOnPaddle = false
     var waveFinished: Bool = true
     var hitFirstDoubleScore: Bool = false
-    let paddleName: String = "paddleBlue"
+    let paddleName: String = "paddle"
     let popSFX = SKAction.playSoundFileNamed("pop", waitForCompletion: false)
     let pop2SFX = SKAction.playSoundFileNamed("pop2", waitForCompletion: false)
     let successSFX = SKAction.playSoundFileNamed("success", waitForCompletion: false)
@@ -37,7 +37,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         /* Set up your scene here */
         
         physicsWorld.contactDelegate = self
-        paddleBlue = self.childNodeWithName("//paddleBlue") as! SKSpriteNode
+        paddle = self.childNodeWithName("//paddle") as! SKSpriteNode
         obstacleLayer = self.childNodeWithName("obstacleLayer")
         UILayer2 = self.childNodeWithName("UI") as! UIClassTutorial
         homeButton = self.childNodeWithName("homeButton") as! MSButtonNode
@@ -107,9 +107,9 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
             let touch = touches.first
             let touchLocation = touch!.locationInNode(self)
             let previousLocation = touch!.previousLocationInNode(self)
-            let paddleX = paddleBlue.position.x + (touchLocation.x - previousLocation.x)
+            let paddleX = paddle.position.x + (touchLocation.x - previousLocation.x)
             
-            paddleBlue.position = CGPoint(x: paddleX, y: paddleBlue.position.y)
+            paddle.position = CGPoint(x: paddleX, y: paddle.position.y)
             
             UILayer2.hideArrows ()
             
@@ -227,7 +227,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
     
     func addBulletJoint (bullet: Bullet) {
         bullet.physicsBody?.velocity = CGVectorMake(0, 0)
-        bulletJoint = SKPhysicsJointPin.jointWithBodyA(paddleBlue.physicsBody!, bodyB: bullet.physicsBody!, anchor: bullet.position)
+        bulletJoint = SKPhysicsJointPin.jointWithBodyA(paddle.physicsBody!, bodyB: bullet.physicsBody!, anchor: bullet.position)
         
         physicsWorld.addJoint(bulletJoint!)
     }

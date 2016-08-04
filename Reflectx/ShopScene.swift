@@ -11,18 +11,13 @@ import SpriteKit
 class ShopScene: SKScene {
     
     var backButton: MSButtonNode!
-    var paddleBox1: MSButtonNode!
-    var paddleBox2: MSButtonNode!
-    var paddleBox3: MSButtonNode!
-    var paddleBox4: MSButtonNode!
-    var paddleBox5: MSButtonNode!
-    var paddleBox6: MSButtonNode!
     var rectangleBlue: MSButtonNode!
     var rectangleGreen: MSButtonNode!
     var rectangleYellow: MSButtonNode!
     var rectangleRed: MSButtonNode!
     var rectangleBlue2: MSButtonNode!
     var rectangleGreen2: MSButtonNode!
+    var paddleSelected = 0
     
     var checkMark: SKSpriteNode!
     
@@ -31,12 +26,6 @@ class ShopScene: SKScene {
     override func didMoveToView(view: SKView) {
         
         backButton = self.childNodeWithName("backButton") as! MSButtonNode
-        paddleBox1 = self.childNodeWithName("paddleBox1") as! MSButtonNode
-        paddleBox2 = self.childNodeWithName("paddleBox2") as! MSButtonNode
-        paddleBox3 = self.childNodeWithName("paddleBox3") as! MSButtonNode
-        paddleBox4 = self.childNodeWithName("paddleBox4") as! MSButtonNode
-        paddleBox5 = self.childNodeWithName("paddleBox5") as! MSButtonNode
-        paddleBox6 = self.childNodeWithName("paddleBox6") as! MSButtonNode
         rectangleBlue = self.childNodeWithName("rectangleBlue") as! MSButtonNode
         rectangleGreen = self.childNodeWithName("rectangleGreen") as! MSButtonNode
         rectangleYellow = self.childNodeWithName("rectangleYellow") as! MSButtonNode
@@ -48,6 +37,11 @@ class ShopScene: SKScene {
         
         goldNumber = self.childNodeWithName("goldNumber") as! SKLabelNode
         
+        let savedCoins3: Int = NSUserDefaults.standardUserDefaults().objectForKey("savedCoins2") as! Int
+        goldNumber.text = "\(savedCoins3)"
+        
+        paddleSelected = NSUserDefaults.standardUserDefaults().integerForKey("paddleSelected2")
+        
         backButton.selectedHandler = {
             
             let skView = self.view as SKView!
@@ -58,6 +52,40 @@ class ShopScene: SKScene {
             
         }
         
-    }
+        rectangleBlue.selectedHandler = {
+
+        }
+        
+        rectangleGreen.selectedHandler = {
+            if savedCoins3 >= 10 {
+                
+            }
+        }
+        
+        rectangleYellow.selectedHandler = {
+            if savedCoins3 >= 20 {
+                
+            }
+        }
+        
+        rectangleRed.selectedHandler = {
+            if savedCoins3 >= 40 {
+                
+            }
+        }
+        
+        rectangleBlue2.selectedHandler = {
+            if savedCoins3 >= 80 {
+                
+            }
+        }
+        
+        rectangleGreen2.selectedHandler = {
+            if savedCoins3 >= 200 {
+                
+            }
+        }
     
+    }
+        
 }
