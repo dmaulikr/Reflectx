@@ -21,35 +21,32 @@ class Ball: Shootable {
         
     }
     
-    func updateBallSpeed () {
-        if position.y < 620 && position.y > 500 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -125)
-        }
-        
-        if position.y <= 500 && position.y > 450 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -340)
+    func updateBallSpeed(waveNumber: Int) {
+        switch waveNumber {
+        case 0...6:
+            if position.y < 620 && position.y > 500 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -125)
+            }
+            
+            if position.y <= 500 && position.y > 450 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -340)
+            }
+        case 6...13:
+            if position.y < 620 && position.y > 500 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -165)
+            }
+            
+            if position.y <= 500 && position.y > 450 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -380)
+            }
+        default:
+            if position.y < 620 && position.y > 500 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -205)
+            }
+            
+            if position.y <= 500 && position.y > 450 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -420)
+            }
         }
     }
-    
-    func updateBallSpeed2 () {
-        if position.y < 620 && position.y > 500 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -165)
-        }
-        
-        if position.y <= 500 && position.y > 450 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -380)
-        }
-    }
-    
-    func updateBallSpeed3 () {
-        if position.y < 620 && position.y > 500 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -205)
-        }
-        
-        if position.y <= 500 && position.y > 450 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -420)
-        }
-    }
-
-    
 }

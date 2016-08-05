@@ -20,6 +20,8 @@ class EndScene: SKScene {
     var scoreLabel2: SKLabelNode!
     var highScoreLabel: SKLabelNode!
     var addGold: SKLabelNode!
+    var localScore = 0
+    var earnedCoins = 0
     
     override func didMoveToView(view: SKView) {
         
@@ -37,8 +39,8 @@ class EndScene: SKScene {
         let savedScore: Int = NSUserDefaults.standardUserDefaults().objectForKey("highScore") as! Int
         highScoreLabel.text = String(savedScore)
         
-        let savedScore2: Int = NSUserDefaults.standardUserDefaults().objectForKey("localScore") as! Int
-        scoreLabel2.text = String(savedScore2)
+        scoreLabel2.text = String(localScore)
+        addGold.text = "+\(earnedCoins)"
         
         let savedCoins3: Int = NSUserDefaults.standardUserDefaults().objectForKey("savedCoins2") as! Int
         goldNumber.text = "\(savedCoins3)"

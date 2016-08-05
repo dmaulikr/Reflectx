@@ -10,7 +10,7 @@ import SpriteKit
 
 class Bullet: Shootable {
     
-    init() {
+    init(waveNumber: Int) {
         super.init(image: "ballYellow")
         name = "bullet"
         addPhysicsBody()
@@ -27,46 +27,28 @@ class Bullet: Shootable {
         physicsBody?.collisionBitMask = EnemyCategory | PaddleCategory
         physicsBody?.contactTestBitMask = EnemyCategory
         physicsBody?.velocity = CGVector(dx: 0, dy: -320)
-        
-        if savedWavesDone2 <= 6 {
-            self.updateBulletSpeed()
-        }
-            
-        else if savedWavesDone2 > 6 && savedWavesDone2 <= 13 {
-            self.updateBulletSpeed2()
-        }
-            
-        else if savedWavesDone2 > 13 {
-            self.updateBulletSpeed3()
-        }
-        
         physicsBody?.mass = 1
         physicsBody?.angularDamping = 0
         physicsBody?.linearDamping = 0
         physicsBody?.restitution = 1
         
-        
     }
     
-    func updateBulletSpeed () {
-        if position.y < 650 && position.y > 666 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -320)
+    func updateBulletSpeed(waveNumber: Int) {
+        switch waveNumber {
+        case 0...6:
+            if position.y < 650 && position.y > 666 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -330)
+            }
+        case 6...13:
+            if position.y < 650 && position.y > 666 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -380)
+            }
+        default:
+            if position.y < 650 && position.y > 666 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -430)
+            }
         }
-        
-    }
-    
-    func updateBulletSpeed2 () {
-        if position.y < 650 && position.y > 666 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -380)
-        }
-        
-    }
-    
-    func updateBulletSpeed3 () {
-        if position.y < 650 && position.y > 666 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -430)
-        }
-        
     }
 
     /* You are required to implement this for your subclass to work */

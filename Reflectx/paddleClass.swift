@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class UIClass: SKNode{
+class paddleClass: SKNode{
     
     var scoreLabel: SKLabelNode!
     var buffLabel: SKLabelNode!
@@ -44,9 +44,6 @@ class UIClass: SKNode{
             self.instructions.hidden = true
         })
         
-    }
-    
-    func pauseButton2 () {
         pauseButton.selectedHandler = {
             self.paused = !self.paused
             

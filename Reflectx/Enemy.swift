@@ -10,7 +10,7 @@ import SpriteKit
 
 class Enemy: SKSpriteNode {
     
-    var shootable: Shootable? 
+    var shootable: Shootable?
     
     init(imageName: String) {
         
@@ -38,18 +38,6 @@ class Enemy: SKSpriteNode {
         physicsBody?.restitution = 1
     }
     
-    func goLeft () {
-        physicsBody?.velocity = CGVector(dx: -100, dy: 0)
-    }
-    
-    func goRight () {
-        physicsBody?.velocity = CGVector(dx: 100, dy: 0)
-    }
-    
-    func goDown() {
-        physicsBody?.velocity = CGVector(dx: 0, dy: -230)
-    }
-    
     func goLeftSlow() {
         physicsBody?.velocity = CGVector(dx: -70, dy: 0)
     }
@@ -62,78 +50,72 @@ class Enemy: SKSpriteNode {
         physicsBody?.velocity = CGVector(dx: 0, dy: -120)
     }
     
-    func updateVelocity () {
-        
-        if position.y < 600 && position.y > 550 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -125)
-        }
-        
-        if position.y <= 500 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -335)
-        }
-    }
-    
-    func goLeft2 () {
-        physicsBody?.velocity = CGVector(dx: -105, dy: 0)
-    }
-    
-    func goRight2 () {
-        physicsBody?.velocity = CGVector(dx: 105, dy: 0)
-    }
-    
-    func goDown2() {
-        physicsBody?.velocity = CGVector(dx: 0, dy: -260)
-    }
-    
-    func go2Down2() {
-        physicsBody?.velocity = CGVector(dx: 0, dy: -250)
-    }
-    
-    func updateVelocity2 () {
-        
-        if position.y < 600 && position.y > 550 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -175)
-        }
-        
-        if position.y <= 500 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -385)
+    func goRight(waveNumber: Int) {
+        switch waveNumber {
+        case 0...6:
+            physicsBody?.velocity = CGVector(dx: 100, dy: 0)
+        case 6...13:
+            physicsBody?.velocity = CGVector(dx: 103, dy: 0)
+        default:
+            physicsBody?.velocity = CGVector(dx: 106, dy: 0)
         }
     }
     
-    func updateVelocity3 () {
-        
-        if position.y < 600 && position.y > 550 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -225)
+    func goLeft(waveNumber: Int) {
+        switch waveNumber {
+        case 0...6:
+            physicsBody?.velocity = CGVector(dx: -100, dy: 0)
+        case 6...13:
+            physicsBody?.velocity = CGVector(dx: -103, dy: 0)
+        default:
+            physicsBody?.velocity = CGVector(dx: -106, dy: 0)
         }
-        
-        if position.y <= 500 {
-            physicsBody?.velocity = CGVector(dx: 0, dy: -425)
+    }
+    
+    func goDown(waveNumber: Int) {
+        switch waveNumber {
+        case 0...6:
+            physicsBody?.velocity = CGVector(dx: 0, dy: -210)
+        case 6...13:
+            physicsBody?.velocity = CGVector(dx: 0, dy: -250)
+        default:
+            physicsBody?.velocity = CGVector(dx: 0, dy: -290)
         }
     }
     
-    func goLeft3 () {
-        physicsBody?.velocity = CGVector(dx: -110, dy: 0)
+    func updateVelocity(waveNumber: Int) {
+        switch waveNumber {
+        case 0...6:
+            if position.y < 600 && position.y > 550 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -125)
+            }
+            if position.y <= 500 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -335)
+            }
+        case 6...13:
+            if position.y < 600 && position.y > 550 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -175)
+            }
+            if position.y <= 500 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -385)
+            }
+        default:
+            if position.y < 600 && position.y > 550 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -225)
+            }
+            if position.y <= 500 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -425)
+            }
+        }
     }
     
-    func goRight3 () {
-        physicsBody?.velocity = CGVector(dx: 110, dy: 0)
+    // You are required to implement this for your subclass to work
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
     }
     
-    func goDown3() {
-        physicsBody?.velocity = CGVector(dx: 0, dy: -310)
-    }
-    
-    func go2Down3() {
-        physicsBody?.velocity = CGVector(dx: 0, dy: -270)
-    }
- 
-     // You are required to implement this for your subclass to work
-     required init?(coder aDecoder: NSCoder) {
-     super.init(coder: aDecoder)
-     
-     }
-    
-    }
+}
 
-    
+
 

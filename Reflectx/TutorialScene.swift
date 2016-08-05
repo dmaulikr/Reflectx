@@ -11,7 +11,7 @@ import SpriteKit
 class TutorialScene: SKScene, SKPhysicsContactDelegate {
     
     var state: GameState = .Title
-    var wavesDone = 0
+    var wavesNumber = 0
     var wavesDoneNumber = 0
     var health: Int = 1
     var points = 0
@@ -149,16 +149,16 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         /* Process obstacles */
         
         // stage 1
-        if wavesDone < 1 {
+        if wavesNumber < 1 {
             spawnNewWave()
         }
         
         // stage 2
-        if wavesDone == 1 {
+        if wavesNumber == 1 {
             spawnNewWave2()
         }
         
-        if wavesDone == 2 {
+        if wavesNumber == 2 {
             spawnNewWave3()
         }
         
@@ -322,7 +322,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         let enemyPosition = CGPoint (x: newBall.position.x+0, y: newBall.position.y+100)
         newEnemy.position = enemyPosition
         obstacleLayer.addChild(newEnemy)
-        newEnemy.goDown()
+        newEnemy.goDown(wavesNumber)
         newEnemy.shootable = newBall
     }
     
@@ -341,7 +341,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createBullet(position: CGPoint) -> Bullet {
-        let newBullet = Bullet()
+        let newBullet = Bullet(waveNumber: wavesNumber)
         newBullet.position = position
         obstacleLayer.addChild(newBullet)
         return newBullet
@@ -368,7 +368,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         }
         let finish = SKAction.runBlock {
             self.waveFinished = true
-            self.wavesDone += 1
+            self.wavesNumber += 1
         }
         
         self.runAction(SKAction.sequence([run, wait, run, wait, run, wait, run, run, finish]))
@@ -394,7 +394,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         
         let finish = SKAction.runBlock {
             self.waveFinished = true
-            self.wavesDone += 1
+            self.wavesNumber += 1
         }
         
         self.runAction(SKAction.sequence([run, wait, run, wait, finish]))
@@ -412,7 +412,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         
         let finish = SKAction.runBlock {
             self.waveFinished = true
-            self.wavesDone += 1
+            self.wavesNumber += 1
         }
         
         self.runAction(SKAction.sequence([run, finish]))
