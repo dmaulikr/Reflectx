@@ -18,7 +18,7 @@ class ShopScene: SKScene {
     var paddleBoxBlue2: MSButtonNode!
     var paddleBoxGreen2: MSButtonNode!
     var paddleSelected : Constants.PaddleColor = .Blue
-    var checkMark: SKSpriteNode!
+    var checkMarks: [SKSpriteNode] = []
     var greenBought = 0
     var redBought = 0
     var goldNumber: SKLabelNode!
@@ -32,9 +32,8 @@ class ShopScene: SKScene {
     var smallGold4: SKSpriteNode!
     var smallGold5: SKSpriteNode!
     var smallGold6: SKSpriteNode!
-
-    // shop, show paddle when clicked/bought etc, checkmark
-    // hide all other paddles
+    var paddleGreenPic: SKSpriteNode!
+    var paddleRedPic: SKSpriteNode!
     
     override func didMoveToView(view: SKView) {
         
@@ -45,17 +44,21 @@ class ShopScene: SKScene {
         paddleBoxYellow = self.childNodeWithName("paddleBoxYellow") as! MSButtonNode
         paddleBoxBlue2 = self.childNodeWithName("paddleBoxBlue2") as! MSButtonNode
         paddleBoxGreen2 = self.childNodeWithName("paddleBoxGreen2") as! MSButtonNode
-        checkMark = self.childNodeWithName("checkMark") as! SKSpriteNode
-        ten = self.childNodeWithName("ten") as! SKLabelNode
-        twenty = self.childNodeWithName("twenty") as! SKLabelNode
-        forty = self.childNodeWithName("forty") as! SKLabelNode
-        eighty = self.childNodeWithName("eighty") as! SKLabelNode
-        twoHundred = self.childNodeWithName("twoHundred") as! SKLabelNode
-        smallGold2 = self.childNodeWithName("smallGold2") as! SKSpriteNode
-        smallGold3 = self.childNodeWithName("smallGold3") as! SKSpriteNode
-        smallGold4 = self.childNodeWithName("smallGold4") as! SKSpriteNode
-        smallGold5 = self.childNodeWithName("smallGold5") as! SKSpriteNode
-        smallGold6 = self.childNodeWithName("smallGold6") as! SKSpriteNode
+        for index in 1...6 {
+            checkMarks.append(self.childNodeWithName("checkMark\(index)") as! SKSpriteNode)
+        }
+        ten = paddleBoxGreen.childNodeWithName("ten") as! SKLabelNode
+        twenty = paddleBoxRed.childNodeWithName("twenty") as! SKLabelNode
+        forty = paddleBoxYellow.childNodeWithName("forty") as! SKLabelNode
+        eighty = paddleBoxBlue2.childNodeWithName("eighty") as! SKLabelNode
+        twoHundred = paddleBoxGreen2.childNodeWithName("twoHundred") as! SKLabelNode
+        smallGold2 = paddleBoxGreen.childNodeWithName("smallGold2") as! SKSpriteNode
+        smallGold3 = paddleBoxRed.childNodeWithName("smallGold3") as! SKSpriteNode
+        smallGold4 = paddleBoxYellow.childNodeWithName("smallGold4") as! SKSpriteNode
+        smallGold5 = paddleBoxBlue2.childNodeWithName("smallGold5") as! SKSpriteNode
+        smallGold6 = paddleBoxGreen2.childNodeWithName("smallGold6") as! SKSpriteNode
+        paddleGreenPic = paddleBoxGreen.childNodeWithName("paddleGreenPic") as! SKSpriteNode
+        paddleRedPic = paddleBoxRed.childNodeWithName("paddleRedPic") as! SKSpriteNode
         goldNumber = self.childNodeWithName("goldNumber") as! SKLabelNode
         
         var savedCoins: Int = NSUserDefaults.standardUserDefaults().integerForKey("savedCoins")
@@ -64,6 +67,9 @@ class ShopScene: SKScene {
         paddleSelected = Constants.PaddleColor(rawValue: NSUserDefaults.standardUserDefaults().integerForKey("paddleSelected"))!
         greenBought = NSUserDefaults.standardUserDefaults().integerForKey("greenBought")
         redBought = NSUserDefaults.standardUserDefaults().integerForKey("redBought")
+        
+        self.paddleGreenPic.hidden = true
+        self.paddleRedPic.hidden = true
         
         backButton.selectedHandler = {
             
@@ -75,27 +81,41 @@ class ShopScene: SKScene {
             
         }
         
-        // save greenbought & yellowbought
-        // fix savedCoins minus
+        func updateCheckMark () {
+            for index in 0...5 {
+                let checkMark = checkMarks[index]
+                if paddleSelected.rawValue == index {
+                    checkMark.hidden = false
+                }
+                else {
+                    checkMark.hidden = true
+                }
+            }
+        }
+        
+        updateCheckMark()
         
         paddleBoxBlue.selectedHandler = {
             self.paddleSelected = .Blue
+            updateCheckMark()
             self.paddleSelectedUpdate()
         }
         
         paddleBoxGreen.selectedHandler = {
-            if savedCoins >= 10 {
+            if savedCoins >= 1 {                // 10
                 if self.greenBought == 0 {
-                    savedCoins -= 10
+                    savedCoins -= 1             // 10
                     self.goldNumber.text = "\(savedCoins)"
                     NSUserDefaults.standardUserDefaults().setInteger(savedCoins, forKey: Constants.savedCoins)
                     self.greenBought = 1
                     self.greenBoughtUpdate()
                     self.paddleSelected = .Green
+                    updateCheckMark()
                     self.paddleSelectedUpdate()
                 }
                 else if self.greenBought == 1 {
                     self.paddleSelected = .Green
+                    updateCheckMark()
                     self.paddleSelectedUpdate()
                 }
             }
@@ -111,10 +131,12 @@ class ShopScene: SKScene {
                     self.redBought = 1
                     self.redBoughtUpdate()
                     self.paddleSelected = .Red
+                    updateCheckMark()
                     self.paddleSelectedUpdate()
                 }
                 else if self.redBought == 1 {
                     self.paddleSelected = .Red
+                    updateCheckMark()
                     self.paddleSelectedUpdate()
                 }
             }
@@ -150,6 +172,7 @@ class ShopScene: SKScene {
             NSUserDefaults.standardUserDefaults().synchronize()
             self.ten.hidden = true
             self.smallGold2.hidden = true
+            self.paddleGreenPic.hidden = false
     }
     
     func redBoughtUpdate() {
@@ -157,6 +180,10 @@ class ShopScene: SKScene {
             NSUserDefaults.standardUserDefaults().synchronize()
             self.twenty.hidden = true
             self.smallGold3.hidden = true
+            self.paddleRedPic.hidden = false
+        
+        // shows all checkmarks in beginning (use nsuserdefaults, hide all checkmarks only once)
+        // doesnt hide ten, smallgold2, or show paddlegreenpic (doesnt save, use paddle bought)
     }
     
     
