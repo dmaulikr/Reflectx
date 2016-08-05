@@ -34,8 +34,8 @@ class MainScene: SKScene {
     
         /* let appDomain = NSBundle.mainBundle().bundleIdentifier!
         NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain) */
-        let savedCoins3: Int = NSUserDefaults.standardUserDefaults().integerForKey("savedCoins2")
-        goldNumber.text = "\(savedCoins3)"
+        let savedCoins: Int = NSUserDefaults.standardUserDefaults().integerForKey("savedCoins")
+        goldNumber.text = "\(savedCoins)"
         
         func playButtonClicked () {
             

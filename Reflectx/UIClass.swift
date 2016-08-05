@@ -46,15 +46,15 @@ class UIClass: SKNode{
         
     }
     
-    func pauseButton2 () {
+    func setupPauseButton (scene: GameScene) {
         pauseButton.selectedHandler = {
-            self.paused = !self.paused
+            scene.paused = !scene.paused
             
-            if self.paused {
+            if scene.paused {
                 self.pauseButton.texture = SKTexture(imageNamed: "rightTriangleWhite")
             }
                 
-            else if !self.paused {
+            else if !scene.paused {
                 self.countLabel.hidden = false
                 self.countLabel.text = "3"
                 SKAction.waitForDuration(1)

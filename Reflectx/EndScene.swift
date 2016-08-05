@@ -36,14 +36,14 @@ class EndScene: SKScene {
         highScoreLabel = self.childNodeWithName("highScoreLabel") as! SKLabelNode
         addGold = self.childNodeWithName("addGold") as! SKLabelNode
         
-        let savedScore: Int = NSUserDefaults.standardUserDefaults().objectForKey("highScore") as! Int
+        let savedScore: Int = NSUserDefaults.standardUserDefaults().integerForKey("highScore")
         highScoreLabel.text = String(savedScore)
         
         scoreLabel2.text = String(localScore)
         addGold.text = "+\(earnedCoins)"
         
-        let savedCoins3: Int = NSUserDefaults.standardUserDefaults().objectForKey("savedCoins2") as! Int
-        goldNumber.text = "\(savedCoins3)"
+        let savedCoins: Int = NSUserDefaults.standardUserDefaults().integerForKey("savedCoins")
+        goldNumber.text = "\(savedCoins)"
         
         homeButton.selectedHandler = {
             

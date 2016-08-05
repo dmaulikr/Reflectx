@@ -11,36 +11,59 @@ import SpriteKit
 class ShopScene: SKScene {
     
     var backButton: MSButtonNode!
-    var rectangleBlue: MSButtonNode!
-    var rectangleGreen: MSButtonNode!
-    var rectangleYellow: MSButtonNode!
-    var rectangleRed: MSButtonNode!
-    var rectangleBlue2: MSButtonNode!
-    var rectangleGreen2: MSButtonNode!
-    var paddleSelected = 0
+    var paddleBoxBlue: MSButtonNode!
+    var paddleBoxGreen: MSButtonNode!
+    var paddleBoxRed: MSButtonNode!
+    var paddleBoxYellow: MSButtonNode!
+    var paddleBoxBlue2: MSButtonNode!
+    var paddleBoxGreen2: MSButtonNode!
+    var paddleSelected : Constants.PaddleColor = .Blue
     var checkMark: SKSpriteNode!
     var greenBought = 0
-    var yellowBought = 0
+    var redBought = 0
     var goldNumber: SKLabelNode!
+    var ten: SKLabelNode!
+    var twenty: SKLabelNode!
+    var forty: SKLabelNode!
+    var eighty: SKLabelNode!
+    var twoHundred: SKLabelNode!
+    var smallGold2: SKSpriteNode!
+    var smallGold3: SKSpriteNode!
+    var smallGold4: SKSpriteNode!
+    var smallGold5: SKSpriteNode!
+    var smallGold6: SKSpriteNode!
+
+    // shop, show paddle when clicked/bought etc, checkmark
+    // hide all other paddles
     
     override func didMoveToView(view: SKView) {
         
         backButton = self.childNodeWithName("backButton") as! MSButtonNode
-        rectangleBlue = self.childNodeWithName("rectangleBlue") as! MSButtonNode
-        rectangleGreen = self.childNodeWithName("rectangleGreen") as! MSButtonNode
-        rectangleYellow = self.childNodeWithName("rectangleYellow") as! MSButtonNode
-        rectangleRed = self.childNodeWithName("rectangleRed") as! MSButtonNode
-        rectangleBlue2 = self.childNodeWithName("rectangleBlue2") as! MSButtonNode
-        rectangleGreen2 = self.childNodeWithName("rectangleGreen2") as! MSButtonNode
+        paddleBoxBlue = self.childNodeWithName("paddleBoxBlue") as! MSButtonNode
+        paddleBoxGreen = self.childNodeWithName("paddleBoxGreen") as! MSButtonNode
+        paddleBoxRed = self.childNodeWithName("paddleBoxRed") as! MSButtonNode
+        paddleBoxYellow = self.childNodeWithName("paddleBoxYellow") as! MSButtonNode
+        paddleBoxBlue2 = self.childNodeWithName("paddleBoxBlue2") as! MSButtonNode
+        paddleBoxGreen2 = self.childNodeWithName("paddleBoxGreen2") as! MSButtonNode
         checkMark = self.childNodeWithName("checkMark") as! SKSpriteNode
+        ten = self.childNodeWithName("ten") as! SKLabelNode
+        twenty = self.childNodeWithName("twenty") as! SKLabelNode
+        forty = self.childNodeWithName("forty") as! SKLabelNode
+        eighty = self.childNodeWithName("eighty") as! SKLabelNode
+        twoHundred = self.childNodeWithName("twoHundred") as! SKLabelNode
+        smallGold2 = self.childNodeWithName("smallGold2") as! SKSpriteNode
+        smallGold3 = self.childNodeWithName("smallGold3") as! SKSpriteNode
+        smallGold4 = self.childNodeWithName("smallGold4") as! SKSpriteNode
+        smallGold5 = self.childNodeWithName("smallGold5") as! SKSpriteNode
+        smallGold6 = self.childNodeWithName("smallGold6") as! SKSpriteNode
         goldNumber = self.childNodeWithName("goldNumber") as! SKLabelNode
         
-        var savedCoins3: Int = NSUserDefaults.standardUserDefaults().integerForKey("savedCoins2")
-        goldNumber.text = "\(savedCoins3)"
+        var savedCoins: Int = NSUserDefaults.standardUserDefaults().integerForKey("savedCoins")
+        goldNumber.text = "\(savedCoins)"
         
-        paddleSelected = NSUserDefaults.standardUserDefaults().integerForKey("paddleSelected2")
-        greenBought = NSUserDefaults.standardUserDefaults().integerForKey("greenBought2")
-        yellowBought = NSUserDefaults.standardUserDefaults().integerForKey("yellowBought2")
+        paddleSelected = Constants.PaddleColor(rawValue: NSUserDefaults.standardUserDefaults().integerForKey("paddleSelected"))!
+        greenBought = NSUserDefaults.standardUserDefaults().integerForKey("greenBought")
+        redBought = NSUserDefaults.standardUserDefaults().integerForKey("redBought")
         
         backButton.selectedHandler = {
             
@@ -52,87 +75,88 @@ class ShopScene: SKScene {
             
         }
         
-        // fix pause button
-        // save greenbought & yellowbought 
+        // save greenbought & yellowbought
         // fix savedCoins minus
         
-        rectangleBlue.selectedHandler = {
-            self.paddleSelected = 0
+        paddleBoxBlue.selectedHandler = {
+            self.paddleSelected = .Blue
             self.paddleSelectedUpdate()
         }
         
-        rectangleGreen.selectedHandler = {
-            if savedCoins3 >= 10 {
+        paddleBoxGreen.selectedHandler = {
+            if savedCoins >= 10 {
                 if self.greenBought == 0 {
-                    savedCoins3 -= 10
+                    savedCoins -= 10
+                    self.goldNumber.text = "\(savedCoins)"
+                    NSUserDefaults.standardUserDefaults().setInteger(savedCoins, forKey: Constants.savedCoins)
                     self.greenBought = 1
-                    self.paddleSelected = 1
+                    self.greenBoughtUpdate()
+                    self.paddleSelected = .Green
                     self.paddleSelectedUpdate()
                 }
                 else if self.greenBought == 1 {
-                    self.paddleSelected = 1
+                    self.paddleSelected = .Green
                     self.paddleSelectedUpdate()
                 }
             }
             
         }
         
-        rectangleYellow.selectedHandler = {
-            if savedCoins3 >= 10 {
-                if self.yellowBought == 0 {
-                    savedCoins3 -= 10
-                    self.yellowBought = 1
-                    self.paddleSelected = 2
+        paddleBoxRed.selectedHandler = {
+            if savedCoins >= 20 {
+                if self.redBought == 0 {
+                    savedCoins -= 20
+                    self.goldNumber.text = "\(savedCoins)"
+                    NSUserDefaults.standardUserDefaults().setInteger(savedCoins, forKey: Constants.savedCoins)
+                    self.redBought = 1
+                    self.redBoughtUpdate()
+                    self.paddleSelected = .Red
                     self.paddleSelectedUpdate()
                 }
-                else if self.yellowBought == 1 {
-                    self.paddleSelected = 2
+                else if self.redBought == 1 {
+                    self.paddleSelected = .Red
                     self.paddleSelectedUpdate()
                 }
             }
         }
         
-        rectangleRed.selectedHandler = {
-            if savedCoins3 >= 40 {
+        
+        paddleBoxYellow.selectedHandler = {
+            if savedCoins >= 40 {
                 
             }
         }
         
-        rectangleBlue2.selectedHandler = {
-            if savedCoins3 >= 80 {
+        paddleBoxBlue2.selectedHandler = {
+            if savedCoins >= 80 {
                 
             }
         }
         
-        rectangleGreen2.selectedHandler = {
-            if savedCoins3 >= 200 {
+        paddleBoxGreen2.selectedHandler = {
+            if savedCoins >= 200 {
                 
             }
         }
     }
     
     func paddleSelectedUpdate() {
-        let paddleSelected2 = NSUserDefaults().integerForKey("paddleSelected2")
-        if paddleSelected != paddleSelected2 {
-            NSUserDefaults().setInteger(paddleSelected, forKey: "paddleSelected2")
-            NSUserDefaults.standardUserDefaults().synchronize()
-        }
+        NSUserDefaults().setInteger(paddleSelected.rawValue, forKey: "paddleSelected")
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     func greenBoughtUpdate() {
-        let greenBought2 = NSUserDefaults().integerForKey("greenBought2")
-        if greenBought != greenBought2 {
-            NSUserDefaults().setInteger(greenBought, forKey: "greenBought2")
+            NSUserDefaults().setInteger(greenBought, forKey: "greenBought")
             NSUserDefaults.standardUserDefaults().synchronize()
-        }
+            self.ten.hidden = true
+            self.smallGold2.hidden = true
     }
     
-    func yellowBoughtUpdate() {
-        let yellowBought2 = NSUserDefaults().integerForKey("yellowBought2")
-        if yellowBought != yellowBought2 {
-            NSUserDefaults().setInteger(yellowBought, forKey: "yellowBought2")
+    func redBoughtUpdate() {
+            NSUserDefaults().setInteger(redBought, forKey: "redBought")
             NSUserDefaults.standardUserDefaults().synchronize()
-        }
+            self.twenty.hidden = true
+            self.smallGold3.hidden = true
     }
     
     

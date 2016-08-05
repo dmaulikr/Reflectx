@@ -81,27 +81,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         dimLeftUp.alpha = 0
         dimRightUp.alpha = 0
         
-        //here
-        UILayer.pauseButton2 ()
-        savedGames = NSUserDefaults.standardUserDefaults().integerForKey("savedGames2")
-        savedCoins = NSUserDefaults.standardUserDefaults().integerForKey("savedCoins2")
-        let paddleSelected: Int = NSUserDefaults.standardUserDefaults().integerForKey("paddleSelected2")
-        let greenBought: Int = NSUserDefaults.standardUserDefaults().integerForKey("greenBought2")
-        let yellowBought: Int = NSUserDefaults.standardUserDefaults().integerForKey("yellowBought2")
+        UILayer.setupPauseButton(self) 
+        savedGames = NSUserDefaults.standardUserDefaults().integerForKey("savedGames")
+        savedCoins = NSUserDefaults.standardUserDefaults().integerForKey("savedCoins")
+        let paddleSelected: Constants.PaddleColor = Constants.PaddleColor(rawValue: NSUserDefaults.standardUserDefaults().integerForKey("paddleSelected"))!
+        let greenBought: Int = NSUserDefaults.standardUserDefaults().integerForKey("greenBought")
+        let redBought: Int = NSUserDefaults.standardUserDefaults().integerForKey("redBought")
         
         self.state = .Playing
         
-        if paddleSelected == 0 {
+        if paddleSelected == .Blue {
             self.paddle.texture = SKTexture(imageNamed: "paddleBlue")
         }
         
-        //here
-        if paddleSelected == 1 && greenBought == 1 {
+        if paddleSelected == .Green && greenBought == 1 {
             self.paddle.texture = SKTexture(imageNamed: "paddleGreen")
         }
         
-        if paddleSelected == 2 && yellowBought == 1 {
-            self.paddle.texture = SKTexture(imageNamed: "paddleRed") // no yellow yet
+        if paddleSelected == .Red && redBought == 1 {
+            self.paddle.texture = SKTexture(imageNamed: "paddleRed")
         }
     
     }
@@ -332,7 +330,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         }
         
-        if points >= 5 && pointsNumber == 0 || points >= 15 && pointsNumber == 1 || points >= 30 && pointsNumber == 2 || points >= 50 && pointsNumber == 3 || points >= 70 && pointsNumber == 4 || points >= 90 && pointsNumber == 5 || points >= 110 && pointsNumber == 6 || points >= 130 && pointsNumber == 7 || points >= 150 && pointsNumber == 8 || points >= 170 && pointsNumber == 9 || points >= 190 && pointsNumber == 10 || points >= 210 && pointsNumber == 11 || points >= 230 && pointsNumber == 12 || points >= 250 && pointsNumber == 13 || points >= 270 && pointsNumber == 14 || points >= 290 && pointsNumber == 15 {
+        if points >= 5 && pointsNumber == 0 || points >= 10 && pointsNumber == 1 || points >= 20 && pointsNumber == 2 || points >= 40 && pointsNumber == 3 || points >= 60 && pointsNumber == 4 || points >= 80 && pointsNumber == 5 || points >= 100 && pointsNumber == 6 || points >= 120 && pointsNumber == 7 || points >= 140 && pointsNumber == 8 || points >= 160 && pointsNumber == 9 || points >= 180 && pointsNumber == 10 || points >= 200 && pointsNumber == 11 || points >= 220 && pointsNumber == 12 || points >= 240 && pointsNumber == 13 || points >= 260 && pointsNumber == 14 || points >= 280 && pointsNumber == 15 {
             
             savedCoins += 1
             earnedCoins += 1
@@ -434,11 +432,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func savedCoinsUpdate() {
-        let savedCoins2 = NSUserDefaults().integerForKey("savedCoins2")
-        if savedCoins > savedCoins2 {
-            NSUserDefaults().setInteger(savedCoins, forKey: "savedCoins2")
-            NSUserDefaults.standardUserDefaults().synchronize()
-        }
+        NSUserDefaults().setInteger(savedCoins, forKey: "savedCoins")
+        NSUserDefaults.standardUserDefaults().synchronize()
+        
     }
     
     func spawnNewWave(){
@@ -510,7 +506,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func createBallGroup(position: CGPoint){
         let newBall = createBall(position)
-        let newEnemy = Enemy(imageName: "cloud")
+        let newEnemy = Enemy(imageName: "cloud") 
         let enemyPosition = CGPoint (x: newBall.position.x+0, y: newBall.position.y+105)
         newEnemy.position = enemyPosition
         obstacleLayer.addChild(newEnemy)

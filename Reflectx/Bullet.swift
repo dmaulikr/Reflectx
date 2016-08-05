@@ -16,7 +16,7 @@ class Bullet: Shootable {
         addPhysicsBody()
     }
     
-    let savedWavesDone2: Int = NSUserDefaults.standardUserDefaults().objectForKey("wavesDone2") as! Int
+    let savedWavesDone2: Int = NSUserDefaults.standardUserDefaults().integerForKey("wavesDone2")
     
     override func addPhysicsBody () {
         physicsBody = SKPhysicsBody(rectangleOfSize: size)
