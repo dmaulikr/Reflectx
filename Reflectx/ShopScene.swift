@@ -19,7 +19,7 @@ class ShopScene: SKScene {
     var paddleBoxGreen2: MSButtonNode!
     var paddleSelected : Constants.PaddleColor = .Blue
     var checkMarks: [SKSpriteNode] = []
-    var greenBought = 0
+    var greenBought : Bool = false
     var redBought = 0
     var goldNumber: SKLabelNode!
     var ten: SKLabelNode!
@@ -65,7 +65,7 @@ class ShopScene: SKScene {
         goldNumber.text = "\(savedCoins)"
         
         paddleSelected = Constants.PaddleColor(rawValue: NSUserDefaults.standardUserDefaults().integerForKey("paddleSelected"))!
-        greenBought = NSUserDefaults.standardUserDefaults().integerForKey("greenBought")
+        greenBought = NSUserDefaults.standardUserDefaults().boolForKey("greenBought")
         redBought = NSUserDefaults.standardUserDefaults().integerForKey("redBought")
         
         self.paddleGreenPic.hidden = true
@@ -94,6 +94,13 @@ class ShopScene: SKScene {
         }
         
         updateCheckMark()
+        if redBought == 1 {
+        self.redBoughtUpdate()
+        }
+        if greenBought {
+            self.greenBoughtUpdate()
+        }
+        self.paddleSelectedUpdate()
         
         paddleBoxBlue.selectedHandler = {
             self.paddleSelected = .Blue
@@ -103,23 +110,24 @@ class ShopScene: SKScene {
         
         paddleBoxGreen.selectedHandler = {
             if savedCoins >= 1 {                // 10
-                if self.greenBought == 0 {
+                if !self.greenBought {
                     savedCoins -= 1             // 10
                     self.goldNumber.text = "\(savedCoins)"
                     NSUserDefaults.standardUserDefaults().setInteger(savedCoins, forKey: Constants.savedCoins)
-                    self.greenBought = 1
+                    self.greenBought = true
+                    self.paddleSelected = .Green
+                    updateCheckMark()
                     self.greenBoughtUpdate()
-                    self.paddleSelected = .Green
-                    updateCheckMark()
                     self.paddleSelectedUpdate()
                 }
-                else if self.greenBought == 1 {
-                    self.paddleSelected = .Green
-                    updateCheckMark()
-                    self.paddleSelectedUpdate()
-                }
+          
             }
-            
+            else if self.greenBought {
+                self.paddleSelected = .Green
+                updateCheckMark()
+                self.greenBoughtUpdate()
+                self.paddleSelectedUpdate()
+            }
         }
         
         paddleBoxRed.selectedHandler = {
@@ -129,16 +137,17 @@ class ShopScene: SKScene {
                     self.goldNumber.text = "\(savedCoins)"
                     NSUserDefaults.standardUserDefaults().setInteger(savedCoins, forKey: Constants.savedCoins)
                     self.redBought = 1
+                    self.paddleSelected = .Red
+                    updateCheckMark()
                     self.redBoughtUpdate()
-                    self.paddleSelected = .Red
-                    updateCheckMark()
                     self.paddleSelectedUpdate()
                 }
-                else if self.redBought == 1 {
-                    self.paddleSelected = .Red
-                    updateCheckMark()
-                    self.paddleSelectedUpdate()
-                }
+            }
+            else if self.redBought == 1 {
+                self.paddleSelected = .Red
+                updateCheckMark()
+                self.redBoughtUpdate()
+                self.paddleSelectedUpdate()
             }
         }
         
@@ -168,7 +177,7 @@ class ShopScene: SKScene {
     }
     
     func greenBoughtUpdate() {
-            NSUserDefaults().setInteger(greenBought, forKey: "greenBought")
+            NSUserDefaults().setBool(greenBought, forKey: "greenBought")
             NSUserDefaults.standardUserDefaults().synchronize()
             self.ten.hidden = true
             self.smallGold2.hidden = true
@@ -181,10 +190,7 @@ class ShopScene: SKScene {
             self.twenty.hidden = true
             self.smallGold3.hidden = true
             self.paddleRedPic.hidden = false
-        
-        // shows all checkmarks in beginning (use nsuserdefaults, hide all checkmarks only once)
-        // doesnt hide ten, smallgold2, or show paddlegreenpic (doesnt save, use paddle bought)
-    }
     
+    }
     
 }
