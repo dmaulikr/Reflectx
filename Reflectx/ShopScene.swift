@@ -20,7 +20,7 @@ class ShopScene: SKScene {
     var paddleSelected : Constants.PaddleColor = .Blue
     var checkMarks: [SKSpriteNode] = []
     var greenBought : Bool = false
-    var redBought = 0
+    var redBought: Bool = false
     var goldNumber: SKLabelNode!
     var ten: SKLabelNode!
     var twenty: SKLabelNode!
@@ -66,7 +66,7 @@ class ShopScene: SKScene {
         
         paddleSelected = Constants.PaddleColor(rawValue: NSUserDefaults.standardUserDefaults().integerForKey("paddleSelected"))!
         greenBought = NSUserDefaults.standardUserDefaults().boolForKey("greenBought")
-        redBought = NSUserDefaults.standardUserDefaults().integerForKey("redBought")
+        redBought = NSUserDefaults.standardUserDefaults().boolForKey("redBought")
         
         self.paddleGreenPic.hidden = true
         self.paddleRedPic.hidden = true
@@ -94,8 +94,8 @@ class ShopScene: SKScene {
         }
         
         updateCheckMark()
-        if redBought == 1 {
-        self.redBoughtUpdate()
+        if redBought {
+            self.redBoughtUpdate()
         }
         if greenBought {
             self.greenBoughtUpdate()
@@ -109,18 +109,15 @@ class ShopScene: SKScene {
         }
         
         paddleBoxGreen.selectedHandler = {
-            if savedCoins >= 1 {                // 10
-                if !self.greenBought {
-                    savedCoins -= 1             // 10
-                    self.goldNumber.text = "\(savedCoins)"
-                    NSUserDefaults.standardUserDefaults().setInteger(savedCoins, forKey: Constants.savedCoins)
-                    self.greenBought = true
-                    self.paddleSelected = .Green
-                    updateCheckMark()
-                    self.greenBoughtUpdate()
-                    self.paddleSelectedUpdate()
-                }
-          
+            if savedCoins >= 10 && !self.greenBought {
+                savedCoins -= 10
+                self.goldNumber.text = "\(savedCoins)"
+                NSUserDefaults.standardUserDefaults().setInteger(savedCoins, forKey: Constants.savedCoins)
+                self.greenBought = true
+                self.paddleSelected = .Green
+                updateCheckMark()
+                self.greenBoughtUpdate()
+                self.paddleSelectedUpdate()
             }
             else if self.greenBought {
                 self.paddleSelected = .Green
@@ -131,19 +128,17 @@ class ShopScene: SKScene {
         }
         
         paddleBoxRed.selectedHandler = {
-            if savedCoins >= 20 {
-                if self.redBought == 0 {
+            if savedCoins >= 20 && !self.redBought {
                     savedCoins -= 20
                     self.goldNumber.text = "\(savedCoins)"
                     NSUserDefaults.standardUserDefaults().setInteger(savedCoins, forKey: Constants.savedCoins)
-                    self.redBought = 1
+                    self.redBought = true
                     self.paddleSelected = .Red
                     updateCheckMark()
                     self.redBoughtUpdate()
                     self.paddleSelectedUpdate()
-                }
             }
-            else if self.redBought == 1 {
+            else if self.redBought == true {
                 self.paddleSelected = .Red
                 updateCheckMark()
                 self.redBoughtUpdate()
@@ -177,20 +172,20 @@ class ShopScene: SKScene {
     }
     
     func greenBoughtUpdate() {
-            NSUserDefaults().setBool(greenBought, forKey: "greenBought")
-            NSUserDefaults.standardUserDefaults().synchronize()
-            self.ten.hidden = true
-            self.smallGold2.hidden = true
-            self.paddleGreenPic.hidden = false
+        NSUserDefaults().setBool(greenBought, forKey: "greenBought")
+        NSUserDefaults.standardUserDefaults().synchronize()
+        self.ten.hidden = true
+        self.smallGold2.hidden = true
+        self.paddleGreenPic.hidden = false
     }
     
     func redBoughtUpdate() {
-            NSUserDefaults().setInteger(redBought, forKey: "redBought")
-            NSUserDefaults.standardUserDefaults().synchronize()
-            self.twenty.hidden = true
-            self.smallGold3.hidden = true
-            self.paddleRedPic.hidden = false
-    
+        NSUserDefaults().setBool(redBought, forKey: "redBought")
+        NSUserDefaults.standardUserDefaults().synchronize()
+        self.twenty.hidden = true
+        self.smallGold3.hidden = true
+        self.paddleRedPic.hidden = false
+        
     }
     
 }

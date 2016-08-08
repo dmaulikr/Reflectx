@@ -237,7 +237,6 @@
 				TargetAttributes = {
 					85DBC74E1D36AB7A00E7FE09 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = QPPG2G8STX;
 					};
 				};
 			};
@@ -427,7 +426,7 @@
 				INFOPLIST_FILE = Reflectx/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jacky.Reflectx;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jacky99.Reflectx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -442,7 +441,7 @@
 				INFOPLIST_FILE = Reflectx/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jacky.Reflectx;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jacky99.Reflectx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

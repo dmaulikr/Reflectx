@@ -22,10 +22,10 @@ class HighScoreScene: SKScene {
         gamesPlayedLabel = self.childNodeWithName("gamesPlayedLabel") as! SKLabelNode
         rankLabel = self.childNodeWithName("rankLabel") as! SKLabelNode
         
-        let savedScore: Int = NSUserDefaults.standardUserDefaults().objectForKey("highScore") as! Int
+        let savedScore: Int = NSUserDefaults.standardUserDefaults().integerForKey("highScore")
         highScoreLabel.text = "\(savedScore)"
         
-        let savedRank: Int = NSUserDefaults.standardUserDefaults().objectForKey("highScore") as! Int
+        let savedRank: Int = NSUserDefaults.standardUserDefaults().integerForKey("highScore")
         if savedRank >= 0 && savedRank <= 19 {
             rankLabel.text = "Novice"
         }
@@ -54,8 +54,8 @@ class HighScoreScene: SKScene {
             rankLabel.text = "Transcender"
         }
         
-        let savedGames3: Int = NSUserDefaults.standardUserDefaults().objectForKey("savedGames2") as! Int
-        gamesPlayedLabel.text = "Games played - \(savedGames3)"
+        let savedGames: Int = NSUserDefaults.standardUserDefaults().integerForKey("savedGames2")
+        gamesPlayedLabel.text = "Games played - \(savedGames)"
         
         backButton.selectedHandler = {
             

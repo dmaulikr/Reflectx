@@ -43,9 +43,9 @@ class MainScene: SKScene {
             let skView = self.view as SKView!
             let scene = GameScene(fileNamed:"GameScene") as GameScene!
             scene.scaleMode = .AspectFill
-            skView.showsPhysics = true
-            skView.showsDrawCount = true
-            skView.showsFPS = true
+            skView.showsPhysics = false
+            skView.showsDrawCount = false
+            skView.showsFPS = false
             let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
             skView.presentScene(scene, transition: transition)
             
@@ -57,9 +57,9 @@ class MainScene: SKScene {
             let skView = self.view as SKView!
             let scene = GameScene(fileNamed:"GameScene") as GameScene!
             scene.scaleMode = .AspectFill
-            skView.showsPhysics = true
-            skView.showsDrawCount = true
-            skView.showsFPS = true
+            skView.showsPhysics = false
+            skView.showsDrawCount = false
+            skView.showsFPS = false
             let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
             skView.presentScene(scene, transition: transition)
             

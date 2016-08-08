@@ -26,7 +26,7 @@ class Bullet: Shootable {
         physicsBody?.categoryBitMask = BulletCategory
         physicsBody?.collisionBitMask = EnemyCategory | PaddleCategory
         physicsBody?.contactTestBitMask = EnemyCategory
-        physicsBody?.velocity = CGVector(dx: 0, dy: -320)
+        physicsBody?.velocity = CGVector(dx: 0, dy: -380)
         physicsBody?.mass = 1
         physicsBody?.angularDamping = 0
         physicsBody?.linearDamping = 0
@@ -36,17 +36,25 @@ class Bullet: Shootable {
     
     func updateBulletSpeed(waveNumber: Int) {
         switch waveNumber {
-        case 0...6:
-            if position.y < 650 && position.y > 666 {
-                physicsBody?.velocity = CGVector(dx: 0, dy: -330)
-            }
-        case 6...13:
+        case 0...4:
             if position.y < 650 && position.y > 666 {
                 physicsBody?.velocity = CGVector(dx: 0, dy: -380)
             }
-        default:
+        case 5...7:
             if position.y < 650 && position.y > 666 {
                 physicsBody?.velocity = CGVector(dx: 0, dy: -430)
+            }
+        case 8...10:
+            if position.y < 650 && position.y > 666 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -480)
+            }
+        case 11...13:
+            if position.y < 650 && position.y > 666 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -530)
+            }
+        default:
+            if position.y < 650 && position.y > 666 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -560)
             }
         }
     }

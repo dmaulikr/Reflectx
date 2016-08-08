@@ -122,11 +122,11 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         if let bulletJoint = bulletJoint {
             
             if let bullet = bulletJoint.bodyA.node as? Bullet {
-                bullet.physicsBody?.velocity = CGVectorMake(0, 600)
+                bullet.physicsBody?.velocity = CGVectorMake(0, 650)
             }
                 
             else if let bullet = bulletJoint.bodyB.node as? Bullet {
-                bullet.physicsBody?.velocity = CGVectorMake(0, 600)
+                bullet.physicsBody?.velocity = CGVectorMake(0, 650)
             }
             
             physicsWorld.removeJoint(bulletJoint)
@@ -285,7 +285,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func spawnNewWave(){
-        if spawnTimer >= 1.5 && waveFinished {
+        if spawnTimer >= 3 && waveFinished {
             
             wave1()
             spawnTimer = 0
@@ -295,11 +295,11 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
     
     func spawnNewWave2(){
         
-        if spawnTimer >= 1.5 {
+        if spawnTimer >= 5 {
             UILayer2.instructionsUpdate()
         } 
         
-        if spawnTimer >= 2 && waveFinished {
+        if spawnTimer >= 5 && waveFinished {
             
             wave2()
             spawnTimer = 0
@@ -308,7 +308,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func spawnNewWave3(){
-        if spawnTimer >= 2 && waveFinished {
+        if spawnTimer >= 3 && waveFinished {
             
             wave3()
             spawnTimer = 0

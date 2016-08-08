@@ -82,7 +82,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         dimRightUp.alpha = 0
         
         UILayer.setupPauseButton(self) 
-        savedGames = NSUserDefaults.standardUserDefaults().integerForKey("savedGames")
+        savedGames = NSUserDefaults.standardUserDefaults().integerForKey("savedGames2")
         savedCoins = NSUserDefaults.standardUserDefaults().integerForKey("savedCoins")
         let paddleSelected: Constants.PaddleColor = Constants.PaddleColor(rawValue: NSUserDefaults.standardUserDefaults().integerForKey("paddleSelected"))!
         let greenBought: Int = NSUserDefaults.standardUserDefaults().integerForKey("greenBought")
@@ -123,15 +123,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         }
         
-        // for now
-        /* if let musicURL = NSBundle.mainBundle().URLForResource("music1", withExtension: "mp3") {
+            if let musicURL = NSBundle.mainBundle().URLForResource("music1", withExtension: "mp3") {
             if musicNumber == 0 {
             backgroundMusic = SKAudioNode(URL: musicURL)
-            backgroundMusic.runAction(SKAction.changeVolumeTo(Float(0.5), duration: 0))
+            backgroundMusic.runAction(SKAction.changeVolumeTo(Float(0.75), duration: 0))
             addChild(backgroundMusic)
             musicNumber += 1
             }
-        } */
+        }
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -163,11 +162,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let bulletJoint = bulletJoint {
             
             if let bullet = bulletJoint.bodyA.node as? Bullet {
-                bullet.physicsBody?.velocity = CGVectorMake(0, 600)
+                bullet.physicsBody?.velocity = CGVectorMake(0, 650)
             }
                 
             else if let bullet = bulletJoint.bodyB.node as? Bullet {
-                bullet.physicsBody?.velocity = CGVectorMake(0, 600)
+                bullet.physicsBody?.velocity = CGVectorMake(0, 650)
             }
             
             physicsWorld.removeJoint(bulletJoint)
@@ -190,13 +189,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         /* Process obstacles */
         
         // stage 1
-        if wavesNumber <= 3 {
+        if wavesNumber <= 2 {
             spawnNewWave()
         }
         
         // stage 2
-        if wavesNumber > 3 {
+        if wavesNumber > 2 && wavesNumber <= 10 {
             spawnNewWave2()
+        }
+        
+        if wavesNumber > 10 {
+            spawnNewWave3()
+        }
+        
+        if wavesNumber > 13 {
+            spawnNewWave4()
         }
         
         updateObstacles()
@@ -209,12 +216,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameOver()
         }
         
-        if (wavesNumber == 7 && wavesDoneNumber == 0) || (wavesNumber == 14 && wavesDoneNumber == 1) {
+        if (wavesNumber == 5 && wavesDoneNumber == 0) || (wavesNumber == 8 && wavesDoneNumber == 1) || (wavesNumber == 11 && wavesDoneNumber == 2) || (wavesNumber == 14 && wavesDoneNumber == 3) {
             UILayer.fastForwardAnimation ()
             wavesDoneNumber += 1
         }
         
-        if wavesNumber == 21 && wavesDoneNumber == 2 {
+        if wavesNumber == 17 && wavesDoneNumber == 4 {
             dimPanel.zPosition = 50
             dimLeft.zPosition = 51
             dimRight.zPosition = 51
@@ -349,7 +356,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         UILayer.setBuffLabel()
         
-        if points >= 5 && points <= 6 || points >= 10 && points <= 11 || points >= 20 && points <= 21 || points >= 40 && points <= 41 || points >= 80 && points <= 81 {
+        if points >= 5 && points <= 6 || points >= 10 && points <= 11 || points >= 20 && points <= 21 || points >= 40 && points <= 41 || points >= 80 && points <= 81 || points >= 160 && points <= 161{
             
             self.runAction(successSFX)
         }
@@ -438,7 +445,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func spawnNewWave(){
-        if spawnTimer >= 0.8 && waveFinished {
+        if spawnTimer >= 2.8 && waveFinished {
             
             var random = arc4random_uniform(4)
             while previousNumber == random {
@@ -467,7 +474,83 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func spawnNewWave2(){
-        if spawnTimer >= 0.85 && waveFinished {
+        if spawnTimer >= 2.8 && waveFinished {
+            
+            var random = arc4random_uniform(9)
+            while previousNumber == random {
+                random = arc4random_uniform(9)
+            }
+            
+            previousNumber = random
+            
+            switch (random) {
+                
+            case 0:
+                wave1()
+            case 1:
+                wave2()
+            case 2:
+                wave3()
+            case 3:
+                wave4()
+            case 4:
+                wave5()
+            case 5:
+                wave6()
+            case 6:
+                wave7()
+            case 7:
+                wave8()
+            case 8:
+                wave9()
+            default:
+                break
+                
+            }
+            spawnTimer = 0
+        }
+    }
+    
+    func spawnNewWave3(){
+        if spawnTimer >= 2.5 && waveFinished {
+            
+            var random = arc4random_uniform(9)
+            while previousNumber == random {
+                random = arc4random_uniform(9)
+            }
+            
+            previousNumber = random
+            
+            switch (random) {
+                
+            case 0:
+                wave1()
+            case 1:
+                wave2()
+            case 2:
+                wave3()
+            case 3:
+                wave4()
+            case 4:
+                wave5()
+            case 5:
+                wave6()
+            case 6:
+                wave7()
+            case 7:
+                wave8()
+            case 8:
+                wave9()
+            default:
+                break
+                
+            }
+            spawnTimer = 0
+        }
+    }
+    
+    func spawnNewWave4(){
+        if spawnTimer >= 2.3 && waveFinished {
             
             var random = arc4random_uniform(9)
             while previousNumber == random {

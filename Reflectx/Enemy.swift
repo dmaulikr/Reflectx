@@ -52,10 +52,14 @@ class Enemy: SKSpriteNode {
     
     func goRight(waveNumber: Int) {
         switch waveNumber {
-        case 0...6:
-            physicsBody?.velocity = CGVector(dx: 100, dy: 0)
-        case 6...13:
-            physicsBody?.velocity = CGVector(dx: 103, dy: 0)
+        case 0...4:
+            physicsBody?.velocity = CGVector(dx: 95, dy: 0)
+        case 5...7:
+            physicsBody?.velocity = CGVector(dx: 98, dy: 0)
+        case 8...10:
+            physicsBody?.velocity = CGVector(dx: 101, dy: 0)
+        case 11...13:
+            physicsBody?.velocity = CGVector(dx: 104, dy: 0)
         default:
             physicsBody?.velocity = CGVector(dx: 106, dy: 0)
         }
@@ -63,48 +67,70 @@ class Enemy: SKSpriteNode {
     
     func goLeft(waveNumber: Int) {
         switch waveNumber {
-        case 0...6:
+        case 0...4:
             physicsBody?.velocity = CGVector(dx: -100, dy: 0)
-        case 6...13:
+        case 5...7:
             physicsBody?.velocity = CGVector(dx: -103, dy: 0)
-        default:
+        case 8...10:
             physicsBody?.velocity = CGVector(dx: -106, dy: 0)
+        case 11...13:
+            physicsBody?.velocity = CGVector(dx: -109, dy: 0)
+        default:
+            physicsBody?.velocity = CGVector(dx: -111, dy: 0)
         }
     }
     
     func goDown(waveNumber: Int) {
         switch waveNumber {
-        case 0...6:
+        case 0...4:
             physicsBody?.velocity = CGVector(dx: 0, dy: -210)
-        case 6...13:
-            physicsBody?.velocity = CGVector(dx: 0, dy: -250)
+        case 5...7:
+            physicsBody?.velocity = CGVector(dx: 0, dy: -230)
+        case 8...10:
+            physicsBody?.velocity = CGVector(dx: 0, dy: -245)
+        case 11...13:
+            physicsBody?.velocity = CGVector(dx: 0, dy: -255)
         default:
-            physicsBody?.velocity = CGVector(dx: 0, dy: -290)
+            physicsBody?.velocity = CGVector(dx: 0, dy: -265)
         }
     }
     
     func updateVelocity(waveNumber: Int) {
         switch waveNumber {
-        case 0...6:
+        case 0...4:
             if position.y < 600 && position.y > 550 {
                 physicsBody?.velocity = CGVector(dx: 0, dy: -125)
             }
             if position.y <= 500 {
-                physicsBody?.velocity = CGVector(dx: 0, dy: -335)
+                physicsBody?.velocity = CGVector(dx: 0, dy: -345)
             }
-        case 6...13:
+        case 5...7:
             if position.y < 600 && position.y > 550 {
                 physicsBody?.velocity = CGVector(dx: 0, dy: -175)
             }
             if position.y <= 500 {
-                physicsBody?.velocity = CGVector(dx: 0, dy: -385)
+                physicsBody?.velocity = CGVector(dx: 0, dy: -395)
             }
-        default:
+        case 8...10:
             if position.y < 600 && position.y > 550 {
                 physicsBody?.velocity = CGVector(dx: 0, dy: -225)
             }
             if position.y <= 500 {
                 physicsBody?.velocity = CGVector(dx: 0, dy: -425)
+            }
+        case 11...13:
+            if position.y < 600 && position.y > 550 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -260)
+            }
+            if position.y <= 500 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -455)
+            }
+        default:
+            if position.y < 600 && position.y > 550 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -295)
+            }
+            if position.y <= 500 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -480)
             }
         }
     }

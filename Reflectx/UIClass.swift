@@ -40,7 +40,7 @@ class UIClass: SKNode{
         fastForwardWhite.hidden = true
         hiddenLabel.hidden = true
         
-        self.runAction(SKAction.waitForDuration(1.5), completion: {() -> Void in
+        self.runAction(SKAction.waitForDuration(1.3), completion: {() -> Void in
             self.instructions.hidden = true
         })
         
@@ -71,7 +71,7 @@ class UIClass: SKNode{
     func setBuffLabel () {
         self.buffLabel.text = "2x"
         self.buffLabel.hidden = false
-        self.runAction(SKAction.waitForDuration(1.5), completion: {() -> Void in
+        self.runAction(SKAction.waitForDuration(1.3), completion: {() -> Void in
             self.buffLabel.hidden = true
         })
         self.runAction(powerupSFX)
@@ -88,8 +88,10 @@ class UIClass: SKNode{
             scoreLabel.fontColor = UIColor.blueColor()
         case 40...79:
             scoreLabel.fontColor = UIColor.redColor()
-        case 80:
+        case 80...159:
             scoreLabel.fontColor = UIColor.yellowColor()
+        case 160:
+            scoreLabel.fontColor = UIColor.blackColor()
         default:
             break
             
@@ -104,14 +106,14 @@ class UIClass: SKNode{
     
     func fastForwardAnimation () {
         self.fastForwardWhite.hidden = false
-        self.runAction(SKAction.waitForDuration(1.5), completion: {() -> Void in
+        self.runAction(SKAction.waitForDuration(1.3), completion: {() -> Void in
             self.fastForwardWhite.hidden = true
         })
     }
     
     func hiddenLabelAnimation () {
         self.hiddenLabel.hidden = false
-        self.runAction(SKAction.waitForDuration(4), completion: {() -> Void in
+        self.runAction(SKAction.waitForDuration(3), completion: {() -> Void in
             self.hiddenLabel.hidden = true
         })
     }
@@ -122,7 +124,7 @@ class UIClass: SKNode{
             self.instructions.hidden = true
         }
         else if instructionsNumber <= 1 {
-            self.runAction(SKAction.waitForDuration(1.5), completion: {() -> Void in
+            self.runAction(SKAction.waitForDuration(1), completion: {() -> Void in
                 self.instructions.text = "Let go to shoot"
                 self.instructions.hidden = false
             })
