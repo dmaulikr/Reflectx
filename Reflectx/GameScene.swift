@@ -447,9 +447,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func spawnNewWave(){
         if spawnTimer >= 2.8 && waveFinished {
             
-            var random = arc4random_uniform(4)
+            var random = arc4random_uniform(2)
             while previousNumber == random {
-                random = arc4random_uniform(4)
+                random = arc4random_uniform(2)
             }
             
             previousNumber = random
