@@ -32,6 +32,9 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
     var UILayer2: UIClassTutorial!
     var playButton2: MSButtonNode!
     var playButtonBack2: MSButtonNode!
+    var backgroundMusic: SKAudioNode!
+    var music: SKNode!
+    var musicNumber = 0
     
     override func didMoveToView(view: SKView) {
         /* Set up your scene here */
@@ -98,6 +101,16 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
             sinceTouch = 0
             
         }
+        
+         /*if let musicURL = NSBundle.mainBundle().URLForResource("music2", withExtension: "mp3") {
+         if musicNumber == 0 {
+         backgroundMusic = SKAudioNode(URL: musicURL)
+         backgroundMusic.runAction(SKAction.changeVolumeTo(Float(0.75), duration: 0))
+         addChild(backgroundMusic)
+         musicNumber += 1
+         }
+         
+         } */
         
     }
     
@@ -406,7 +419,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         self.waveFinished = false
         
         let run = SKAction.runBlock {
-            let enemy = self.createBulletGroup(CGPoint(x: 345, y: 485))
+            let enemy = self.createBulletGroup(CGPoint(x: 265, y: 530))
             enemy.goLeftSlow()
         }
         

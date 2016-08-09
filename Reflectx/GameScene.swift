@@ -122,7 +122,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             sinceTouch = 0
             
         }
-        
+        /*
             if let musicURL = NSBundle.mainBundle().URLForResource("music1", withExtension: "mp3") {
             if musicNumber == 0 {
             backgroundMusic = SKAudioNode(URL: musicURL)
@@ -130,7 +130,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addChild(backgroundMusic)
             musicNumber += 1
             }
-        }
+        } */
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -447,9 +447,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func spawnNewWave(){
         if spawnTimer >= 2.8 && waveFinished {
             
-            var random = arc4random_uniform(2)
+            var random = arc4random_uniform(3) 
             while previousNumber == random {
-                random = arc4random_uniform(2)
+                random = arc4random_uniform(3)
             }
             
             previousNumber = random
@@ -459,10 +459,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             case 0:
                 wave1()
             case 1:
-                wave2()
-            case 2:
                 wave3()
-            case 3:
+            case 2:
                 wave4()
             default:
                 break
@@ -476,9 +474,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func spawnNewWave2(){
         if spawnTimer >= 2.8 && waveFinished {
             
-            var random = arc4random_uniform(9)
+            var random = arc4random_uniform(10)
             while previousNumber == random {
-                random = arc4random_uniform(9)
+                random = arc4random_uniform(10)
             }
             
             previousNumber = random
@@ -503,6 +501,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 wave8()
             case 8:
                 wave9()
+            case 9:
+                wave10()
             default:
                 break
                 
@@ -514,9 +514,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func spawnNewWave3(){
         if spawnTimer >= 2.5 && waveFinished {
             
-            var random = arc4random_uniform(9)
+            var random = arc4random_uniform(10)
             while previousNumber == random {
-                random = arc4random_uniform(9)
+                random = arc4random_uniform(10)
             }
             
             previousNumber = random
@@ -541,6 +541,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 wave8()
             case 8:
                 wave9()
+            case 9:
+                wave10()
             default:
                 break
                 
@@ -552,9 +554,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func spawnNewWave4(){
         if spawnTimer >= 2.3 && waveFinished {
             
-            var random = arc4random_uniform(9)
+            var random = arc4random_uniform(10)
             while previousNumber == random {
-                random = arc4random_uniform(9)
+                random = arc4random_uniform(10)
             }
             
             previousNumber = random
@@ -579,6 +581,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 wave8()
             case 8:
                 wave9()
+            case 9:
+                wave10()
             default:
                 break
                 
@@ -613,6 +617,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         UILayer.instructionsUpdate()
         let bullet = createBullet(position)
         let enemy = createEnemy(CGPoint(x: bullet.position.x+40, y: bullet.position.y+120)) 
+        enemy.shootable = bullet
+        return enemy
+    }
+    
+    func createBulletGroup2(position: CGPoint) -> Enemy{
+        UILayer.instructionsUpdate()
+        let bullet = createBullet(position)
+        let enemy = createEnemy(CGPoint(x: bullet.position.x-40, y: bullet.position.y+120))
         enemy.shootable = bullet
         return enemy
     }
@@ -672,24 +684,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let wavePositionsX = [40, 90, 335, 280]
         var index = 0
         let wait = SKAction.waitForDuration(0.4)
+        let wait2 = SKAction.waitForDuration(1)
         let run = SKAction.runBlock {
             self.createBallGroup(CGPoint(x: wavePositionsX[index], y: 650))
             index += 1
             
         }
+        
+        let run2 = SKAction.runBlock {
+            let enemy = self.createBulletGroup2(CGPoint(x: 135, y: 650))
+            
+            enemy.goDown(self.wavesNumber)
+            
+        }
+        
         let finish = SKAction.runBlock {
             self.waveFinished = true
             self.wavesNumber += 1
         }
         
-        self.runAction(SKAction.sequence([run, run, wait, run, wait, run, finish]))
+        self.runAction(SKAction.sequence([run, run, wait, run, wait, run, wait2, run2, finish]))
         
     }
-    
+ 
     func wave3() {
-        
+ 
         self.waveFinished = false
-        
+ 
         let wavePositionsX = [40, 280, 100, 220, 140, 180]
         var index = 0
         let wait = SKAction.waitForDuration(0.4)
@@ -893,7 +914,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    
+    func wave10() {
+        
+        self.waveFinished = false
+        
+        let wavePositionsX = [60, 120, 180, 340, 280, 220, 80, 320]
+        let wavePositionsX2 = [40]
+        var index = 0
+        var index2 = 0
+        let wait = SKAction.waitForDuration(0.4)
+        let wait2 = SKAction.waitForDuration(0.3)
+        let wait3 = SKAction.waitForDuration(1.05)
+        
+        let run = SKAction.runBlock {
+            
+            self.createBallGroup(CGPoint(x: wavePositionsX[index], y: 650))
+            index += 1
+        }
+        
+        let run2 = SKAction.runBlock {
+            
+            let enemy = self.createBulletGroup(CGPoint(x: wavePositionsX2[index2], y: 650))
+            
+            enemy.goDown(self.wavesNumber)
+            index2 += 1
+        }
+        
+        let finish = SKAction.runBlock {
+            self.waveFinished = true
+            self.wavesNumber += 1
+        }
+        
+        self.runAction(SKAction.sequence([wait, run, wait2, run, wait2, run, wait2, run, wait2, run, wait2, run, wait2, run, wait2, run, wait3, run2, finish]))
+        
+    }
 }
 
 

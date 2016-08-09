@@ -21,6 +21,7 @@
 		85A459531D36DDE4005C94CC /* InfoScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85A459521D36DDE4005C94CC /* InfoScene.sks */; };
 		85A459551D36DDF0005C94CC /* TutorialScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85A459541D36DDF0005C94CC /* TutorialScene.sks */; };
 		85A6212D1D49221D00F92ADE /* Shootable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A6212C1D49221D00F92ADE /* Shootable.swift */; };
+		85A672B41D5A7CC4001CE176 /* music2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 85A672B31D5A7CC4001CE176 /* music2.mp3 */; };
 		85A7D72E1D3EA15F0041C26E /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A7D72D1D3EA15F0041C26E /* Bullet.swift */; };
 		85BD17531D38597300D2FBAC /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BD17521D38597300D2FBAC /* Enemy.swift */; };
 		85C6135A1D526376001F12C1 /* UIClassTutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C613591D526376001F12C1 /* UIClassTutorial.swift */; };
@@ -60,6 +61,7 @@
 		85A459521D36DDE4005C94CC /* InfoScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = InfoScene.sks; sourceTree = "<group>"; };
 		85A459541D36DDF0005C94CC /* TutorialScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TutorialScene.sks; sourceTree = "<group>"; };
 		85A6212C1D49221D00F92ADE /* Shootable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shootable.swift; sourceTree = "<group>"; };
+		85A672B31D5A7CC4001CE176 /* music2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music2.mp3; sourceTree = "<group>"; };
 		85A7D72D1D3EA15F0041C26E /* Bullet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
 		85BD17521D38597300D2FBAC /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		85C613591D526376001F12C1 /* UIClassTutorial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIClassTutorial.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				8547F9701D53BE9E00BFBA0D /* powerup.wav */,
 				85DBC76A1D36AD9C00E7FE09 /* success.mp3 */,
 				8547F96E1D53B7F800BFBA0D /* music1.mp3 */,
+				85A672B31D5A7CC4001CE176 /* music2.mp3 */,
 			);
 			name = Sounds;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				85DBC76C1D36AD9C00E7FE09 /* success.mp3 in Resources */,
 				85A459551D36DDF0005C94CC /* TutorialScene.sks in Resources */,
 				85DBC75C1D36AB7B00E7FE09 /* Main.storyboard in Resources */,
+				85A672B41D5A7CC4001CE176 /* music2.mp3 in Resources */,
 				8547F9711D53BE9E00BFBA0D /* powerup.wav in Resources */,
 				85DBC77C1D36AEE800E7FE09 /* MainScene.sks in Resources */,
 			);
