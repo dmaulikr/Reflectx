@@ -22,7 +22,9 @@
 		85A459551D36DDF0005C94CC /* TutorialScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85A459541D36DDF0005C94CC /* TutorialScene.sks */; };
 		85A6212D1D49221D00F92ADE /* Shootable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A6212C1D49221D00F92ADE /* Shootable.swift */; };
 		85A672B41D5A7CC4001CE176 /* music2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 85A672B31D5A7CC4001CE176 /* music2.mp3 */; };
+		85A672D41D5A8FCA001CE176 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85A672D31D5A8FCA001CE176 /* GoogleService-Info.plist */; };
 		85A7D72E1D3EA15F0041C26E /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A7D72D1D3EA15F0041C26E /* Bullet.swift */; };
+		85BCD9411D5A9BF600BF3680 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85BCD9401D5A9BF600BF3680 /* GoogleMobileAds.framework */; };
 		85BD17531D38597300D2FBAC /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BD17521D38597300D2FBAC /* Enemy.swift */; };
 		85C6135A1D526376001F12C1 /* UIClassTutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C613591D526376001F12C1 /* UIClassTutorial.swift */; };
 		85D6C4541D55404900BBC06A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D6C4531D55404900BBC06A /* Constants.swift */; };
@@ -44,9 +46,12 @@
 		85DBC77C1D36AEE800E7FE09 /* MainScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85DBC77B1D36AEE800E7FE09 /* MainScene.sks */; };
 		85DBC77E1D36AEF500E7FE09 /* EndScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85DBC77D1D36AEF500E7FE09 /* EndScene.sks */; };
 		85DBC7801D36B57000E7FE09 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DBC77F1D36B57000E7FE09 /* CGFloat+Extensions.swift */; };
+		9DF1F341A10B2728C1DE1D2C /* Pods_Reflectx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248AA39D4C1553E7D690C7E7 /* Pods_Reflectx.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		248AA39D4C1553E7D690C7E7 /* Pods_Reflectx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reflectx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		560E0EE6045CCE5080810401 /* Pods-Reflectx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reflectx.release.xcconfig"; path = "Pods/Target Support Files/Pods-Reflectx/Pods-Reflectx.release.xcconfig"; sourceTree = "<group>"; };
 		8512C8F01D514BC700D23169 /* UIClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIClass.swift; sourceTree = "<group>"; };
 		8547F96E1D53B7F800BFBA0D /* music1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music1.mp3; sourceTree = "<group>"; };
 		8547F9701D53BE9E00BFBA0D /* powerup.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = powerup.wav; sourceTree = "<group>"; };
@@ -62,7 +67,9 @@
 		85A459541D36DDF0005C94CC /* TutorialScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TutorialScene.sks; sourceTree = "<group>"; };
 		85A6212C1D49221D00F92ADE /* Shootable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shootable.swift; sourceTree = "<group>"; };
 		85A672B31D5A7CC4001CE176 /* music2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music2.mp3; sourceTree = "<group>"; };
+		85A672D31D5A8FCA001CE176 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		85A7D72D1D3EA15F0041C26E /* Bullet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
+		85BCD9401D5A9BF600BF3680 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
 		85BD17521D38597300D2FBAC /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		85C613591D526376001F12C1 /* UIClassTutorial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIClassTutorial.swift; sourceTree = "<group>"; };
 		85D6C4531D55404900BBC06A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -86,6 +93,7 @@
 		85DBC77B1D36AEE800E7FE09 /* MainScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainScene.sks; sourceTree = "<group>"; };
 		85DBC77D1D36AEF500E7FE09 /* EndScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = EndScene.sks; sourceTree = "<group>"; };
 		85DBC77F1D36B57000E7FE09 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
+		F71F4FE3E80E51374A1AC343 /* Pods-Reflectx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reflectx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Reflectx/Pods-Reflectx.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +101,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85BCD9411D5A9BF600BF3680 /* GoogleMobileAds.framework in Frameworks */,
+				9DF1F341A10B2728C1DE1D2C /* Pods_Reflectx.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,8 +167,11 @@
 		85DBC7461D36AB7A00E7FE09 = {
 			isa = PBXGroup;
 			children = (
+				85BCD9401D5A9BF600BF3680 /* GoogleMobileAds.framework */,
 				85DBC7511D36AB7B00E7FE09 /* Reflectx */,
 				85DBC7501D36AB7A00E7FE09 /* Products */,
+				A1F81411DCF7587F9B73DD10 /* Pods */,
+				AC89FB09FC6C37DE201FFF26 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -202,10 +215,28 @@
 			children = (
 				85DBC75F1D36AB7B00E7FE09 /* LaunchScreen.storyboard */,
 				85DBC75A1D36AB7B00E7FE09 /* Main.storyboard */,
+				85A672D31D5A8FCA001CE176 /* GoogleService-Info.plist */,
 				85DBC7621D36AB7B00E7FE09 /* Info.plist */,
 				8598E5291D3984CA006F62AD /* kenvector_future_thin.ttf */,
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		A1F81411DCF7587F9B73DD10 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F71F4FE3E80E51374A1AC343 /* Pods-Reflectx.debug.xcconfig */,
+				560E0EE6045CCE5080810401 /* Pods-Reflectx.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		AC89FB09FC6C37DE201FFF26 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				248AA39D4C1553E7D690C7E7 /* Pods_Reflectx.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,9 +246,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85DBC7651D36AB7B00E7FE09 /* Build configuration list for PBXNativeTarget "Reflectx" */;
 			buildPhases = (
+				411C493E6E44AAB87665ADAC /* [CP] Check Pods Manifest.lock */,
 				85DBC74B1D36AB7A00E7FE09 /* Sources */,
 				85DBC74C1D36AB7A00E7FE09 /* Frameworks */,
 				85DBC74D1D36AB7A00E7FE09 /* Resources */,
+				4CAC701A09E3CA3912B7BBC1 /* [CP] Embed Pods Frameworks */,
+				7B79F646734E74A23C2B1AC0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -278,6 +312,7 @@
 				85A459531D36DDE4005C94CC /* InfoScene.sks in Resources */,
 				85A4594F1D36DDCA005C94CC /* HighScoreScene.sks in Resources */,
 				8547F96F1D53B7F800BFBA0D /* music1.mp3 in Resources */,
+				85A672D41D5A8FCA001CE176 /* GoogleService-Info.plist in Resources */,
 				85DBC75E1D36AB7B00E7FE09 /* Assets.xcassets in Resources */,
 				85DBC76C1D36AD9C00E7FE09 /* success.mp3 in Resources */,
 				85A459551D36DDF0005C94CC /* TutorialScene.sks in Resources */,
@@ -289,6 +324,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		411C493E6E44AAB87665ADAC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4CAC701A09E3CA3912B7BBC1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Reflectx/Pods-Reflectx-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7B79F646734E74A23C2B1AC0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Reflectx/Pods-Reflectx-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		85DBC74B1D36AB7A00E7FE09 /* Sources */ = {
@@ -424,11 +507,16 @@
 		};
 		85DBC7661D36AB7B00E7FE09 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F71F4FE3E80E51374A1AC343 /* Pods-Reflectx.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Reflectx/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -440,11 +528,16 @@
 		};
 		85DBC7671D36AB7B00E7FE09 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 560E0EE6045CCE5080810401 /* Pods-Reflectx.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Reflectx/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

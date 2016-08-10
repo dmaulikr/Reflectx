@@ -1,0 +1,6 @@
+framework module Pods_Reflectx {
+  umbrella header "Pods-Reflectx-umbrella.h"
+
+  export *
+  module * { export * }
+}

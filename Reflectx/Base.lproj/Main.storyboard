@@ -15,8 +15,32 @@
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfF-ZT-U5m" customClass="GADBannerView">
+                                <rect key="frame" x="140" y="550" width="320" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="P1u-9u-SBh"/>
+                                    <constraint firstAttribute="height" constant="50" id="b8K-hO-RCZ"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="cjI-Tr-itx"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="sRH-9Q-EiH"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cfF-ZT-U5m" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="8su-Ag-miC"/>
+                            <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="cfF-ZT-U5m" secondAttribute="bottom" id="JLJ-ig-L7v"/>
+                            <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="cfF-ZT-U5m" secondAttribute="bottom" id="R9l-oa-AMr"/>
+                            <constraint firstItem="cfF-ZT-U5m" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="SHX-MW-JQR"/>
+                            <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="cfF-ZT-U5m" secondAttribute="bottom" id="SgE-zd-Xui"/>
+                            <constraint firstItem="cfF-ZT-U5m" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="ab2-XT-eIm"/>
+                            <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="cfF-ZT-U5m" secondAttribute="bottom" id="ta4-4Y-KqN"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bannerView" destination="cfF-ZT-U5m" id="hmg-kJ-028"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
