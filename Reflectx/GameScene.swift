@@ -274,26 +274,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 if let bullet = nodeA as? Bullet {
                     addBulletJoint(bullet)
-                    self.runAction(SKAction.waitForDuration(0.2), completion: {() -> Void in
+                    self.runAction(SKAction.waitForDuration(0), completion: {() -> Void in
                         let spark = SKEmitterNode(fileNamed: "Spark.sks")
                         spark!.targetNode = self;
                         self.paddle.addChild(spark!)
+                        self.runAction(SKAction.waitForDuration(1), completion: {() -> Void in
+                            spark!.removeFromParent()
+                        })
                     })
-                    //let actionMove = SKAction.moveTo(CGPoint(x: -monster.size.width/2, y: actualY), duration: NSTimeInterval(actualDuration))
-                    //let actionMoveDone = SKAction.removeFromParent()
-                    //self.runAction(SKAction.sequence([actionMove, actionMoveDone]), withKey: "actionA")
-                    
                 }
                 else if let bullet = nodeB as? Bullet {
                     addBulletJoint(bullet)
-                    self.runAction(SKAction.waitForDuration(0.2), completion: {() -> Void in
+                    self.runAction(SKAction.waitForDuration(0), completion: {() -> Void in
                         let spark = SKEmitterNode(fileNamed: "Spark.sks")
                         spark!.targetNode = self;
                         self.paddle.addChild(spark!)
-                        spark!.removeFromParent()
+                        self.runAction(SKAction.waitForDuration(1), completion: {() -> Void in
+                            spark!.removeFromParent()
+                        })
                     })
                 }
-                self.paddle.removeActionForKey("spark")
             }
         }
         
@@ -338,6 +338,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if let ballTwo = obstacle as? Ball {
                 ballTwo.doubleScore = true
             }
+            self.runAction(SKAction.waitForDuration(0), completion: {() -> Void in
+                let magic = SKEmitterNode(fileNamed: "Magic.sks")
+                magic!.targetNode = self;
+                self.paddle.addChild(magic!)
+                self.runAction(SKAction.waitForDuration(1), completion: {() -> Void in
+                    magic!.removeFromParent()
+                })
+            })
         }
     }
     
@@ -411,11 +419,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     health -= 1
                     self.runAction(pop2SFX)
                 }
-                if enemy.position.x > 365 {
+                if enemy.position.x > 380 {
                     health -= 1
                     self.runAction(pop2SFX)
                 }
-                if enemy.position.x < 10 {
+                if enemy.position.x < 0 {
                     health -= 1
                     self.runAction(pop2SFX)
                 }
@@ -472,9 +480,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func spawnNewWave(){
         if spawnTimer >= 2.8 && waveFinished {
             
-            var random = arc4random_uniform(2) // 3
+            var random = arc4random_uniform(3) 
             while previousNumber == random {
-                random = arc4random_uniform(2) // 3
+                random = arc4random_uniform(3)
             }
             
             previousNumber = random
@@ -482,9 +490,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             switch (random) {
                 
             case 0:
-                wave6() // 1
+                wave1()
             case 1:
-                wave7() // 3
+                wave3()
             case 2:
                 wave4()
             default:
