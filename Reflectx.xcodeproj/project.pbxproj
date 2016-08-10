@@ -24,6 +24,12 @@
 		85A672B41D5A7CC4001CE176 /* music2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 85A672B31D5A7CC4001CE176 /* music2.mp3 */; };
 		85A672D41D5A8FCA001CE176 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85A672D31D5A8FCA001CE176 /* GoogleService-Info.plist */; };
 		85A7D72E1D3EA15F0041C26E /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A7D72D1D3EA15F0041C26E /* Bullet.swift */; };
+		85B42E911D5BD4A2008BD61E /* Fireflies.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85B42E901D5BD4A2008BD61E /* Fireflies.sks */; };
+		85B42E931D5BD4AB008BD61E /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 85B42E921D5BD4AB008BD61E /* spark.png */; };
+		85B42E961D5BD538008BD61E /* Magic.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85B42E951D5BD538008BD61E /* Magic.sks */; };
+		85B42E981D5BD541008BD61E /* Rain.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85B42E971D5BD541008BD61E /* Rain.sks */; };
+		85B42E9A1D5BD549008BD61E /* Snow.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85B42E991D5BD549008BD61E /* Snow.sks */; };
+		85B42E9C1D5BD551008BD61E /* Spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85B42E9B1D5BD551008BD61E /* Spark.sks */; };
 		85BCD9411D5A9BF600BF3680 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85BCD9401D5A9BF600BF3680 /* GoogleMobileAds.framework */; };
 		85BD17531D38597300D2FBAC /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BD17521D38597300D2FBAC /* Enemy.swift */; };
 		85C6135A1D526376001F12C1 /* UIClassTutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C613591D526376001F12C1 /* UIClassTutorial.swift */; };
@@ -68,6 +74,12 @@
 		85A672B31D5A7CC4001CE176 /* music2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music2.mp3; sourceTree = "<group>"; };
 		85A672D31D5A8FCA001CE176 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		85A7D72D1D3EA15F0041C26E /* Bullet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
+		85B42E901D5BD4A2008BD61E /* Fireflies.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fireflies.sks; sourceTree = "<group>"; };
+		85B42E921D5BD4AB008BD61E /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		85B42E951D5BD538008BD61E /* Magic.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Magic.sks; sourceTree = "<group>"; };
+		85B42E971D5BD541008BD61E /* Rain.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Rain.sks; sourceTree = "<group>"; };
+		85B42E991D5BD549008BD61E /* Snow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Snow.sks; sourceTree = "<group>"; };
+		85B42E9B1D5BD551008BD61E /* Spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Spark.sks; sourceTree = "<group>"; };
 		85BCD9401D5A9BF600BF3680 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
 		85BD17521D38597300D2FBAC /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		85C613591D526376001F12C1 /* UIClassTutorial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIClassTutorial.swift; sourceTree = "<group>"; };
@@ -162,6 +174,19 @@
 			name = Swift;
 			sourceTree = "<group>";
 		};
+		85B42E941D5BD4D4008BD61E /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				85B42E901D5BD4A2008BD61E /* Fireflies.sks */,
+				85B42E951D5BD538008BD61E /* Magic.sks */,
+				85B42E971D5BD541008BD61E /* Rain.sks */,
+				85B42E991D5BD549008BD61E /* Snow.sks */,
+				85B42E9B1D5BD551008BD61E /* Spark.sks */,
+				85B42E921D5BD4AB008BD61E /* spark.png */,
+			);
+			name = Effects;
+			sourceTree = "<group>";
+		};
 		85DBC7461D36AB7A00E7FE09 = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +212,7 @@
 				85A947751D403C7F008D89C6 /* Swift */,
 				85A947741D403C5F008D89C6 /* Scenes */,
 				85A947721D403C09008D89C6 /* Objects */,
+				85B42E941D5BD4D4008BD61E /* Effects */,
 				85A947731D403C3C008D89C6 /* Tools */,
 				85DBC7681D36AD6800E7FE09 /* Sounds */,
 				85DBC7811D36C31300E7FE09 /* Other */,
@@ -299,22 +325,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				85DBC77E1D36AEF500E7FE09 /* EndScene.sks in Resources */,
+				85B42E981D5BD541008BD61E /* Rain.sks in Resources */,
 				85A459511D36DDD7005C94CC /* ShopScene.sks in Resources */,
 				8598E52C1D3987A3006F62AD /* CharacterActions.sks in Resources */,
 				8598E52A1D398521006F62AD /* kenvector_future_thin.ttf in Resources */,
 				85DBC7551D36AB7B00E7FE09 /* GameScene.sks in Resources */,
+				85B42E931D5BD4AB008BD61E /* spark.png in Resources */,
 				85DBC76B1D36AD9C00E7FE09 /* pop.wav in Resources */,
 				85DBC76E1D36ADA200E7FE09 /* pop2.wav in Resources */,
 				85A459531D36DDE4005C94CC /* InfoScene.sks in Resources */,
+				85B42E9A1D5BD549008BD61E /* Snow.sks in Resources */,
 				85A4594F1D36DDCA005C94CC /* HighScoreScene.sks in Resources */,
+				85B42E961D5BD538008BD61E /* Magic.sks in Resources */,
 				8547F96F1D53B7F800BFBA0D /* music1.mp3 in Resources */,
 				85A672D41D5A8FCA001CE176 /* GoogleService-Info.plist in Resources */,
 				85DBC75E1D36AB7B00E7FE09 /* Assets.xcassets in Resources */,
 				85DBC76C1D36AD9C00E7FE09 /* success.mp3 in Resources */,
+				85B42E9C1D5BD551008BD61E /* Spark.sks in Resources */,
 				85A459551D36DDF0005C94CC /* TutorialScene.sks in Resources */,
 				85DBC75C1D36AB7B00E7FE09 /* Main.storyboard in Resources */,
 				85A672B41D5A7CC4001CE176 /* music2.mp3 in Resources */,
 				8547F9711D53BE9E00BFBA0D /* powerup.wav in Resources */,
+				85B42E911D5BD4A2008BD61E /* Fireflies.sks in Resources */,
 				85DBC77C1D36AEE800E7FE09 /* MainScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

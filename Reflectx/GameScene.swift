@@ -274,10 +274,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 if let bullet = nodeA as? Bullet {
                     addBulletJoint(bullet)
+                    self.runAction(SKAction.waitForDuration(0.2), completion: {() -> Void in
+                        let spark = SKEmitterNode(fileNamed: "Spark.sks")
+                        spark!.targetNode = self;
+                        self.paddle.addChild(spark!)
+                    })
+                    //let actionMove = SKAction.moveTo(CGPoint(x: -monster.size.width/2, y: actualY), duration: NSTimeInterval(actualDuration))
+                    //let actionMoveDone = SKAction.removeFromParent()
+                    //self.runAction(SKAction.sequence([actionMove, actionMoveDone]), withKey: "actionA")
+                    
                 }
                 else if let bullet = nodeB as? Bullet {
                     addBulletJoint(bullet)
+                    self.runAction(SKAction.waitForDuration(0.2), completion: {() -> Void in
+                        let spark = SKEmitterNode(fileNamed: "Spark.sks")
+                        spark!.targetNode = self;
+                        self.paddle.addChild(spark!)
+                        spark!.removeFromParent()
+                    })
                 }
+                self.paddle.removeActionForKey("spark")
             }
         }
         
@@ -395,8 +411,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     health -= 1
                     self.runAction(pop2SFX)
                 }
+                if enemy.position.x > 365 {
+                    health -= 1
+                    self.runAction(pop2SFX)
+                }
+                if enemy.position.x < 10 {
+                    health -= 1
+                    self.runAction(pop2SFX)
+                }
                 enemy.updateVelocity(self.wavesNumber)
             }
+                
             else if let ball = obstacle as? Ball {
                 if ball.position.y <= 70 {
                     health -= 1
@@ -447,9 +472,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func spawnNewWave(){
         if spawnTimer >= 2.8 && waveFinished {
             
-            var random = arc4random_uniform(3) 
+            var random = arc4random_uniform(2) // 3
             while previousNumber == random {
-                random = arc4random_uniform(3)
+                random = arc4random_uniform(2) // 3
             }
             
             previousNumber = random
@@ -457,9 +482,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             switch (random) {
                 
             case 0:
-                wave1()
+                wave6() // 1
             case 1:
-                wave3()
+                wave7() // 3
             case 2:
                 wave4()
             default:
