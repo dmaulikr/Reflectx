@@ -32,6 +32,10 @@
 		85B42E9C1D5BD551008BD61E /* Spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85B42E9B1D5BD551008BD61E /* Spark.sks */; };
 		85BCD9411D5A9BF600BF3680 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85BCD9401D5A9BF600BF3680 /* GoogleMobileAds.framework */; };
 		85BD17531D38597300D2FBAC /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BD17521D38597300D2FBAC /* Enemy.swift */; };
+		85C4B7BA1D5D2AA900D35FE5 /* button1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 85C4B7B91D5D2AA900D35FE5 /* button1.mp3 */; };
+		85C4B7BC1D5D2F5A00D35FE5 /* play.wav in Resources */ = {isa = PBXBuildFile; fileRef = 85C4B7BB1D5D2F5A00D35FE5 /* play.wav */; };
+		85C4B7BE1D5D306F00D35FE5 /* GameEffects.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85C4B7BD1D5D306F00D35FE5 /* GameEffects.sks */; };
+		85C4B7C01D5D418C00D35FE5 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C4B7BF1D5D418C00D35FE5 /* Social.framework */; };
 		85C6135A1D526376001F12C1 /* UIClassTutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C613591D526376001F12C1 /* UIClassTutorial.swift */; };
 		85D6C4541D55404900BBC06A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D6C4531D55404900BBC06A /* Constants.swift */; };
 		85DBC7531D36AB7B00E7FE09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DBC7521D36AB7B00E7FE09 /* AppDelegate.swift */; };
@@ -82,6 +86,10 @@
 		85B42E9B1D5BD551008BD61E /* Spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Spark.sks; sourceTree = "<group>"; };
 		85BCD9401D5A9BF600BF3680 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
 		85BD17521D38597300D2FBAC /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		85C4B7B91D5D2AA900D35FE5 /* button1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = button1.mp3; sourceTree = "<group>"; };
+		85C4B7BB1D5D2F5A00D35FE5 /* play.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = play.wav; sourceTree = "<group>"; };
+		85C4B7BD1D5D306F00D35FE5 /* GameEffects.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameEffects.sks; sourceTree = "<group>"; };
+		85C4B7BF1D5D418C00D35FE5 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		85C613591D526376001F12C1 /* UIClassTutorial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIClassTutorial.swift; sourceTree = "<group>"; };
 		85D6C4531D55404900BBC06A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		85DBC74F1D36AB7A00E7FE09 /* Reflectx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reflectx.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85C4B7C01D5D418C00D35FE5 /* Social.framework in Frameworks */,
 				85BCD9411D5A9BF600BF3680 /* GoogleMobileAds.framework in Frameworks */,
 				9DF1F341A10B2728C1DE1D2C /* Pods_Reflectx.framework in Frameworks */,
 			);
@@ -183,6 +192,7 @@
 				85B42E991D5BD549008BD61E /* Snow.sks */,
 				85B42E9B1D5BD551008BD61E /* Spark.sks */,
 				85B42E921D5BD4AB008BD61E /* spark.png */,
+				85C4B7BD1D5D306F00D35FE5 /* GameEffects.sks */,
 			);
 			name = Effects;
 			sourceTree = "<group>";
@@ -230,6 +240,8 @@
 				85DBC76A1D36AD9C00E7FE09 /* success.mp3 */,
 				8547F96E1D53B7F800BFBA0D /* music1.mp3 */,
 				85A672B31D5A7CC4001CE176 /* music2.mp3 */,
+				85C4B7B91D5D2AA900D35FE5 /* button1.mp3 */,
+				85C4B7BB1D5D2F5A00D35FE5 /* play.wav */,
 			);
 			name = Sounds;
 			sourceTree = "<group>";
@@ -257,6 +269,7 @@
 		AC89FB09FC6C37DE201FFF26 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				85C4B7BF1D5D418C00D35FE5 /* Social.framework */,
 				248AA39D4C1553E7D690C7E7 /* Pods_Reflectx.framework */,
 			);
 			name = Frameworks;
@@ -327,6 +340,7 @@
 				85DBC77E1D36AEF500E7FE09 /* EndScene.sks in Resources */,
 				85B42E981D5BD541008BD61E /* Rain.sks in Resources */,
 				85A459511D36DDD7005C94CC /* ShopScene.sks in Resources */,
+				85C4B7BA1D5D2AA900D35FE5 /* button1.mp3 in Resources */,
 				8598E52C1D3987A3006F62AD /* CharacterActions.sks in Resources */,
 				8598E52A1D398521006F62AD /* kenvector_future_thin.ttf in Resources */,
 				85DBC7551D36AB7B00E7FE09 /* GameScene.sks in Resources */,
@@ -347,6 +361,8 @@
 				85A672B41D5A7CC4001CE176 /* music2.mp3 in Resources */,
 				8547F9711D53BE9E00BFBA0D /* powerup.wav in Resources */,
 				85B42E911D5BD4A2008BD61E /* Fireflies.sks in Resources */,
+				85C4B7BE1D5D306F00D35FE5 /* GameEffects.sks in Resources */,
+				85C4B7BC1D5D2F5A00D35FE5 /* play.wav in Resources */,
 				85DBC77C1D36AEE800E7FE09 /* MainScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

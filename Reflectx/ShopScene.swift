@@ -34,6 +34,8 @@ class ShopScene: SKScene {
     var smallGold6: SKSpriteNode!
     var paddleGreenPic: SKSpriteNode!
     var paddleRedPic: SKSpriteNode!
+    let savedAudio: Bool = NSUserDefaults.standardUserDefaults().boolForKey("savedAudio")
+    let buttonSFX = SKAction.playSoundFileNamed("button1", waitForCompletion: false)
     
     override func didMoveToView(view: SKView) {
         
@@ -73,6 +75,9 @@ class ShopScene: SKScene {
         
         backButton.selectedHandler = {
             
+            if self.savedAudio == true {
+                self.runAction(self.buttonSFX)
+            }
             let skView = self.view as SKView!
             let scene = MainScene(fileNamed:"MainScene") as MainScene!
             scene.scaleMode = .AspectFill
@@ -103,12 +108,18 @@ class ShopScene: SKScene {
         self.paddleSelectedUpdate()
         
         paddleBoxBlue.selectedHandler = {
+            if self.savedAudio == true {
+                self.runAction(self.buttonSFX)
+            }
             self.paddleSelected = .Blue
             updateCheckMark()
             self.paddleSelectedUpdate()
         }
         
         paddleBoxGreen.selectedHandler = {
+            if self.savedAudio == true {
+                self.runAction(self.buttonSFX)
+            }
             if savedCoins >= 10 && !self.greenBought {
                 savedCoins -= 10
                 self.goldNumber.text = "\(savedCoins)"
@@ -128,6 +139,9 @@ class ShopScene: SKScene {
         }
         
         paddleBoxRed.selectedHandler = {
+            if self.savedAudio == true {
+                self.runAction(self.buttonSFX)
+            }
             if savedCoins >= 20 && !self.redBought {
                     savedCoins -= 20
                     self.goldNumber.text = "\(savedCoins)"
@@ -148,18 +162,27 @@ class ShopScene: SKScene {
         
         
         paddleBoxYellow.selectedHandler = {
+            if self.savedAudio == true {
+                self.runAction(self.buttonSFX)
+            }
             if savedCoins >= 40 {
                 
             }
         }
         
         paddleBoxBlue2.selectedHandler = {
+            if self.savedAudio == true {
+                self.runAction(self.buttonSFX)
+            }
             if savedCoins >= 80 {
                 
             }
         }
         
         paddleBoxGreen2.selectedHandler = {
+            if self.savedAudio == true {
+                self.runAction(self.buttonSFX)
+            }
             if savedCoins >= 200 {
                 
             }

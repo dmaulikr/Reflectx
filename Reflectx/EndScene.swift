@@ -22,6 +22,9 @@ class EndScene: SKScene {
     var addGold: SKLabelNode!
     var localScore = 0
     var earnedCoins = 0
+    let savedAudio: Bool = NSUserDefaults.standardUserDefaults().boolForKey("savedAudio")
+    let buttonSFX = SKAction.playSoundFileNamed("button1", waitForCompletion: false)
+    let playSFX = SKAction.playSoundFileNamed("play", waitForCompletion: false)
     
     override func didMoveToView(view: SKView) {
         
@@ -44,9 +47,23 @@ class EndScene: SKScene {
         
         let savedCoins: Int = NSUserDefaults.standardUserDefaults().integerForKey("savedCoins")
         goldNumber.text = "\(savedCoins)"
+
+        shareButton.selectedHandler = {
+
+        }
+        
+        rateButton.selectedHandler = {
+            if self.savedAudio == true {
+                self.runAction(self.playSFX)
+            }
+            UIApplication.sharedApplication().openURL(NSURL(string : "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=\(1141987144)&onlyLatestVersion=true&pageNumber=0&sortOrdering=1)")!);
+        }
         
         homeButton.selectedHandler = {
             
+            if self.savedAudio == true {
+                self.runAction(self.buttonSFX)
+            }
             let skView = self.view as SKView!
             let scene = MainScene(fileNamed:"MainScene") as MainScene!
             scene.scaleMode = .AspectFill
@@ -57,6 +74,9 @@ class EndScene: SKScene {
         
         retryButton.selectedHandler = {
             
+            if self.savedAudio == true {
+                self.runAction(self.buttonSFX)
+            }
             let skView = self.view as SKView!
             let scene = GameScene(fileNamed:"GameScene") as GameScene!
             scene.scaleMode = .AspectFill
@@ -67,6 +87,9 @@ class EndScene: SKScene {
         
         highScoreButton.selectedHandler = {
             
+            if self.savedAudio == true {
+                self.runAction(self.buttonSFX)
+            }
             let skView = self.view as SKView!
             let scene = HighScoreScene(fileNamed:"HighScoreScene") as HighScoreScene!
             scene.scaleMode = .AspectFill
@@ -77,6 +100,9 @@ class EndScene: SKScene {
         
         shopButton.selectedHandler = {
             
+            if self.savedAudio == true {
+                self.runAction(self.buttonSFX)
+            }
             let skView = self.view as SKView!
             let scene = ShopScene(fileNamed:"ShopScene") as ShopScene!
             scene.scaleMode = .AspectFill

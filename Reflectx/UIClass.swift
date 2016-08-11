@@ -16,11 +16,16 @@ class UIClass: SKNode{
     var countLabel: SKLabelNode!
     var instructions: SKLabelNode!
     var hiddenLabel: SKLabelNode!
+    var pauseLabel: SKLabelNode!
     var fastForwardWhite: SKSpriteNode!
     var smallLeftArrow: SKSpriteNode!
     var smallRightArrow: SKSpriteNode!
     var instructionsNumber = 0
     let powerupSFX = SKAction.playSoundFileNamed("powerup", waitForCompletion: false)
+    var savedAudio: Bool = NSUserDefaults.standardUserDefaults().boolForKey("savedAudio")
+    var musicPast: Bool = true
+    var pause: Bool = false
+    let buttonSFX = SKAction.playSoundFileNamed("button1", waitForCompletion: false)
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -34,27 +39,52 @@ class UIClass: SKNode{
         smallLeftArrow = childNodeWithName("smallLeftArrow") as! SKSpriteNode
         smallRightArrow = childNodeWithName("smallRightArrow") as! SKSpriteNode
         instructions = childNodeWithName("instructions") as! SKLabelNode
+        pauseLabel = childNodeWithName("pauseLabel") as! SKLabelNode
         
         buffLabel.hidden = true
         countLabel.hidden = true
         fastForwardWhite.hidden = true
         hiddenLabel.hidden = true
-                
+        pauseLabel.hidden = true
+        
         self.runAction(SKAction.waitForDuration(1.3), completion: {() -> Void in
             self.instructions.hidden = true
         })
         
+        if savedAudio == true {
+            musicPast = true
+        }
+        else if savedAudio == false {
+            musicPast = false
+        }
+        
+    }
+    
+    func savedAudioUpdate() {
+        
+        NSUserDefaults().setBool(savedAudio, forKey: "savedAudio")
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     func setupPauseButton (scene: GameScene) {
         pauseButton.selectedHandler = {
-            scene.paused = !scene.paused
+            self.pause = !self.pause
             
-            if scene.paused {
+            if self.pause {
+                if self.savedAudio == true {
+                    self.runAction(self.buttonSFX)
+                }
                 self.pauseButton.texture = SKTexture(imageNamed: "rightTriangleWhite")
+//                self.savedAudio = false
+//                self.savedAudioUpdate()
+                self.setpauseLabel1 ()
+                scene.paused = true
             }
                 
-            else if !scene.paused {
+            else if !self.pause {
+                if self.savedAudio == true {
+                    self.runAction(self.buttonSFX)
+                }
                 self.countLabel.hidden = false
                 self.countLabel.text = "3"
                 SKAction.waitForDuration(1)
@@ -64,8 +94,27 @@ class UIClass: SKNode{
                 SKAction.waitForDuration(1)
                 self.pauseButton.texture = SKTexture(imageNamed: "pauseButtonWhite")
                 self.countLabel.hidden = true
+//                if self.musicPast == true {
+//                    self.savedAudio = true
+//                }
+//                else if self.musicPast == false {
+//                    self.savedAudio = false
+//                }
+//                self.savedAudioUpdate()
+                self.setpauseLabel2 ()
+                scene.paused = false
             }
         }
+    }
+    
+    func setpauseLabel1 () {
+        self.pauseLabel.text = "-paused-"
+        self.pauseLabel.hidden = false
+    }
+    
+    func setpauseLabel2 () {
+        self.pauseLabel.text = "-paused-"
+        self.pauseLabel.hidden = true
     }
     
     func setBuffLabel () {
@@ -124,9 +173,12 @@ class UIClass: SKNode{
             self.instructions.hidden = true
         }
         else if instructionsNumber <= 1 {
-            self.runAction(SKAction.waitForDuration(1), completion: {() -> Void in
+            self.runAction(SKAction.waitForDuration(2), completion: {() -> Void in
                 self.instructions.text = "Let go to shoot"
                 self.instructions.hidden = false
+                self.runAction(SKAction.waitForDuration(2), completion: {() -> Void in
+                    self.instructions.hidden = true
+                })
             })
         }
         

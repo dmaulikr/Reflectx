@@ -14,6 +14,8 @@ class HighScoreScene: SKScene {
     var highScoreLabel: SKLabelNode!
     var gamesPlayedLabel: SKLabelNode!
     var rankLabel: SKLabelNode!
+    let savedAudio: Bool = NSUserDefaults.standardUserDefaults().boolForKey("savedAudio")
+    let buttonSFX = SKAction.playSoundFileNamed("button1", waitForCompletion: false)
     
     override func didMoveToView(view: SKView) {
         
@@ -59,6 +61,9 @@ class HighScoreScene: SKScene {
         
         backButton.selectedHandler = {
             
+            if self.savedAudio == true {
+                self.runAction(self.buttonSFX)
+            }
             let skView = self.view as SKView!
             let scene = MainScene(fileNamed:"MainScene") as MainScene!
             scene.scaleMode = .AspectFill

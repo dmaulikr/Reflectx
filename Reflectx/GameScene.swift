@@ -53,6 +53,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var dimLeftUp: SKSpriteNode!
     var dimRightUp: SKSpriteNode!
     var UILayer: UIClass!
+    let savedAudio: Bool = NSUserDefaults.standardUserDefaults().boolForKey("savedAudio")
+    let shakeScene:SKAction = SKAction.init(named: "Shake")!
+    let shakeScene2:SKAction = SKAction.init(named: "Shake2")!
     
     override func didMoveToView(view: SKView) {
         /* Set up your scene here */
@@ -81,7 +84,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         dimLeftUp.alpha = 0
         dimRightUp.alpha = 0
         
-        UILayer.setupPauseButton(self) 
+        UILayer.setupPauseButton(self)
         savedGames = NSUserDefaults.standardUserDefaults().integerForKey("savedGames2")
         savedCoins = NSUserDefaults.standardUserDefaults().integerForKey("savedCoins")
         let paddleSelected: Constants.PaddleColor = Constants.PaddleColor(rawValue: NSUserDefaults.standardUserDefaults().integerForKey("paddleSelected"))!
@@ -101,10 +104,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if paddleSelected == .Red && redBought == 1 {
             self.paddle.texture = SKTexture(imageNamed: "paddleRed")
         }
-    
+        
     }
     
- 
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         if state == .GameOver || state == .Title { return }
@@ -123,12 +126,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         }
         
+        if savedAudio == true {
             if let musicURL = NSBundle.mainBundle().URLForResource("music1", withExtension: "mp3") {
-            if musicNumber == 0 {
-            backgroundMusic = SKAudioNode(URL: musicURL)
-            backgroundMusic.runAction(SKAction.changeVolumeTo(Float(0.7), duration: 0))
-            addChild(backgroundMusic)
-            musicNumber += 1
+                if musicNumber == 0 {
+                    backgroundMusic = SKAudioNode(URL: musicURL)
+                    backgroundMusic.runAction(SKAction.changeVolumeTo(Float(0.6), duration: 0))
+                    addChild(backgroundMusic)
+                    musicNumber += 1
+                    backgroundMusic.autoplayLooped = true
+                }
+            }
+        }
+        else if savedAudio == false {
+            if let musicURL = NSBundle.mainBundle().URLForResource("music1", withExtension: "mp3") {
+                if musicNumber == 0 {
+                    backgroundMusic = SKAudioNode(URL: musicURL)
+                    backgroundMusic.runAction(SKAction.changeVolumeTo(Float(0), duration: 0))
+                    addChild(backgroundMusic)
+                    musicNumber += 1
+                    backgroundMusic.autoplayLooped = true
+                }
             }
         }
     }
@@ -353,12 +370,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         points += 1
         UILayer.updateScoreLabel(points)
         
-        self.runAction(popSFX) 
+        if savedAudio == true {
+            self.runAction(popSFX)
+        }
         
         if points == 5 || points == 10 || points == 20 || points == 40 || points == 80 {
             
-            self.runAction(successSFX)
-            
+            if savedAudio == true {
+                self.runAction(successSFX)
+            }
         }
         
         if points >= 5 && pointsNumber == 0 || points >= 10 && pointsNumber == 1 || points >= 20 && pointsNumber == 2 || points >= 40 && pointsNumber == 3 || points >= 60 && pointsNumber == 4 || points >= 80 && pointsNumber == 5 || points >= 100 && pointsNumber == 6 || points >= 120 && pointsNumber == 7 || points >= 140 && pointsNumber == 8 || points >= 160 && pointsNumber == 9 || points >= 180 && pointsNumber == 10 || points >= 200 && pointsNumber == 11 || points >= 220 && pointsNumber == 12 || points >= 240 && pointsNumber == 13 || points >= 260 && pointsNumber == 14 || points >= 280 && pointsNumber == 15 {
@@ -367,6 +387,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             earnedCoins += 1
             pointsNumber += 1
             savedCoinsUpdate()
+            
+            var random = arc4random_uniform(2)
+            while previousNumber == random {
+                random = arc4random_uniform(2)
+            }
+            
+            previousNumber = random
+            
+            switch (random) {
+                
+            case 0:
+                shake1()
+            case 1:
+                shake2()
+            default:
+                break
+
+            }
         }
         
         UILayer.scoreColor(points)
@@ -376,13 +414,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         points += 2
         UILayer.updateScoreLabel(points)
         
-        self.runAction(popSFX)
+        if savedAudio == true {
+            self.runAction(popSFX)
+        }
         
         UILayer.setBuffLabel()
         
         if points >= 5 && points <= 6 || points >= 10 && points <= 11 || points >= 20 && points <= 21 || points >= 40 && points <= 41 || points >= 80 && points <= 81 || points >= 160 && points <= 161 {
             
-            self.runAction(successSFX)
+            if savedAudio == true {
+                self.runAction(successSFX)
+            }
         }
         UILayer.scoreColor(points)
     }
@@ -408,24 +450,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 if bullet.position.y <= 70 || bullet.position.y > 660  {
                     health -= 1
-                    self.runAction(pop2SFX)
+                    if savedAudio == true {
+                        self.runAction(pop2SFX)
+                    }
                 }
                 
                 bullet.updateBulletSpeed(self.wavesNumber)
-
+                
             }
             else if let enemy = obstacle as? Enemy {
                 if enemy.position.y < 180 {
                     health -= 1
-                    self.runAction(pop2SFX)
+                    if savedAudio == true {
+                        self.runAction(pop2SFX)
+                    }
                 }
                 if enemy.position.x > 380 {
                     health -= 1
-                    self.runAction(pop2SFX)
+                    if savedAudio == true {
+                        self.runAction(pop2SFX)
+                    }
                 }
                 if enemy.position.x < 0 {
                     health -= 1
-                    self.runAction(pop2SFX)
+                    if savedAudio == true {
+                        self.runAction(pop2SFX)
+                    }
                 }
                 enemy.updateVelocity(self.wavesNumber)
             }
@@ -433,7 +483,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             else if let ball = obstacle as? Ball {
                 if ball.position.y <= 70 {
                     health -= 1
-                    self.runAction(pop2SFX)
+                    if savedAudio == true {
+                        self.runAction(pop2SFX)
+                    }
                 }
                 ball.updateBallSpeed(self.wavesNumber)
             }
@@ -449,7 +501,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scene.localScore = points
         scene.earnedCoins = earnedCoins
         scene.scaleMode = .AspectFill
-        self.runAction(pop2SFX)
+        if savedAudio == true {
+            self.runAction(pop2SFX)
+        }
         let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
         skView.presentScene(scene, transition: transition)
         
@@ -507,9 +561,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func spawnNewWave2(){
         if spawnTimer >= 2.8 && waveFinished {
             
-            var random = arc4random_uniform(10)
+            var random = arc4random_uniform(9)
             while previousNumber == random {
-                random = arc4random_uniform(10)
+                random = arc4random_uniform(9)
             }
             
             previousNumber = random
@@ -527,14 +581,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             case 4:
                 wave5()
             case 5:
-                wave6()
-            case 6:
                 wave7()
-            case 7:
+            case 6:
                 wave8()
-            case 8:
+            case 7:
                 wave9()
-            case 9:
+            case 8:
                 wave10()
             default:
                 break
@@ -626,7 +678,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func createBallGroup(position: CGPoint){
         let newBall = createBall(position)
-        let newEnemy = Enemy(imageName: "cloud") 
+        let newEnemy = Enemy(imageName: "cloud")
         let enemyPosition = CGPoint (x: newBall.position.x+0, y: newBall.position.y+105)
         newEnemy.position = enemyPosition
         obstacleLayer.addChild(newEnemy)
@@ -649,7 +701,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func createBulletGroup(position: CGPoint) -> Enemy{
         UILayer.instructionsUpdate()
         let bullet = createBullet(position)
-        let enemy = createEnemy(CGPoint(x: bullet.position.x+40, y: bullet.position.y+120)) 
+        let enemy = createEnemy(CGPoint(x: bullet.position.x+40, y: bullet.position.y+120))
         enemy.shootable = bullet
         return enemy
     }
@@ -705,7 +757,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.waveFinished = true
             self.wavesNumber += 1
         }
-
+        
         self.runAction(SKAction.sequence([run, wait, run, wait, run, wait, run, wait, run, wait, run, finish]))
         
     }
@@ -739,11 +791,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.runAction(SKAction.sequence([run, run, wait, run, wait, run, wait2, run2, finish]))
         
     }
- 
+    
     func wave3() {
- 
+        
         self.waveFinished = false
- 
+        
         let wavePositionsX = [40, 280, 100, 220, 140, 180]
         var index = 0
         let wait = SKAction.waitForDuration(0.4)
@@ -831,15 +883,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let run = SKAction.runBlock {
             let enemy = self.createBulletGroup(CGPoint(x: 25, y: 500))
             
-            enemy.goRight(self.wavesNumber)
-
+            enemy.goRightSpecial(self.wavesNumber)
+            
         }
         
         let run2 = SKAction.runBlock {
             let enemy = self.createBulletGroup(CGPoint(x: 345, y: 500))
             
-            enemy.goLeft(self.wavesNumber)
-
+            enemy.goLeftSpecial(self.wavesNumber)
+            
         }
         
         let run3 = SKAction.runBlock {
@@ -980,6 +1032,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.runAction(SKAction.sequence([wait, run, wait2, run, wait2, run, wait2, run, wait2, run, wait2, run, wait2, run, wait2, run, wait3, run2, finish]))
         
+    }
+    
+    func shake1 () {
+        for node in self.children {
+            node.runAction(shakeScene)
+        }
+    }
+    
+    func shake2 () {
+        for node in self.children {
+            node.runAction(shakeScene2)
+        }
     }
 }
 

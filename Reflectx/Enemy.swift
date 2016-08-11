@@ -65,6 +65,21 @@ class Enemy: SKSpriteNode {
         }
     }
     
+    func goRightSpecial(waveNumber: Int) {
+        switch waveNumber {
+        case 0...4:
+            physicsBody?.velocity = CGVector(dx: 95, dy: -15)
+        case 5...7:
+            physicsBody?.velocity = CGVector(dx: 98, dy: -15)
+        case 8...10:
+            physicsBody?.velocity = CGVector(dx: 101, dy: -15)
+        case 11...13:
+            physicsBody?.velocity = CGVector(dx: 104, dy: -15)
+        default:
+            physicsBody?.velocity = CGVector(dx: 106, dy: -15)
+        }
+    }
+    
     func goLeft(waveNumber: Int) {
         switch waveNumber {
         case 0...4:
@@ -77,6 +92,21 @@ class Enemy: SKSpriteNode {
             physicsBody?.velocity = CGVector(dx: -109, dy: 0)
         default:
             physicsBody?.velocity = CGVector(dx: -111, dy: 0)
+        }
+    }
+    
+    func goLeftSpecial(waveNumber: Int) {
+        switch waveNumber {
+        case 0...4:
+            physicsBody?.velocity = CGVector(dx: -100, dy: -12)
+        case 5...7:
+            physicsBody?.velocity = CGVector(dx: -103, dy: -12)
+        case 8...10:
+            physicsBody?.velocity = CGVector(dx: -106, dy: -12)
+        case 11...13:
+            physicsBody?.velocity = CGVector(dx: -109, dy: -12)
+        default:
+            physicsBody?.velocity = CGVector(dx: -111, dy: -12)
         }
     }
     
