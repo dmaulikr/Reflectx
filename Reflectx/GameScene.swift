@@ -122,15 +122,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             sinceTouch = 0
             
         }
-        /*
+        
             if let musicURL = NSBundle.mainBundle().URLForResource("music1", withExtension: "mp3") {
             if musicNumber == 0 {
             backgroundMusic = SKAudioNode(URL: musicURL)
-            backgroundMusic.runAction(SKAction.changeVolumeTo(Float(0.75), duration: 0))
+            backgroundMusic.runAction(SKAction.changeVolumeTo(Float(0.7), duration: 0))
             addChild(backgroundMusic)
             musicNumber += 1
             }
-        } */
+        }
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -353,7 +353,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         points += 1
         UILayer.updateScoreLabel(points)
         
-        self.runAction(popSFX) //popSFX
+        self.runAction(popSFX) 
         
         if points == 5 || points == 10 || points == 20 || points == 40 || points == 80 {
             
@@ -380,7 +380,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         UILayer.setBuffLabel()
         
-        if points >= 5 && points <= 6 || points >= 10 && points <= 11 || points >= 20 && points <= 21 || points >= 40 && points <= 41 || points >= 80 && points <= 81 || points >= 160 && points <= 161{
+        if points >= 5 && points <= 6 || points >= 10 && points <= 11 || points >= 20 && points <= 21 || points >= 40 && points <= 41 || points >= 80 && points <= 81 || points >= 160 && points <= 161 {
             
             self.runAction(successSFX)
         }
@@ -480,9 +480,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func spawnNewWave(){
         if spawnTimer >= 2.8 && waveFinished {
             
-            var random = arc4random_uniform(3) 
+            var random = arc4random_uniform(3) // 3
             while previousNumber == random {
-                random = arc4random_uniform(3)
+                random = arc4random_uniform(3) // 3
             }
             
             previousNumber = random
@@ -490,7 +490,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             switch (random) {
                 
             case 0:
-                wave1()
+                wave1() // 1
             case 1:
                 wave3()
             case 2:
@@ -765,7 +765,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.waveFinished = false
         
-        let wavePositionsX = [60, 60, 60, 100, 250]
+        let wavePositionsX = [60, 60, 60, 100, 250, 335, 335, 160, 200, 335]
         var index = 0
         let wait = SKAction.waitForDuration(0.3)
         let wait2 = SKAction.waitForDuration(0.2)
@@ -779,7 +779,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.wavesNumber += 1
         }
         
-        self.runAction(SKAction.sequence([run, wait2, run, wait2, run, wait, run, wait, run, finish]))
+        self.runAction(SKAction.sequence([run, wait2, run, wait2, run, wait, run, wait, run, wait, run, wait2, run, wait, run, run, wait, run, finish]))
         
     }
     

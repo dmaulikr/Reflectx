@@ -39,7 +39,7 @@ class UIClass: SKNode{
         countLabel.hidden = true
         fastForwardWhite.hidden = true
         hiddenLabel.hidden = true
-        
+                
         self.runAction(SKAction.waitForDuration(1.3), completion: {() -> Void in
             self.instructions.hidden = true
         })

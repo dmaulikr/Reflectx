@@ -102,10 +102,10 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
             
         }
         
-         /*if let musicURL = NSBundle.mainBundle().URLForResource("music2", withExtension: "mp3") {
+         /* if let musicURL = NSBundle.mainBundle().URLForResource("music2", withExtension: "mp3") {
          if musicNumber == 0 {
          backgroundMusic = SKAudioNode(URL: musicURL)
-         backgroundMusic.runAction(SKAction.changeVolumeTo(Float(0.75), duration: 0))
+         backgroundMusic.runAction(SKAction.changeVolumeTo(Float(0.7), duration: 0))
          addChild(backgroundMusic)
          musicNumber += 1
          }
