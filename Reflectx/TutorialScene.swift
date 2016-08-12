@@ -35,7 +35,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
     var backgroundMusic: SKAudioNode!
     var music: SKNode!
     var musicNumber = 0
-    let savedAudio: Bool = NSUserDefaults.standardUserDefaults().boolForKey("savedAudio")
+    let soundOn: Bool = NSUserDefaults.standardUserDefaults().boolForKey("soundOn")
     let buttonSFX = SKAction.playSoundFileNamed("button1", waitForCompletion: false)
     
     override func didMoveToView(view: SKView) {
@@ -51,7 +51,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         
         homeButton.selectedHandler = {
             
-            if self.savedAudio == true {
+            if self.soundOn {
                 self.runAction(self.buttonSFX)
             }
             let skView = self.view as SKView!
@@ -64,7 +64,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         
         playButton2.selectedHandler = {
             
-            if self.savedAudio == true {
+            if self.soundOn {
                 self.runAction(self.buttonSFX)
             }
             let skView = self.view as SKView!
@@ -77,7 +77,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         
         playButtonBack2.selectedHandler = {
             
-            if self.savedAudio == true {
+            if self.soundOn {
                 self.runAction(self.buttonSFX)
             }
             let skView = self.view as SKView!
@@ -92,6 +92,29 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         playButtonBack2.hidden = true
         
         self.state = .Playing
+        
+        if self.soundOn {
+            if let musicURL = NSBundle.mainBundle().URLForResource("music2", withExtension: "mp3") {
+                if musicNumber == 0 {
+                    backgroundMusic = SKAudioNode(URL: musicURL)
+                    backgroundMusic.runAction(SKAction.changeVolumeTo(Float(0.6), duration: 0))
+                    addChild(backgroundMusic)
+                    musicNumber += 1
+                }
+                
+            }
+        }
+        else {
+            if let musicURL = NSBundle.mainBundle().URLForResource("music2", withExtension: "mp3") {
+                if musicNumber == 0 {
+                    backgroundMusic = SKAudioNode(URL: musicURL)
+                    backgroundMusic.runAction(SKAction.changeVolumeTo(Float(0), duration: 0))
+                    addChild(backgroundMusic)
+                    musicNumber += 1
+                }
+                
+            }
+        }
         
     }
     
@@ -113,29 +136,6 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
             
         }
         
-        let savedAudio: Bool = NSUserDefaults.standardUserDefaults().boolForKey("savedAudio")
-        if savedAudio == true {
-         if let musicURL = NSBundle.mainBundle().URLForResource("music2", withExtension: "mp3") {
-         if musicNumber == 0 {
-         backgroundMusic = SKAudioNode(URL: musicURL)
-         backgroundMusic.runAction(SKAction.changeVolumeTo(Float(0.6), duration: 0))
-         addChild(backgroundMusic)
-         musicNumber += 1
-         }
-         
-         }
-        }
-        else if savedAudio == false {
-            if let musicURL = NSBundle.mainBundle().URLForResource("music2", withExtension: "mp3") {
-                if musicNumber == 0 {
-                    backgroundMusic = SKAudioNode(URL: musicURL)
-                    backgroundMusic.runAction(SKAction.changeVolumeTo(Float(0), duration: 0))
-                    addChild(backgroundMusic)
-                    musicNumber += 1
-                }
-                
-            }
-        }
         
     }
     
@@ -258,7 +258,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         points += 1
-        if savedAudio == true {
+        if self.soundOn {
         self.runAction(popSFX)
         }
         dieEnemy(enemy)
@@ -286,7 +286,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
                 
                 if bullet.position.y <= 70 || bullet.position.y > 660  {
                     health -= 1
-                    if savedAudio == true {
+                    if self.soundOn {
                     self.runAction(pop2SFX)
                     }
                 }
@@ -295,7 +295,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
             else if let enemy = obstacle as? Enemy {
                 if enemy.position.y < 180 {
                     health -= 1
-                    if savedAudio == true {
+                    if self.soundOn {
                     self.runAction(pop2SFX)
                     }
                 }
@@ -304,7 +304,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
             else if let ball = obstacle as? Ball {
                 if ball.position.y <= 70 {
                     health -= 1
-                    if savedAudio == true {
+                    if self.soundOn {
                     self.runAction(pop2SFX)
                     }
                 }
@@ -319,7 +319,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         let skView = self.view as SKView!
         let scene = TutorialScene(fileNamed:"TutorialScene") as TutorialScene!
         scene.scaleMode = .AspectFill
-        if savedAudio == true {
+        if self.soundOn {
         self.runAction(pop2SFX)
         }
         let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)

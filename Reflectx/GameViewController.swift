@@ -14,20 +14,21 @@ import Social
 class GameViewController: UIViewController {
     
     @IBOutlet weak var bannerView: GADBannerView!
-
+    
     @IBAction func shareToFaceBook () {
         let shareToFacebook: SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
         shareToFacebook.setInitialText("Check out this game: https://itunes.apple.com/app/id1141987144")
         shareToFacebook.addImage(UIImage(named: "IconPic.png"))
         self.presentViewController(shareToFacebook, animated: true, completion: nil)
-
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "Method", name: "Notification", object: nil)
+        self.view?.window?.rootViewController?.presentViewController(shareToFacebook, animated: false, completion: { /* Optional completion statement */ })
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         bannerView.adSize = kGADAdSizeSmartBannerPortrait
-        //bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
         bannerView.loadRequest(GADRequest())

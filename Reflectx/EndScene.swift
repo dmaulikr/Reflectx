@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import Social
 
 class EndScene: SKScene {
     
@@ -22,7 +23,7 @@ class EndScene: SKScene {
     var addGold: SKLabelNode!
     var localScore = 0
     var earnedCoins = 0
-    let savedAudio: Bool = NSUserDefaults.standardUserDefaults().boolForKey("savedAudio")
+    let soundOn: Bool = NSUserDefaults.standardUserDefaults().boolForKey("soundOn")
     let buttonSFX = SKAction.playSoundFileNamed("button1", waitForCompletion: false)
     let playSFX = SKAction.playSoundFileNamed("play", waitForCompletion: false)
     
@@ -49,11 +50,11 @@ class EndScene: SKScene {
         goldNumber.text = "\(savedCoins)"
 
         shareButton.selectedHandler = {
-
+            NSNotificationCenter.defaultCenter().postNotificationName("Notification", object: nil)
         }
         
         rateButton.selectedHandler = {
-            if self.savedAudio == true {
+            if self.soundOn {
                 self.runAction(self.playSFX)
             }
             UIApplication.sharedApplication().openURL(NSURL(string : "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=\(1141987144)&onlyLatestVersion=true&pageNumber=0&sortOrdering=1)")!);
@@ -61,7 +62,7 @@ class EndScene: SKScene {
         
         homeButton.selectedHandler = {
             
-            if self.savedAudio == true {
+            if self.soundOn {
                 self.runAction(self.buttonSFX)
             }
             let skView = self.view as SKView!
@@ -74,7 +75,7 @@ class EndScene: SKScene {
         
         retryButton.selectedHandler = {
             
-            if self.savedAudio == true {
+            if self.soundOn {
                 self.runAction(self.buttonSFX)
             }
             let skView = self.view as SKView!
@@ -87,7 +88,7 @@ class EndScene: SKScene {
         
         highScoreButton.selectedHandler = {
             
-            if self.savedAudio == true {
+            if self.soundOn {
                 self.runAction(self.buttonSFX)
             }
             let skView = self.view as SKView!
@@ -100,7 +101,7 @@ class EndScene: SKScene {
         
         shopButton.selectedHandler = {
             
-            if self.savedAudio == true {
+            if self.soundOn {
                 self.runAction(self.buttonSFX)
             }
             let skView = self.view as SKView!

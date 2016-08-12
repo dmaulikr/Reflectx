@@ -22,8 +22,7 @@ class UIClass: SKNode{
     var smallRightArrow: SKSpriteNode!
     var instructionsNumber = 0
     let powerupSFX = SKAction.playSoundFileNamed("powerup", waitForCompletion: false)
-    var savedAudio: Bool = NSUserDefaults.standardUserDefaults().boolForKey("savedAudio")
-    var musicPast: Bool = true
+    var soundOn: Bool = NSUserDefaults.standardUserDefaults().boolForKey("soundOn")
     var pause: Bool = false
     let buttonSFX = SKAction.playSoundFileNamed("button1", waitForCompletion: false)
     
@@ -50,39 +49,27 @@ class UIClass: SKNode{
         self.runAction(SKAction.waitForDuration(1.3), completion: {() -> Void in
             self.instructions.hidden = true
         })
-        
-        if savedAudio == true {
-            musicPast = true
-        }
-        else if savedAudio == false {
-            musicPast = false
-        }
-        
-    }
-    
-    func savedAudioUpdate() {
-        
-        NSUserDefaults().setBool(savedAudio, forKey: "savedAudio")
-        NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     func setupPauseButton (scene: GameScene) {
         pauseButton.selectedHandler = {
             self.pause = !self.pause
             
+            // when music on, press pause = music on, press unpause = music off 
+            // also always music when die
+            
             if self.pause {
-                if self.savedAudio == true {
+                if self.soundOn {
                     self.runAction(self.buttonSFX)
                 }
                 self.pauseButton.texture = SKTexture(imageNamed: "rightTriangleWhite")
-//                self.savedAudio = false
-//                self.savedAudioUpdate()
                 self.setpauseLabel1 ()
                 scene.paused = true
+                scene.player.pause()
             }
                 
             else if !self.pause {
-                if self.savedAudio == true {
+                if self.soundOn {
                     self.runAction(self.buttonSFX)
                 }
                 self.countLabel.hidden = false
@@ -92,17 +79,13 @@ class UIClass: SKNode{
                 SKAction.waitForDuration(1)
                 self.countLabel.text = "1"
                 SKAction.waitForDuration(1)
-                self.pauseButton.texture = SKTexture(imageNamed: "pauseButtonWhite")
                 self.countLabel.hidden = true
-//                if self.musicPast == true {
-//                    self.savedAudio = true
-//                }
-//                else if self.musicPast == false {
-//                    self.savedAudio = false
-//                }
-//                self.savedAudioUpdate()
+                self.pauseButton.texture = SKTexture(imageNamed: "pauseButtonWhite")
                 self.setpauseLabel2 ()
                 scene.paused = false
+                if self.soundOn {
+                scene.player.play()
+                }
             }
         }
     }

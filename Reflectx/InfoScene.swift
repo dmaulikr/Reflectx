@@ -11,7 +11,7 @@ import SpriteKit
 class InfoScene: SKScene {
     
     var backButton: MSButtonNode!
-    let savedAudio: Bool = NSUserDefaults.standardUserDefaults().boolForKey("savedAudio")
+    let soundOn: Bool = NSUserDefaults.standardUserDefaults().boolForKey("soundOn")
     let buttonSFX = SKAction.playSoundFileNamed("button1", waitForCompletion: false)
     
     override func didMoveToView(view: SKView) {
@@ -20,7 +20,7 @@ class InfoScene: SKScene {
         
         backButton.selectedHandler = {
             
-            if self.savedAudio == true {
+            if self.soundOn {
                 self.runAction(self.buttonSFX)
             }
             let skView = self.view as SKView!

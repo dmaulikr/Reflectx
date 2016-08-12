@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 enum GameState {
     case Title, Browse, Playing, GameOver, Restart
@@ -53,9 +54,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var dimLeftUp: SKSpriteNode!
     var dimRightUp: SKSpriteNode!
     var UILayer: UIClass!
-    let savedAudio: Bool = NSUserDefaults.standardUserDefaults().boolForKey("savedAudio")
+    let soundOn: Bool = NSUserDefaults.standardUserDefaults().boolForKey("soundOn")
     let shakeScene:SKAction = SKAction.init(named: "Shake")!
     let shakeScene2:SKAction = SKAction.init(named: "Shake2")!
+    var player = AVAudioPlayer()
+    var nowPlaying = false
     
     override func didMoveToView(view: SKView) {
         /* Set up your scene here */
@@ -105,6 +108,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.paddle.texture = SKTexture(imageNamed: "paddleRed")
         }
         
+        let urlPath = NSBundle.mainBundle().URLForResource("music1", withExtension: "mp3")
+        player = try! AVAudioPlayer(contentsOfURL: urlPath!)
+        
+        if soundOn {
+            player.play()
+        }
+        else {
+            player.pause()
+        }
     }
     
     
@@ -126,28 +138,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         }
         
-        if savedAudio == true {
-            if let musicURL = NSBundle.mainBundle().URLForResource("music1", withExtension: "mp3") {
-                if musicNumber == 0 {
-                    backgroundMusic = SKAudioNode(URL: musicURL)
-                    backgroundMusic.runAction(SKAction.changeVolumeTo(Float(0.6), duration: 0))
-                    addChild(backgroundMusic)
-                    musicNumber += 1
-                    backgroundMusic.autoplayLooped = true
-                }
-            }
-        }
-        else if savedAudio == false {
-            if let musicURL = NSBundle.mainBundle().URLForResource("music1", withExtension: "mp3") {
-                if musicNumber == 0 {
-                    backgroundMusic = SKAudioNode(URL: musicURL)
-                    backgroundMusic.runAction(SKAction.changeVolumeTo(Float(0), duration: 0))
-                    addChild(backgroundMusic)
-                    musicNumber += 1
-                    backgroundMusic.autoplayLooped = true
-                }
-            }
-        }
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -370,13 +360,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         points += 1
         UILayer.updateScoreLabel(points)
         
-        if savedAudio == true {
+        if soundOn {
             self.runAction(popSFX)
         }
         
         if points == 5 || points == 10 || points == 20 || points == 40 || points == 80 {
             
-            if savedAudio == true {
+            if soundOn {
                 self.runAction(successSFX)
             }
         }
@@ -403,7 +393,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 shake2()
             default:
                 break
-
+                
             }
         }
         
@@ -414,7 +404,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         points += 2
         UILayer.updateScoreLabel(points)
         
-        if savedAudio == true {
+        if soundOn {
             self.runAction(popSFX)
         }
         
@@ -422,7 +412,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if points >= 5 && points <= 6 || points >= 10 && points <= 11 || points >= 20 && points <= 21 || points >= 40 && points <= 41 || points >= 80 && points <= 81 || points >= 160 && points <= 161 {
             
-            if savedAudio == true {
+            if soundOn {
                 self.runAction(successSFX)
             }
         }
@@ -450,7 +440,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 if bullet.position.y <= 70 || bullet.position.y > 660  {
                     health -= 1
-                    if savedAudio == true {
+                    if soundOn {
                         self.runAction(pop2SFX)
                     }
                 }
@@ -461,19 +451,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             else if let enemy = obstacle as? Enemy {
                 if enemy.position.y < 180 {
                     health -= 1
-                    if savedAudio == true {
+                    if soundOn {
                         self.runAction(pop2SFX)
                     }
                 }
                 if enemy.position.x > 380 {
                     health -= 1
-                    if savedAudio == true {
+                    if soundOn {
                         self.runAction(pop2SFX)
                     }
                 }
                 if enemy.position.x < 0 {
                     health -= 1
-                    if savedAudio == true {
+                    if soundOn {
                         self.runAction(pop2SFX)
                     }
                 }
@@ -483,7 +473,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             else if let ball = obstacle as? Ball {
                 if ball.position.y <= 70 {
                     health -= 1
-                    if savedAudio == true {
+                    if soundOn {
                         self.runAction(pop2SFX)
                     }
                 }
@@ -501,7 +491,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scene.localScore = points
         scene.earnedCoins = earnedCoins
         scene.scaleMode = .AspectFill
-        if savedAudio == true {
+        if soundOn {
             self.runAction(pop2SFX)
         }
         let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)

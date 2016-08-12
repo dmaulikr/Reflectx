@@ -19,7 +19,7 @@ class MainScene: SKScene {
     var tutorialButton: MSButtonNode!
     var audioButton: MSButtonNode!
     var goldNumber: SKLabelNode!
-    var savedAudio: Bool = true
+    var soundOn: Bool = true
     var state: GameState = .Title
     let buttonSFX = SKAction.playSoundFileNamed("button1", waitForCompletion: false)
     let playSFX = SKAction.playSoundFileNamed("play", waitForCompletion: false)
@@ -37,7 +37,7 @@ class MainScene: SKScene {
         audioButton = self.childNodeWithName("audioButton") as! MSButtonNode
         goldNumber = self.childNodeWithName("goldNumber") as! SKLabelNode
         
-        savedAudio = NSUserDefaults.standardUserDefaults().boolForKey("savedAudio")
+        soundOn = NSUserDefaults.standardUserDefaults().boolForKey("soundOn")
         
         audioUpdate()
         
@@ -56,7 +56,7 @@ class MainScene: SKScene {
     }
     
     func rateButtonClicked () {
-        if savedAudio == true {
+        if soundOn == true {
             self.runAction(playSFX)
         }
         UIApplication.sharedApplication().openURL(NSURL(string : "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=\(1141987144)&onlyLatestVersion=true&pageNumber=0&sortOrdering=1)")!);
@@ -64,7 +64,7 @@ class MainScene: SKScene {
     
     func playButtonClicked () {
         
-        if savedAudio == true {
+        if soundOn == true {
         self.runAction(playSFX)
         }
         self.state = .Playing
@@ -78,37 +78,37 @@ class MainScene: SKScene {
         skView.presentScene(scene, transition: transition)
         
     }
-    
-    func savedAudioUpdate() {
-        NSUserDefaults().setBool(savedAudio, forKey: "savedAudio")
+
+    func soundOnUpdate() {
+        
+        NSUserDefaults().setBool(soundOn, forKey: "soundOn")
         NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     func audioButtonClicked () {
-        self.savedAudio = !self.savedAudio
+        self.soundOn = !self.soundOn
         
         audioUpdate()
-        if savedAudio == true {
+        if soundOn {
             self.runAction(buttonSFX)
         }
+        soundOnUpdate()
     }
     
     func audioUpdate () {
         
-        if self.savedAudio {
+        if soundOn {
             self.audioButton.texture = SKTexture(imageNamed: "audioOnWhite")
-            self.savedAudioUpdate()
         }
             
-        else if !self.savedAudio {
+        else {
             self.audioButton.texture = SKTexture(imageNamed: "audioOffWhite")
-            self.savedAudioUpdate()
         }
     }
     
     func playButtonBackClicked () {
         
-        if savedAudio == true {
+        if soundOn == true {
             self.runAction(buttonSFX)
         }
         self.state = .Playing
@@ -125,7 +125,7 @@ class MainScene: SKScene {
     
     func highScoreButtonClicked () {
         
-        if savedAudio == true {
+        if soundOn == true {
             self.runAction(buttonSFX)
         }
         self.state = .Browse
@@ -139,7 +139,7 @@ class MainScene: SKScene {
     
     func tutorialButtonClicked () {
         
-        if savedAudio == true {
+        if soundOn == true {
             self.runAction(buttonSFX)
         }
         self.state = .Browse
@@ -153,7 +153,7 @@ class MainScene: SKScene {
     
     func shopButtonClicked () {
         
-        if savedAudio == true {
+        if soundOn == true {
             self.runAction(buttonSFX)
         }
         self.state = .Browse
@@ -167,7 +167,7 @@ class MainScene: SKScene {
     
     func infoButtonClicked () {
         
-        if savedAudio == true {
+        if soundOn == true {
             self.runAction(buttonSFX)
         }
         self.state = .Browse
