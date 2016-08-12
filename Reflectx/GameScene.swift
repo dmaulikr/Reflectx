@@ -21,7 +21,6 @@ public let PaddleCategory : UInt32 = 1
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    var backgroundMusic: SKAudioNode!
     var sinceTouch : CFTimeInterval = 0
     var spawnTimer: CFTimeInterval = 0
     let fixedDelta: CFTimeInterval = 1.0/60.0 // 60 FPS, fix later on (phones with 40 fps etc)
@@ -220,6 +219,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if health <= 0 {
             savedGames += 1
             savedGamesUpdate()
+            player.pause()
             gameOver()
         }
         

@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 class TutorialScene: SKScene, SKPhysicsContactDelegate {
     
@@ -32,11 +33,10 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
     var UILayer2: UIClassTutorial!
     var playButton2: MSButtonNode!
     var playButtonBack2: MSButtonNode!
-    var backgroundMusic: SKAudioNode!
-    var music: SKNode!
-    var musicNumber = 0
     let soundOn: Bool = NSUserDefaults.standardUserDefaults().boolForKey("soundOn")
     let buttonSFX = SKAction.playSoundFileNamed("button1", waitForCompletion: false)
+    var player = AVAudioPlayer()
+    var nowPlaying = false
     
     override func didMoveToView(view: SKView) {
         /* Set up your scene here */
@@ -49,17 +49,20 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         playButton2 = self.childNodeWithName("playButton2") as! MSButtonNode
         playButtonBack2 = self.childNodeWithName("playButtonBack2") as! MSButtonNode
         
+        let urlPath = NSBundle.mainBundle().URLForResource("music2", withExtension: "mp3")
+        player = try! AVAudioPlayer(contentsOfURL: urlPath!)
+        
         homeButton.selectedHandler = {
             
             if self.soundOn {
                 self.runAction(self.buttonSFX)
             }
+            self.player.pause()
             let skView = self.view as SKView!
             let scene = MainScene(fileNamed:"MainScene") as MainScene!
             scene.scaleMode = .AspectFill
             let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
             skView.presentScene(scene, transition: transition)
-            
         }
         
         playButton2.selectedHandler = {
@@ -67,6 +70,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
             if self.soundOn {
                 self.runAction(self.buttonSFX)
             }
+            self.player.pause()
             let skView = self.view as SKView!
             let scene = GameScene(fileNamed:"GameScene") as GameScene!
             scene.scaleMode = .AspectFill
@@ -80,6 +84,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
             if self.soundOn {
                 self.runAction(self.buttonSFX)
             }
+            self.player.pause()
             let skView = self.view as SKView!
             let scene = GameScene(fileNamed:"GameScene") as GameScene!
             scene.scaleMode = .AspectFill
@@ -94,28 +99,11 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         self.state = .Playing
         
         if self.soundOn {
-            if let musicURL = NSBundle.mainBundle().URLForResource("music2", withExtension: "mp3") {
-                if musicNumber == 0 {
-                    backgroundMusic = SKAudioNode(URL: musicURL)
-                    backgroundMusic.runAction(SKAction.changeVolumeTo(Float(0.6), duration: 0))
-                    addChild(backgroundMusic)
-                    musicNumber += 1
-                }
-                
-            }
+            player.play()
         }
         else {
-            if let musicURL = NSBundle.mainBundle().URLForResource("music2", withExtension: "mp3") {
-                if musicNumber == 0 {
-                    backgroundMusic = SKAudioNode(URL: musicURL)
-                    backgroundMusic.runAction(SKAction.changeVolumeTo(Float(0), duration: 0))
-                    addChild(backgroundMusic)
-                    musicNumber += 1
-                }
-                
-            }
+            player.pause()
         }
-        
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -316,6 +304,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         /* Game over! */
         
         state = .Restart
+        player.pause()
         let skView = self.view as SKView!
         let scene = TutorialScene(fileNamed:"TutorialScene") as TutorialScene!
         scene.scaleMode = .AspectFill

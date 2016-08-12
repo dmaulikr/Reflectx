@@ -50,7 +50,7 @@ class EndScene: SKScene {
         goldNumber.text = "\(savedCoins)"
 
         shareButton.selectedHandler = {
-            NSNotificationCenter.defaultCenter().postNotificationName("Notification", object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName("postToFacebook", object: nil)
         }
         
         rateButton.selectedHandler = {
@@ -76,7 +76,7 @@ class EndScene: SKScene {
         retryButton.selectedHandler = {
             
             if self.soundOn {
-                self.runAction(self.buttonSFX)
+                self.runAction(self.playSFX)
             }
             let skView = self.view as SKView!
             let scene = GameScene(fileNamed:"GameScene") as GameScene!

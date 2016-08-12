@@ -15,14 +15,22 @@ class GameViewController: UIViewController {
     
     @IBOutlet weak var bannerView: GADBannerView!
     
-    @IBAction func shareToFaceBook () {
+    func shareToFacebook () {
         let shareToFacebook: SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+        shareToFacebook.completionHandler = {
+            result in
+            switch result {
+            case SLComposeViewControllerResult.Cancelled:
+                break
+                
+            case SLComposeViewControllerResult.Done:
+                break
+            }
+        }
+
         shareToFacebook.setInitialText("Check out this game: https://itunes.apple.com/app/id1141987144")
         shareToFacebook.addImage(UIImage(named: "IconPic.png"))
         self.presentViewController(shareToFacebook, animated: true, completion: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "Method", name: "Notification", object: nil)
-        self.view?.window?.rootViewController?.presentViewController(shareToFacebook, animated: false, completion: { /* Optional completion statement */ })
-        
     }
     
     override func viewDidLoad() {
@@ -32,6 +40,9 @@ class GameViewController: UIViewController {
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
         bannerView.loadRequest(GADRequest())
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.shareToFacebook), name: "postToFacebook", object: nil)
+
         
         if let scene = MainScene(fileNamed:"MainScene") {
             // Configure the view.

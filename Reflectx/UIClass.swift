@@ -55,9 +55,6 @@ class UIClass: SKNode{
         pauseButton.selectedHandler = {
             self.pause = !self.pause
             
-            // when music on, press pause = music on, press unpause = music off 
-            // also always music when die
-            
             if self.pause {
                 if self.soundOn {
                     self.runAction(self.buttonSFX)
