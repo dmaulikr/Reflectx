@@ -26,7 +26,7 @@ class MainScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        
+                
         playButton = self.childNodeWithName("playButton") as! MSButtonNode
         playButtonBack = self.childNodeWithName("playButtonBack") as! MSButtonNode
         highScoreButton = self.childNodeWithName("highScoreButton") as! MSButtonNode
@@ -37,7 +37,12 @@ class MainScene: SKScene {
         audioButton = self.childNodeWithName("audioButton") as! MSButtonNode
         goldNumber = self.childNodeWithName("goldNumber") as! SKLabelNode
         
-        soundOn = NSUserDefaults.standardUserDefaults().boolForKey("soundOn")
+        if NSUserDefaults.standardUserDefaults().objectForKey("soundOn") != nil {
+            soundOn = NSUserDefaults.standardUserDefaults().boolForKey("soundOn")
+        }
+        else {
+            soundOn = true
+        }
         
         audioUpdate()
         
@@ -59,7 +64,7 @@ class MainScene: SKScene {
         if soundOn == true {
             self.runAction(playSFX)
         }
-        UIApplication.sharedApplication().openURL(NSURL(string : "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=\(1141987144)&onlyLatestVersion=true&pageNumber=0&sortOrdering=1)")!);
+        UIApplication.sharedApplication().openURL(NSURL(string : "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1141987144&onlyLatestVersion=true&pageNumber=0&sortOrdering=1)")!);
     }
     
     func playButtonClicked () {
@@ -70,7 +75,7 @@ class MainScene: SKScene {
         self.state = .Playing
         let skView = self.view as SKView!
         let scene = GameScene(fileNamed:"GameScene") as GameScene!
-        scene.scaleMode = .AspectFill
+        scene.scaleMode = .AspectFit
         skView.showsPhysics = false
         skView.showsDrawCount = false
         skView.showsFPS = false
@@ -114,7 +119,7 @@ class MainScene: SKScene {
         self.state = .Playing
         let skView = self.view as SKView!
         let scene = GameScene(fileNamed:"GameScene") as GameScene!
-        scene.scaleMode = .AspectFill
+        scene.scaleMode = .AspectFit
         skView.showsPhysics = false
         skView.showsDrawCount = false
         skView.showsFPS = false
@@ -131,7 +136,7 @@ class MainScene: SKScene {
         self.state = .Browse
         let skView = self.view as SKView!
         let scene = HighScoreScene(fileNamed:"HighScoreScene") as HighScoreScene!
-        scene.scaleMode = .AspectFill
+        scene.scaleMode = .AspectFit
         let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
         skView.presentScene(scene, transition: transition)
         
@@ -145,7 +150,7 @@ class MainScene: SKScene {
         self.state = .Browse
         let skView = self.view as SKView!
         let scene = TutorialScene(fileNamed:"TutorialScene") as TutorialScene!
-        scene.scaleMode = .AspectFill
+        scene.scaleMode = .AspectFit
         let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
         skView.presentScene(scene, transition: transition)
         
@@ -159,7 +164,7 @@ class MainScene: SKScene {
         self.state = .Browse
         let skView = self.view as SKView!
         let scene = ShopScene(fileNamed:"ShopScene") as ShopScene!
-        scene.scaleMode = .AspectFill
+        scene.scaleMode = .AspectFit
         let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
         skView.presentScene(scene, transition: transition)
         
@@ -173,7 +178,7 @@ class MainScene: SKScene {
         self.state = .Browse
         let skView = self.view as SKView!
         let scene = InfoScene(fileNamed:"InfoScene") as InfoScene!
-        scene.scaleMode = .AspectFill
+        scene.scaleMode = .AspectFit
         let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
         skView.presentScene(scene, transition: transition)
         

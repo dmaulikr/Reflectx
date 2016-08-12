@@ -490,7 +490,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let scene = EndScene(fileNamed:"EndScene") as EndScene!
         scene.localScore = points
         scene.earnedCoins = earnedCoins
-        scene.scaleMode = .AspectFill
+        scene.scaleMode = .AspectFit
         if soundOn {
             self.runAction(pop2SFX)
         }
@@ -524,9 +524,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func spawnNewWave(){
         if spawnTimer >= 2.8 && waveFinished {
             
-            var random = arc4random_uniform(3) // 3
+            var random = arc4random_uniform(2) // 2
             while previousNumber == random {
-                random = arc4random_uniform(3) // 3
+                random = arc4random_uniform(2) // 2
             }
             
             previousNumber = random
@@ -537,8 +537,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 wave1() // 1
             case 1:
                 wave3()
-            case 2:
-                wave4()
             default:
                 break
                 

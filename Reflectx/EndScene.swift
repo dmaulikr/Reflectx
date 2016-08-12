@@ -50,14 +50,19 @@ class EndScene: SKScene {
         goldNumber.text = "\(savedCoins)"
 
         shareButton.selectedHandler = {
-            NSNotificationCenter.defaultCenter().postNotificationName("postToFacebook", object: nil)
+            //NSNotificationCenter.defaultCenter().postNotificationName("postToFacebook", object: nil)
+            if self.soundOn {
+                self.runAction(self.playSFX)
+            }
+            let socialHandler = Social()
+            socialHandler.shareScore(self)
         }
         
         rateButton.selectedHandler = {
             if self.soundOn {
                 self.runAction(self.playSFX)
             }
-            UIApplication.sharedApplication().openURL(NSURL(string : "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=\(1141987144)&onlyLatestVersion=true&pageNumber=0&sortOrdering=1)")!);
+            UIApplication.sharedApplication().openURL(NSURL(string : "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1141987144&onlyLatestVersion=true&pageNumber=0&sortOrdering=1)")!);
         }
         
         homeButton.selectedHandler = {
@@ -67,7 +72,7 @@ class EndScene: SKScene {
             }
             let skView = self.view as SKView!
             let scene = MainScene(fileNamed:"MainScene") as MainScene!
-            scene.scaleMode = .AspectFill
+            scene.scaleMode = .AspectFit
             let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
             skView.presentScene(scene, transition: transition)
             
@@ -80,7 +85,7 @@ class EndScene: SKScene {
             }
             let skView = self.view as SKView!
             let scene = GameScene(fileNamed:"GameScene") as GameScene!
-            scene.scaleMode = .AspectFill
+            scene.scaleMode = .AspectFit
             let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
             skView.presentScene(scene, transition: transition)
             
@@ -93,7 +98,7 @@ class EndScene: SKScene {
             }
             let skView = self.view as SKView!
             let scene = HighScoreScene(fileNamed:"HighScoreScene") as HighScoreScene!
-            scene.scaleMode = .AspectFill
+            scene.scaleMode = .AspectFit
             let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
             skView.presentScene(scene, transition: transition)
             
@@ -106,7 +111,7 @@ class EndScene: SKScene {
             }
             let skView = self.view as SKView!
             let scene = ShopScene(fileNamed:"ShopScene") as ShopScene!
-            scene.scaleMode = .AspectFill
+            scene.scaleMode = .AspectFit
             let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
             skView.presentScene(scene, transition: transition)
             

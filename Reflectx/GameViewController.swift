@@ -6,10 +6,47 @@
 //  Copyright (c) 2016 Jacky. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import SpriteKit
 import GoogleMobileAds
 import Social
+
+class Social {
+    func shareScore(scene: SKScene) {
+        let postText: String = "Check out my score! Can you beat it? "
+        let postImage: UIImage = getScreenshot(scene)
+        let postGame: String = "https://itunes.apple.com/app/id1141987144"
+        let activityItems = [postText, postImage, postGame]
+        let activityController = UIActivityViewController(
+            activityItems: activityItems,
+            applicationActivities: nil
+        )
+        
+        let controller: UIViewController = scene.view!.window!.rootViewController!
+        
+        controller.presentViewController(
+            activityController,
+            animated: true,
+            completion: nil
+        )
+    }
+    
+    func getScreenshot(scene: SKScene) -> UIImage {
+        let snapshotView = scene.view!.snapshotViewAfterScreenUpdates(true)
+        let bounds = UIScreen.mainScreen().bounds
+        
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0)
+        
+        snapshotView.drawViewHierarchyInRect(bounds, afterScreenUpdates: true)
+        
+        let screenshotImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        return screenshotImage;
+    }
+}
 
 class GameViewController: UIViewController {
     
@@ -36,10 +73,10 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bannerView.adSize = kGADAdSizeSmartBannerPortrait
+       /* bannerView.adSize = kGADAdSizeSmartBannerPortrait
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
-        bannerView.loadRequest(GADRequest())
+        bannerView.loadRequest(GADRequest()) */
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.shareToFacebook), name: "postToFacebook", object: nil)
 
@@ -54,7 +91,7 @@ class GameViewController: UIViewController {
             skView.ignoresSiblingOrder = true
             
             /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFill
+            scene.scaleMode = .AspectFit
             
             skView.presentScene(scene)
         }

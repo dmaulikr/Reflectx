@@ -60,7 +60,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
             self.player.pause()
             let skView = self.view as SKView!
             let scene = MainScene(fileNamed:"MainScene") as MainScene!
-            scene.scaleMode = .AspectFill
+            scene.scaleMode = .AspectFit
             let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
             skView.presentScene(scene, transition: transition)
         }
@@ -73,7 +73,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
             self.player.pause()
             let skView = self.view as SKView!
             let scene = GameScene(fileNamed:"GameScene") as GameScene!
-            scene.scaleMode = .AspectFill
+            scene.scaleMode = .AspectFit
             let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
             skView.presentScene(scene, transition: transition)
             
@@ -87,7 +87,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
             self.player.pause()
             let skView = self.view as SKView!
             let scene = GameScene(fileNamed:"GameScene") as GameScene!
-            scene.scaleMode = .AspectFill
+            scene.scaleMode = .AspectFit
             let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
             skView.presentScene(scene, transition: transition)
             
@@ -307,7 +307,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         player.pause()
         let skView = self.view as SKView!
         let scene = TutorialScene(fileNamed:"TutorialScene") as TutorialScene!
-        scene.scaleMode = .AspectFill
+        scene.scaleMode = .AspectFit
         if self.soundOn {
         self.runAction(pop2SFX)
         }
