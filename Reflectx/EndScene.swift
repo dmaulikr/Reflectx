@@ -50,19 +50,19 @@ class EndScene: SKScene {
         goldNumber.text = "\(savedCoins)"
 
         shareButton.selectedHandler = {
-            //NSNotificationCenter.defaultCenter().postNotificationName("postToFacebook", object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName("postToFacebook", object: nil)
             if self.soundOn {
                 self.runAction(self.playSFX)
             }
-            let socialHandler = Social()
-            socialHandler.shareScore(self)
+            //let socialHandler = Social()
+            //socialHandler.shareScore(self)
         }
         
         rateButton.selectedHandler = {
             if self.soundOn {
                 self.runAction(self.playSFX)
             }
-            UIApplication.sharedApplication().openURL(NSURL(string : "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1141987144&onlyLatestVersion=true&pageNumber=0&sortOrdering=1)")!);
+            UIApplication.sharedApplication().openURL(NSURL(string : "itms-apps://itunes.apple.com/app/id1141987144")!);
         }
         
         homeButton.selectedHandler = {

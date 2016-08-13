@@ -45,6 +45,7 @@ class MainScene: SKScene {
         }
         
         audioUpdate()
+        soundOnUpdate()
         
         let savedCoins: Int = NSUserDefaults.standardUserDefaults().integerForKey("savedCoins")
         goldNumber.text = "\(savedCoins)"
@@ -64,7 +65,7 @@ class MainScene: SKScene {
         if soundOn == true {
             self.runAction(playSFX)
         }
-        UIApplication.sharedApplication().openURL(NSURL(string : "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1141987144&onlyLatestVersion=true&pageNumber=0&sortOrdering=1)")!);
+            UIApplication.sharedApplication().openURL(NSURL(string : "itms-apps://itunes.apple.com/app/id1141987144")!);
     }
     
     func playButtonClicked () {
