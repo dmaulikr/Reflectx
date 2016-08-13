@@ -115,13 +115,13 @@ class Enemy: SKSpriteNode {
         case 0...4:
             physicsBody?.velocity = CGVector(dx: 0, dy: -210)
         case 5...7:
-            physicsBody?.velocity = CGVector(dx: 0, dy: -230)
+            physicsBody?.velocity = CGVector(dx: 0, dy: -220)
         case 8...10:
-            physicsBody?.velocity = CGVector(dx: 0, dy: -245)
+            physicsBody?.velocity = CGVector(dx: 0, dy: -230)
         case 11...13:
-            physicsBody?.velocity = CGVector(dx: 0, dy: -255)
+            physicsBody?.velocity = CGVector(dx: 0, dy: -240)
         default:
-            physicsBody?.velocity = CGVector(dx: 0, dy: -265)
+            physicsBody?.velocity = CGVector(dx: 0, dy: -250)
         }
     }
     

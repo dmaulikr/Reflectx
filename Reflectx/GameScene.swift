@@ -455,7 +455,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         self.runAction(pop2SFX)
                     }
                 }
-                if enemy.position.x > 380 {
+                if enemy.position.x > 400 {
                     health -= 1
                     if soundOn {
                         self.runAction(pop2SFX)
@@ -983,7 +983,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.wavesNumber += 1
         }
         
-        self.runAction(SKAction.sequence([wait, wait2, run, wait, run, wait2, run, wait2, run, wait2, run2, finish]))
+        self.runAction(SKAction.sequence([wait, wait2, run, wait, run, wait2, run, wait2, run, wait2, run2, wait, finish]))
         
     }
     
@@ -1018,7 +1018,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.wavesNumber += 1
         }
         
-        self.runAction(SKAction.sequence([wait, run, wait2, run, wait2, run, wait2, run, wait2, run, wait2, run, wait2, run, wait2, run, wait3, run2, finish]))
+        self.runAction(SKAction.sequence([wait, run, wait2, run, wait2, run, wait2, run, wait2, run, wait2, run, wait2, run, wait2, run, wait3, run2, wait, finish]))
         
     }
     
