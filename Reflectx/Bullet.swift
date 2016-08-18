@@ -58,6 +58,12 @@ class Bullet: Shootable {
             }
         }
     }
+    
+    func updateBulletSpeedSlow(waveNumber: Int) {
+            if position.y < 650 && position.y > 666 {
+                physicsBody?.velocity = CGVector(dx: 0, dy: -55)
+            }
+    }
 
     /* You are required to implement this for your subclass to work */
     required init?(coder aDecoder: NSCoder) {

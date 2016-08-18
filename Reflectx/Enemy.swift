@@ -39,15 +39,15 @@ class Enemy: SKSpriteNode {
     }
     
     func goLeftSlow() {
-        physicsBody?.velocity = CGVector(dx: -70, dy: 0)
+        physicsBody?.velocity = CGVector(dx: -60, dy: 0)
     }
     
     func goRightSlow() {
-        physicsBody?.velocity = CGVector(dx: 70, dy: 0)
+        physicsBody?.velocity = CGVector(dx: 60, dy: 0)
     }
     
     func goDownSlow() {
-        physicsBody?.velocity = CGVector(dx: 0, dy: -120)
+        physicsBody?.velocity = CGVector(dx: 0, dy: -100)
     }
     
     func goRight(waveNumber: Int) {
@@ -129,14 +129,14 @@ class Enemy: SKSpriteNode {
         switch waveNumber {
         case 0...4:
             if position.y < 600 && position.y > 550 {
-                physicsBody?.velocity = CGVector(dx: 0, dy: -125)
+                physicsBody?.velocity = CGVector(dx: 0, dy: -115)
             }
             if position.y <= 500 {
                 physicsBody?.velocity = CGVector(dx: 0, dy: -345)
             }
         case 5...7:
             if position.y < 600 && position.y > 550 {
-                physicsBody?.velocity = CGVector(dx: 0, dy: -175)
+                physicsBody?.velocity = CGVector(dx: 0, dy: -165)
             }
             if position.y <= 500 {
                 physicsBody?.velocity = CGVector(dx: 0, dy: -395)

@@ -195,12 +195,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         /* Process obstacles */
         
         // stage 1
-        if wavesNumber <= 2 {
+        if wavesNumber <= 4 {
             spawnNewWave()
         }
         
         // stage 2
-        if wavesNumber > 2 && wavesNumber <= 10 {
+        if wavesNumber > 4 && wavesNumber <= 10 {
             spawnNewWave2()
         }
         
@@ -524,9 +524,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func spawnNewWave(){
         if spawnTimer >= 2.8 && waveFinished {
             
-            var random = arc4random_uniform(2) // 2
+            var random = arc4random_uniform(4)
             while previousNumber == random {
-                random = arc4random_uniform(2) // 2
+                random = arc4random_uniform(4)
             }
             
             previousNumber = random
@@ -534,9 +534,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             switch (random) {
                 
             case 0:
-                wave1() // 1
+                wave11()
             case 1:
-                wave3()
+                wave12()
+            case 2:
+                wave13()
+            case 3:
+                wave14()
             default:
                 break
                 
@@ -1019,6 +1023,93 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         self.runAction(SKAction.sequence([wait, run, wait2, run, wait2, run, wait2, run, wait2, run, wait2, run, wait2, run, wait2, run, wait3, run2, wait, finish]))
+        
+    }
+    
+    func wave11() {
+        
+        self.waveFinished = false
+        
+        let wavePositionsX = [40, 100, 160, 220, 60]
+        var index = 0
+        let wait = SKAction.waitForDuration(0.55)
+        let wait2 = SKAction.waitForDuration(0.8)
+        let run = SKAction.runBlock {
+            self.createBallGroup(CGPoint(x: wavePositionsX[index], y: 650))
+            index += 1
+            
+        }
+        let finish = SKAction.runBlock {
+            self.waveFinished = true
+            self.wavesNumber += 1
+        }
+        
+        self.runAction(SKAction.sequence([run, wait, run, wait, run, wait, run, wait2, run, finish]))
+        
+    }
+    
+    func wave12() {
+        
+        self.waveFinished = false
+        
+        let wavePositionsX = [335, 220, 105]
+        var index = 0
+        let wait = SKAction.waitForDuration(0.65)
+        let run = SKAction.runBlock {
+            self.createBallGroup(CGPoint(x: wavePositionsX[index], y: 650))
+            index += 1
+            
+        }
+        let finish = SKAction.runBlock {
+            self.waveFinished = true
+            self.wavesNumber += 1
+        }
+        
+        self.runAction(SKAction.sequence([run, wait, run, wait, run, finish]))
+        
+    }
+    
+    func wave13() {
+        
+        self.waveFinished = false
+        
+        let wavePositionsX = [40, 280, 100, 220, 140, 180]
+        var index = 0
+        let wait = SKAction.waitForDuration(0.85)
+        let wait2 = SKAction.waitForDuration(0.55)
+        let run = SKAction.runBlock {
+            self.createBallGroup(CGPoint(x: wavePositionsX[index], y: 650))
+            index += 1
+            
+        }
+        let finish = SKAction.runBlock {
+            self.waveFinished = true
+            self.wavesNumber += 1
+        }
+        
+        self.runAction(SKAction.sequence([run, wait, run, wait, run, wait, run, wait2, run, wait2, run, finish]))
+        
+    }
+    
+    func wave14() {
+        
+        self.waveFinished = false
+        
+        let wavePositionsX = [40, 100, 160, 335, 280, 220]
+        var index = 0
+        let wait = SKAction.waitForDuration(0.45)
+        let wait2 = SKAction.waitForDuration(0.9)
+        let run = SKAction.runBlock {
+            self.createBallGroup(CGPoint(x: wavePositionsX[index], y: 650))
+            index += 1
+            
+        }
+        let finish = SKAction.runBlock {
+            self.waveFinished = true
+            self.wavesNumber += 1
+        }
+        
+        self.runAction(SKAction.sequence([run, wait, run, wait, run, wait2, run, wait, run, wait, run, finish]))
         
     }
     

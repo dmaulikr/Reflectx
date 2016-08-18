@@ -278,6 +278,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
                     self.runAction(pop2SFX)
                     }
                 }
+                bullet.updateBulletSpeedSlow(self.wavesNumber)
             }
                 
             else if let enemy = obstacle as? Enemy {
@@ -287,6 +288,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
                     self.runAction(pop2SFX)
                     }
                 }
+                //ball.updateEnemySpeed(self.wavesNumber)
             }
                 
             else if let ball = obstacle as? Ball {
@@ -296,6 +298,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
                     self.runAction(pop2SFX)
                     }
                 }
+                //ball.updateBallSpeed(self.wavesNumber)
             }
         }
     }
@@ -332,7 +335,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
     
     func spawnNewWave2(){
         
-        if spawnTimer >= 5 {
+        if spawnTimer >= 4 {
             UILayer2.instructionsUpdate()
         } 
         
@@ -395,9 +398,9 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         
         self.waveFinished = false
         
-        let wavePositionsX = [40, 130, 220, 120, 170]
+        let wavePositionsX = [60, 150, 240, 140, 190]
         var index = 0
-        let wait = SKAction.waitForDuration(1)
+        let wait = SKAction.waitForDuration(1.6)
         let run = SKAction.runBlock {
             self.createBallGroup(CGPoint(x: wavePositionsX[index], y: 650))
             index += 1
@@ -416,9 +419,9 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         
         self.waveFinished = false
         
-        let wavePositionsX = [40, 120]
+        let wavePositionsX = [60, 155]
         var index = 0
-        let wait = SKAction.waitForDuration(3.5)
+        let wait = SKAction.waitForDuration(4.5)
         
         let run = SKAction.runBlock {
             
@@ -443,7 +446,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         self.waveFinished = false
         
         let run = SKAction.runBlock {
-            let enemy = self.createBulletGroup(CGPoint(x: 265, y: 530))
+            let enemy = self.createBulletGroup(CGPoint(x: 240, y: 490))
             enemy.goLeftSlow()
         }
         

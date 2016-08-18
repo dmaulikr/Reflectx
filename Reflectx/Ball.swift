@@ -29,7 +29,7 @@ class Ball: Shootable {
             }
             
             if position.y <= 500 && position.y > 450 {
-                physicsBody?.velocity = CGVector(dx: 0, dy: -340)
+                physicsBody?.velocity = CGVector(dx: 0, dy: -320)
             }
         case 5...7:
             if position.y < 620 && position.y > 500 {
@@ -37,7 +37,7 @@ class Ball: Shootable {
             }
             
             if position.y <= 500 && position.y > 450 {
-                physicsBody?.velocity = CGVector(dx: 0, dy: -390)
+                physicsBody?.velocity = CGVector(dx: 0, dy: -370)
             }
         case 8...10:
             if position.y < 620 && position.y > 500 {
