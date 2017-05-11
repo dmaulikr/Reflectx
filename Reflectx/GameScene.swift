@@ -23,7 +23,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var sinceTouch : CFTimeInterval = 0
     var spawnTimer: CFTimeInterval = 0
-    let fixedDelta: CFTimeInterval = 1.0/60.0 // 60 FPS, fix later on (phones with 40 fps etc)
+    let fixedDelta: CFTimeInterval = 1.0/60.0
     var obstacleLayer: SKNode!
     var music: SKNode!
     var wavesNumber = 0
