@@ -14,20 +14,20 @@ class HighScoreScene: SKScene {
     var highScoreLabel: SKLabelNode!
     var gamesPlayedLabel: SKLabelNode!
     var rankLabel: SKLabelNode!
-    let soundOn: Bool = NSUserDefaults.standardUserDefaults().boolForKey("soundOn")
+    let soundOn: Bool = UserDefaults.standard.bool(forKey: "soundOn")
     let buttonSFX = SKAction.playSoundFileNamed("button1", waitForCompletion: false)
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         
-        backButton = self.childNodeWithName("backButton") as! MSButtonNode
-        highScoreLabel = self.childNodeWithName("highScoreLabel") as! SKLabelNode
-        gamesPlayedLabel = self.childNodeWithName("gamesPlayedLabel") as! SKLabelNode
-        rankLabel = self.childNodeWithName("rankLabel") as! SKLabelNode
+        backButton = self.childNode(withName: "backButton") as! MSButtonNode
+        highScoreLabel = self.childNode(withName: "highScoreLabel") as! SKLabelNode
+        gamesPlayedLabel = self.childNode(withName: "gamesPlayedLabel") as! SKLabelNode
+        rankLabel = self.childNode(withName: "rankLabel") as! SKLabelNode
         
-        let savedScore: Int = NSUserDefaults.standardUserDefaults().integerForKey("highScore")
+        let savedScore: Int = UserDefaults.standard.integer(forKey: "highScore")
         highScoreLabel.text = "\(savedScore)"
         
-        let savedRank: Int = NSUserDefaults.standardUserDefaults().integerForKey("highScore")
+        let savedRank: Int = UserDefaults.standard.integer(forKey: "highScore")
         if savedRank >= 0 && savedRank <= 19 {
             rankLabel.text = "Novice"
         }
@@ -56,19 +56,19 @@ class HighScoreScene: SKScene {
             rankLabel.text = "Transcender"
         }
         
-        let savedGames: Int = NSUserDefaults.standardUserDefaults().integerForKey("savedGames2")
+        let savedGames: Int = UserDefaults.standard.integer(forKey: "savedGames2")
         gamesPlayedLabel.text = "Games played - \(savedGames)"
         
         backButton.selectedHandler = {
             
             if self.soundOn {
-                self.runAction(self.buttonSFX)
+                self.run(self.buttonSFX)
             }
             let skView = self.view as SKView!
             let scene = MainScene(fileNamed:"MainScene") as MainScene!
-            scene.scaleMode = .AspectFit
-            let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
-            skView.presentScene(scene, transition: transition)
+            scene?.scaleMode = .aspectFit
+            let transition = SKTransition.fade(with: UIColor.darkGray, duration: 0.6)
+            skView?.presentScene(scene!, transition: transition)
             
         }
         

@@ -16,12 +16,12 @@ class Bullet: Shootable {
         addPhysicsBody()
     }
     
-    let savedWavesDone2: Int = NSUserDefaults.standardUserDefaults().integerForKey("wavesDone2")
+    let savedWavesDone2: Int = UserDefaults.standard.integer(forKey: "wavesDone2")
     
     override func addPhysicsBody () {
-        physicsBody = SKPhysicsBody(rectangleOfSize: size)
+        physicsBody = SKPhysicsBody(rectangleOf: size)
         physicsBody?.affectedByGravity = false
-        physicsBody?.dynamic = true
+        physicsBody?.isDynamic = true
         physicsBody?.friction = 0
         physicsBody?.categoryBitMask = BulletCategory
         physicsBody?.collisionBitMask = EnemyCategory | PaddleCategory
@@ -34,7 +34,7 @@ class Bullet: Shootable {
         
     }
     
-    func updateBulletSpeed(waveNumber: Int) {
+    func updateBulletSpeed(_ waveNumber: Int) {
         switch waveNumber {
         case 0...4:
             if position.y < 650 && position.y > 666 {
@@ -59,7 +59,7 @@ class Bullet: Shootable {
         }
     }
     
-    func updateBulletSpeedSlow(waveNumber: Int) {
+    func updateBulletSpeedSlow(_ waveNumber: Int) {
             if position.y < 650 && position.y > 666 {
                 physicsBody?.velocity = CGVector(dx: 0, dy: -55)
             }

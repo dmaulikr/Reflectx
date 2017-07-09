@@ -18,7 +18,7 @@ class Shootable: SKSpriteNode {
     
     init(image: String) {
         let texture = SKTexture(imageNamed: image)
-        super.init(texture: texture, color: UIColor.clearColor(), size: CGSize(width: 18, height: 18))
+        super.init(texture: texture, color: UIColor.clear, size: CGSize(width: 18, height: 18))
         zPosition = 1
         name = "shootable"
         addPhysicsBody()
@@ -29,9 +29,9 @@ class Shootable: SKSpriteNode {
     }
     
     func addPhysicsBody () {
-        physicsBody = SKPhysicsBody(rectangleOfSize: size)
+        physicsBody = SKPhysicsBody(rectangleOf: size)
         physicsBody?.affectedByGravity = false
-        physicsBody?.dynamic = true
+        physicsBody?.isDynamic = true
         physicsBody?.friction = 0
         physicsBody?.categoryBitMask = BallCategory
         physicsBody?.collisionBitMask = EnemyCategory | PaddleCategory

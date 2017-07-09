@@ -12,9 +12,9 @@ class MSReferenceNode: SKReferenceNode {
     
     var blackBall: SKSpriteNode!
     
-    override func didLoadReferenceNode(node: SKNode?) {
+    override func didLoad(_ node: SKNode?) {
         
-        blackBall = childNodeWithName("//blackBall") as! SKSpriteNode
+        blackBall = childNode(withName: "//blackBall") as! SKSpriteNode
         
     }
 }

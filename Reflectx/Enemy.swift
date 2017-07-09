@@ -15,7 +15,7 @@ class Enemy: SKSpriteNode {
     init(imageName: String) {
         
         let texture = SKTexture(imageNamed: imageName)
-        super.init(texture: texture, color: UIColor.clearColor(), size: CGSize(width: 50, height: 25))
+        super.init(texture: texture, color: UIColor.clear, size: CGSize(width: 50, height: 25))
         
         zPosition = 1
         addPhysicsBody()
@@ -24,9 +24,9 @@ class Enemy: SKSpriteNode {
     
     func addPhysicsBody () {
         
-        physicsBody = SKPhysicsBody(rectangleOfSize: size)
+        physicsBody = SKPhysicsBody(rectangleOf: size)
         physicsBody?.affectedByGravity = false
-        physicsBody?.dynamic = true
+        physicsBody?.isDynamic = true
         physicsBody?.allowsRotation = false
         physicsBody?.friction = 0
         physicsBody?.categoryBitMask = EnemyCategory
@@ -50,7 +50,7 @@ class Enemy: SKSpriteNode {
         physicsBody?.velocity = CGVector(dx: 0, dy: -100)
     }
     
-    func goRight(waveNumber: Int) {
+    func goRight(_ waveNumber: Int) {
         switch waveNumber {
         case 0...4:
             physicsBody?.velocity = CGVector(dx: 95, dy: 0)
@@ -65,7 +65,7 @@ class Enemy: SKSpriteNode {
         }
     }
     
-    func goRightSpecial(waveNumber: Int) {
+    func goRightSpecial(_ waveNumber: Int) {
         switch waveNumber {
         case 0...4:
             physicsBody?.velocity = CGVector(dx: 95, dy: -15)
@@ -80,7 +80,7 @@ class Enemy: SKSpriteNode {
         }
     }
     
-    func goLeft(waveNumber: Int) {
+    func goLeft(_ waveNumber: Int) {
         switch waveNumber {
         case 0...4:
             physicsBody?.velocity = CGVector(dx: -100, dy: 0)
@@ -95,7 +95,7 @@ class Enemy: SKSpriteNode {
         }
     }
     
-    func goLeftSpecial(waveNumber: Int) {
+    func goLeftSpecial(_ waveNumber: Int) {
         switch waveNumber {
         case 0...4:
             physicsBody?.velocity = CGVector(dx: -100, dy: -12)
@@ -110,7 +110,7 @@ class Enemy: SKSpriteNode {
         }
     }
     
-    func goDown(waveNumber: Int) {
+    func goDown(_ waveNumber: Int) {
         switch waveNumber {
         case 0...4:
             physicsBody?.velocity = CGVector(dx: 0, dy: -210)
@@ -125,7 +125,7 @@ class Enemy: SKSpriteNode {
         }
     }
     
-    func updateVelocity(waveNumber: Int) {
+    func updateVelocity(_ waveNumber: Int) {
         switch waveNumber {
         case 0...4:
             if position.y < 600 && position.y > 550 {

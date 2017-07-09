@@ -17,7 +17,7 @@ class ShopScene: SKScene {
     var paddleBoxYellow: MSButtonNode!
     var paddleBoxBlue2: MSButtonNode!
     var paddleBoxGreen2: MSButtonNode!
-    var paddleSelected : Constants.PaddleColor = .Blue
+    var paddleSelected : Constants.PaddleColor = .blue
     var checkMarks: [SKSpriteNode] = []
     var greenBought : Bool = false
     var redBought: Bool = false
@@ -34,55 +34,55 @@ class ShopScene: SKScene {
     var smallGold6: SKSpriteNode!
     var paddleGreenPic: SKSpriteNode!
     var paddleRedPic: SKSpriteNode!
-    let soundOn: Bool = NSUserDefaults.standardUserDefaults().boolForKey("soundOn")
+    let soundOn: Bool = UserDefaults.standard.bool(forKey: "soundOn")
     let buttonSFX = SKAction.playSoundFileNamed("button1", waitForCompletion: false)
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         
-        backButton = self.childNodeWithName("backButton") as! MSButtonNode
-        paddleBoxBlue = self.childNodeWithName("paddleBoxBlue") as! MSButtonNode
-        paddleBoxGreen = self.childNodeWithName("paddleBoxGreen") as! MSButtonNode
-        paddleBoxRed = self.childNodeWithName("paddleBoxRed") as! MSButtonNode
-        paddleBoxYellow = self.childNodeWithName("paddleBoxYellow") as! MSButtonNode
-        paddleBoxBlue2 = self.childNodeWithName("paddleBoxBlue2") as! MSButtonNode
-        paddleBoxGreen2 = self.childNodeWithName("paddleBoxGreen2") as! MSButtonNode
+        backButton = self.childNode(withName: "backButton") as! MSButtonNode
+        paddleBoxBlue = self.childNode(withName: "paddleBoxBlue") as! MSButtonNode
+        paddleBoxGreen = self.childNode(withName: "paddleBoxGreen") as! MSButtonNode
+        paddleBoxRed = self.childNode(withName: "paddleBoxRed") as! MSButtonNode
+        paddleBoxYellow = self.childNode(withName: "paddleBoxYellow") as! MSButtonNode
+        paddleBoxBlue2 = self.childNode(withName: "paddleBoxBlue2") as! MSButtonNode
+        paddleBoxGreen2 = self.childNode(withName: "paddleBoxGreen2") as! MSButtonNode
         for index in 1...6 {
-            checkMarks.append(self.childNodeWithName("checkMark\(index)") as! SKSpriteNode)
+            checkMarks.append(self.childNode(withName: "checkMark\(index)") as! SKSpriteNode)
         }
-        ten = paddleBoxGreen.childNodeWithName("ten") as! SKLabelNode
-        twenty = paddleBoxRed.childNodeWithName("twenty") as! SKLabelNode
-        forty = paddleBoxYellow.childNodeWithName("forty") as! SKLabelNode
-        eighty = paddleBoxBlue2.childNodeWithName("eighty") as! SKLabelNode
-        twoHundred = paddleBoxGreen2.childNodeWithName("twoHundred") as! SKLabelNode
-        smallGold2 = paddleBoxGreen.childNodeWithName("smallGold2") as! SKSpriteNode
-        smallGold3 = paddleBoxRed.childNodeWithName("smallGold3") as! SKSpriteNode
-        smallGold4 = paddleBoxYellow.childNodeWithName("smallGold4") as! SKSpriteNode
-        smallGold5 = paddleBoxBlue2.childNodeWithName("smallGold5") as! SKSpriteNode
-        smallGold6 = paddleBoxGreen2.childNodeWithName("smallGold6") as! SKSpriteNode
-        paddleGreenPic = paddleBoxGreen.childNodeWithName("paddleGreenPic") as! SKSpriteNode
-        paddleRedPic = paddleBoxRed.childNodeWithName("paddleRedPic") as! SKSpriteNode
-        goldNumber = self.childNodeWithName("goldNumber") as! SKLabelNode
+        ten = paddleBoxGreen.childNode(withName: "ten") as! SKLabelNode
+        twenty = paddleBoxRed.childNode(withName: "twenty") as! SKLabelNode
+        forty = paddleBoxYellow.childNode(withName: "forty") as! SKLabelNode
+        eighty = paddleBoxBlue2.childNode(withName: "eighty") as! SKLabelNode
+        twoHundred = paddleBoxGreen2.childNode(withName: "twoHundred") as! SKLabelNode
+        smallGold2 = paddleBoxGreen.childNode(withName: "smallGold2") as! SKSpriteNode
+        smallGold3 = paddleBoxRed.childNode(withName: "smallGold3") as! SKSpriteNode
+        smallGold4 = paddleBoxYellow.childNode(withName: "smallGold4") as! SKSpriteNode
+        smallGold5 = paddleBoxBlue2.childNode(withName: "smallGold5") as! SKSpriteNode
+        smallGold6 = paddleBoxGreen2.childNode(withName: "smallGold6") as! SKSpriteNode
+        paddleGreenPic = paddleBoxGreen.childNode(withName: "paddleGreenPic") as! SKSpriteNode
+        paddleRedPic = paddleBoxRed.childNode(withName: "paddleRedPic") as! SKSpriteNode
+        goldNumber = self.childNode(withName: "goldNumber") as! SKLabelNode
         
-        var savedCoins: Int = NSUserDefaults.standardUserDefaults().integerForKey("savedCoins")
+        var savedCoins: Int = UserDefaults.standard.integer(forKey: "savedCoins")
         goldNumber.text = "\(savedCoins)"
         
-        paddleSelected = Constants.PaddleColor(rawValue: NSUserDefaults.standardUserDefaults().integerForKey("paddleSelected"))!
-        greenBought = NSUserDefaults.standardUserDefaults().boolForKey("greenBought")
-        redBought = NSUserDefaults.standardUserDefaults().boolForKey("redBought")
+        paddleSelected = Constants.PaddleColor(rawValue: UserDefaults.standard.integer(forKey: "paddleSelected"))!
+        greenBought = UserDefaults.standard.bool(forKey: "greenBought")
+        redBought = UserDefaults.standard.bool(forKey: "redBought")
         
-        self.paddleGreenPic.hidden = true
-        self.paddleRedPic.hidden = true
+        self.paddleGreenPic.isHidden = true
+        self.paddleRedPic.isHidden = true
         
         backButton.selectedHandler = {
             
             if self.soundOn {
-                self.runAction(self.buttonSFX)
+                self.run(self.buttonSFX)
             }
             let skView = self.view as SKView!
             let scene = MainScene(fileNamed:"MainScene") as MainScene!
-            scene.scaleMode = .AspectFit
-            let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
-            skView.presentScene(scene, transition: transition)
+            scene?.scaleMode = .aspectFit
+            let transition = SKTransition.fade(with: UIColor.darkGray, duration: 0.6)
+            skView?.presentScene(scene!, transition: transition)
             
         }
         
@@ -90,10 +90,10 @@ class ShopScene: SKScene {
             for index in 0...5 {
                 let checkMark = checkMarks[index]
                 if paddleSelected.rawValue == index {
-                    checkMark.hidden = false
+                    checkMark.isHidden = false
                 }
                 else {
-                    checkMark.hidden = true
+                    checkMark.isHidden = true
                 }
             }
         }
@@ -109,29 +109,29 @@ class ShopScene: SKScene {
         
         paddleBoxBlue.selectedHandler = {
             if self.soundOn {
-                self.runAction(self.buttonSFX)
+                self.run(self.buttonSFX)
             }
-            self.paddleSelected = .Blue
+            self.paddleSelected = .blue
             updateCheckMark()
             self.paddleSelectedUpdate()
         }
         
         paddleBoxGreen.selectedHandler = {
             if self.soundOn {
-                self.runAction(self.buttonSFX)
+                self.run(self.buttonSFX)
             }
             if savedCoins >= 10 && !self.greenBought {
                 savedCoins -= 10
                 self.goldNumber.text = "\(savedCoins)"
-                NSUserDefaults.standardUserDefaults().setInteger(savedCoins, forKey: Constants.savedCoins)
+                UserDefaults.standard.set(savedCoins, forKey: Constants.savedCoins)
                 self.greenBought = true
-                self.paddleSelected = .Green
+                self.paddleSelected = .green
                 updateCheckMark()
                 self.greenBoughtUpdate()
                 self.paddleSelectedUpdate()
             }
             else if self.greenBought {
-                self.paddleSelected = .Green
+                self.paddleSelected = .green
                 updateCheckMark()
                 self.greenBoughtUpdate()
                 self.paddleSelectedUpdate()
@@ -140,20 +140,20 @@ class ShopScene: SKScene {
         
         paddleBoxRed.selectedHandler = {
             if self.soundOn {
-                self.runAction(self.buttonSFX)
+                self.run(self.buttonSFX)
             }
             if savedCoins >= 20 && !self.redBought {
                     savedCoins -= 20
                     self.goldNumber.text = "\(savedCoins)"
-                    NSUserDefaults.standardUserDefaults().setInteger(savedCoins, forKey: Constants.savedCoins)
+                    UserDefaults.standard.set(savedCoins, forKey: Constants.savedCoins)
                     self.redBought = true
-                    self.paddleSelected = .Red
+                    self.paddleSelected = .red
                     updateCheckMark()
                     self.redBoughtUpdate()
                     self.paddleSelectedUpdate()
             }
             else if self.redBought == true {
-                self.paddleSelected = .Red
+                self.paddleSelected = .red
                 updateCheckMark()
                 self.redBoughtUpdate()
                 self.paddleSelectedUpdate()
@@ -163,7 +163,7 @@ class ShopScene: SKScene {
         
         paddleBoxYellow.selectedHandler = {
             if self.soundOn {
-                self.runAction(self.buttonSFX)
+                self.run(self.buttonSFX)
             }
             if savedCoins >= 40 {
                 
@@ -172,7 +172,7 @@ class ShopScene: SKScene {
         
         paddleBoxBlue2.selectedHandler = {
             if self.soundOn {
-                self.runAction(self.buttonSFX)
+                self.run(self.buttonSFX)
             }
             if savedCoins >= 80 {
                 
@@ -181,7 +181,7 @@ class ShopScene: SKScene {
         
         paddleBoxGreen2.selectedHandler = {
             if self.soundOn {
-                self.runAction(self.buttonSFX)
+                self.run(self.buttonSFX)
             }
             if savedCoins >= 200 {
                 
@@ -190,24 +190,24 @@ class ShopScene: SKScene {
     }
     
     func paddleSelectedUpdate() {
-        NSUserDefaults().setInteger(paddleSelected.rawValue, forKey: "paddleSelected")
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults().set(paddleSelected.rawValue, forKey: "paddleSelected")
+        UserDefaults.standard.synchronize()
     }
     
     func greenBoughtUpdate() {
-        NSUserDefaults().setBool(greenBought, forKey: "greenBought")
-        NSUserDefaults.standardUserDefaults().synchronize()
-        self.ten.hidden = true
-        self.smallGold2.hidden = true
-        self.paddleGreenPic.hidden = false
+        UserDefaults().set(greenBought, forKey: "greenBought")
+        UserDefaults.standard.synchronize()
+        self.ten.isHidden = true
+        self.smallGold2.isHidden = true
+        self.paddleGreenPic.isHidden = false
     }
     
     func redBoughtUpdate() {
-        NSUserDefaults().setBool(redBought, forKey: "redBought")
-        NSUserDefaults.standardUserDefaults().synchronize()
-        self.twenty.hidden = true
-        self.smallGold3.hidden = true
-        self.paddleRedPic.hidden = false
+        UserDefaults().set(redBought, forKey: "redBought")
+        UserDefaults.standard.synchronize()
+        self.twenty.isHidden = true
+        self.smallGold3.isHidden = true
+        self.paddleRedPic.isHidden = false
         
     }
     

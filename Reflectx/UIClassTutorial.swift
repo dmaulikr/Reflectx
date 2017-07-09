@@ -18,32 +18,32 @@ class UIClassTutorial: SKNode{
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        smallLeftArrow = childNodeWithName("smallLeftArrow") as! SKSpriteNode
-        smallRightArrow = childNodeWithName("smallRightArrow") as! SKSpriteNode
-        instructions = childNodeWithName("instructions") as! SKLabelNode
+        smallLeftArrow = childNode(withName: "smallLeftArrow") as! SKSpriteNode
+        smallRightArrow = childNode(withName: "smallRightArrow") as! SKSpriteNode
+        instructions = childNode(withName: "instructions") as! SKLabelNode
         
-        self.runAction(SKAction.waitForDuration(1.3), completion: {() -> Void in
-            self.instructions.hidden = true
+        self.run(SKAction.wait(forDuration: 1.3), completion: {() -> Void in
+            self.instructions.isHidden = true
         })
         
     }
     
     func hideArrows () {
-        smallLeftArrow.hidden = true
-        smallRightArrow.hidden = true
+        smallLeftArrow.isHidden = true
+        smallRightArrow.isHidden = true
     }
     
     func instructionsUpdate() {
         instructionsNumber += 1
         if instructionsNumber > 1 {
-            self.instructions.hidden = true
+            self.instructions.isHidden = true
         }
         else if instructionsNumber <= 1 {
-            self.runAction(SKAction.waitForDuration(4), completion: {() -> Void in
+            self.run(SKAction.wait(forDuration: 4), completion: {() -> Void in
                 self.instructions.text = "Let go to shoot"
-                self.instructions.hidden = false
-                self.runAction(SKAction.waitForDuration(4), completion: {() -> Void in
-                    self.instructions.hidden = true
+                self.instructions.isHidden = false
+                self.run(SKAction.wait(forDuration: 4), completion: {() -> Void in
+                    self.instructions.isHidden = true
                 })
             })
         }

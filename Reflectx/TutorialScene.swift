@@ -11,7 +11,7 @@ import AVFoundation
 
 class TutorialScene: SKScene, SKPhysicsContactDelegate {
     
-    var state: GameState = .Title
+    var state: GameState = .title
     var wavesNumber = 0
     var wavesDoneNumber = 0
     var health: Int = 1
@@ -33,70 +33,70 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
     var UILayer2: UIClassTutorial!
     var playButton2: MSButtonNode!
     var playButtonBack2: MSButtonNode!
-    let soundOn: Bool = NSUserDefaults.standardUserDefaults().boolForKey("soundOn")
+    let soundOn: Bool = UserDefaults.standard.bool(forKey: "soundOn")
     let buttonSFX = SKAction.playSoundFileNamed("button1", waitForCompletion: false)
     var player = AVAudioPlayer()
     var nowPlaying = false
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         /* Set up your scene here */
         
         physicsWorld.contactDelegate = self
-        paddle = self.childNodeWithName("//paddle") as! SKSpriteNode
-        obstacleLayer = self.childNodeWithName("obstacleLayer")
-        UILayer2 = self.childNodeWithName("UI") as! UIClassTutorial
-        homeButton = self.childNodeWithName("homeButton") as! MSButtonNode
-        playButton2 = self.childNodeWithName("playButton2") as! MSButtonNode
-        playButtonBack2 = self.childNodeWithName("playButtonBack2") as! MSButtonNode
+        paddle = self.childNode(withName: "//paddle") as! SKSpriteNode
+        obstacleLayer = self.childNode(withName: "obstacleLayer")
+        UILayer2 = self.childNode(withName: "UI") as! UIClassTutorial
+        homeButton = self.childNode(withName: "homeButton") as! MSButtonNode
+        playButton2 = self.childNode(withName: "playButton2") as! MSButtonNode
+        playButtonBack2 = self.childNode(withName: "playButtonBack2") as! MSButtonNode
         
-        let urlPath = NSBundle.mainBundle().URLForResource("music2", withExtension: "mp3")
-        player = try! AVAudioPlayer(contentsOfURL: urlPath!)
+        let urlPath = Bundle.main.url(forResource: "music2", withExtension: "mp3")
+        player = try! AVAudioPlayer(contentsOf: urlPath!)
         
         homeButton.selectedHandler = {
             
             if self.soundOn {
-                self.runAction(self.buttonSFX)
+                self.run(self.buttonSFX)
             }
             self.player.pause()
             let skView = self.view as SKView!
             let scene = MainScene(fileNamed:"MainScene") as MainScene!
-            scene.scaleMode = .AspectFit
-            let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
-            skView.presentScene(scene, transition: transition)
+            scene?.scaleMode = .aspectFit
+            let transition = SKTransition.fade(with: UIColor.darkGray, duration: 0.6)
+            skView?.presentScene(scene!, transition: transition)
         }
         
         playButton2.selectedHandler = {
             
             if self.soundOn {
-                self.runAction(self.buttonSFX)
+                self.run(self.buttonSFX)
             }
             self.player.pause()
             let skView = self.view as SKView!
             let scene = GameScene(fileNamed:"GameScene") as GameScene!
-            scene.scaleMode = .AspectFit
-            let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
-            skView.presentScene(scene, transition: transition)
+            scene?.scaleMode = .aspectFit
+            let transition = SKTransition.fade(with: UIColor.darkGray, duration: 0.6)
+            skView?.presentScene(scene!, transition: transition)
             
         }
         
         playButtonBack2.selectedHandler = {
             
             if self.soundOn {
-                self.runAction(self.buttonSFX)
+                self.run(self.buttonSFX)
             }
             self.player.pause()
             let skView = self.view as SKView!
             let scene = GameScene(fileNamed:"GameScene") as GameScene!
-            scene.scaleMode = .AspectFit
-            let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
-            skView.presentScene(scene, transition: transition)
+            scene?.scaleMode = .aspectFit
+            let transition = SKTransition.fade(with: UIColor.darkGray, duration: 0.6)
+            skView?.presentScene(scene!, transition: transition)
             
         }
         
-        playButton2.hidden = true
-        playButtonBack2.hidden = true
+        playButton2.isHidden = true
+        playButtonBack2.isHidden = true
         
-        self.state = .Playing
+        self.state = .playing
         
         if self.soundOn {
             player.play()
@@ -106,16 +106,16 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        if state == .GameOver || state == .Title { return }
+        if state == .gameOver || state == .title { return }
         
-        state = .Playing
+        state = .playing
         
         let touch = touches.first
-        let touchLocation = touch!.locationInNode(self)
+        let touchLocation = touch!.location(in: self)
         
-        if nodeAtPoint(touchLocation).name == paddleName {
+        if atPoint(touchLocation).name == paddleName {
             
             isFingerOnPaddle = true
             
@@ -127,12 +127,12 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         if isFingerOnPaddle {
             let touch = touches.first
-            let touchLocation = touch!.locationInNode(self)
-            let previousLocation = touch!.previousLocationInNode(self)
+            let touchLocation = touch!.location(in: self)
+            let previousLocation = touch!.previousLocation(in: self)
             let paddleX = paddle.position.x + (touchLocation.x - previousLocation.x)
             
             paddle.position = CGPoint(x: paddleX, y: paddle.position.y)
@@ -142,30 +142,30 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         isFingerOnPaddle = false
         
         if let bulletJoint = bulletJoint {
             
             if let bullet = bulletJoint.bodyA.node as? Bullet {
-                bullet.physicsBody?.velocity = CGVectorMake(0, 650)
+                bullet.physicsBody?.velocity = CGVector(dx: 0, dy: 650)
             }
                 
             else if let bullet = bulletJoint.bodyB.node as? Bullet {
-                bullet.physicsBody?.velocity = CGVectorMake(0, 650)
+                bullet.physicsBody?.velocity = CGVector(dx: 0, dy: 650)
             }
             
-            physicsWorld.removeJoint(bulletJoint)
+            physicsWorld.remove(bulletJoint)
             self.bulletJoint = nil
             
         }
         
     }
     
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
         
-        if state != .Playing {
+        if state != .playing {
             return
         }
         
@@ -202,7 +202,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) {
         /* Physics contact delegate implementation */
         
         /* Get references to the bodies involved in the collision */
@@ -241,26 +241,26 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func collisionCheck (enemy: Enemy, shootable: Shootable) {
+    func collisionCheck (_ enemy: Enemy, shootable: Shootable) {
         if enemy.shootable != shootable {
             return
         }
         points += 1
         if self.soundOn {
-        self.runAction(popSFX)
+        self.run(popSFX)
         }
         dieEnemy(enemy)
         dieEnemy(shootable)
     }
     
-    func addBulletJoint (bullet: Bullet) {
-        bullet.physicsBody?.velocity = CGVectorMake(0, 0)
-        bulletJoint = SKPhysicsJointPin.jointWithBodyA(paddle.physicsBody!, bodyB: bullet.physicsBody!, anchor: bullet.position)
+    func addBulletJoint (_ bullet: Bullet) {
+        bullet.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+        bulletJoint = SKPhysicsJointPin.joint(withBodyA: paddle.physicsBody!, bodyB: bullet.physicsBody!, anchor: bullet.position)
         
-        physicsWorld.addJoint(bulletJoint!)
+        physicsWorld.add(bulletJoint!)
     }
     
-    func dieEnemy(node: SKNode) {
+    func dieEnemy(_ node: SKNode) {
         /* Enemy death*/
         node.removeFromParent()
     }
@@ -275,7 +275,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
                 if bullet.position.y <= 70 || bullet.position.y > 660  {
                     health -= 1
                     if self.soundOn {
-                    self.runAction(pop2SFX)
+                    self.run(pop2SFX)
                     }
                 }
                 bullet.updateBulletSpeedSlow(self.wavesNumber)
@@ -285,7 +285,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
                 if enemy.position.y < 180 {
                     health -= 1
                     if self.soundOn {
-                    self.runAction(pop2SFX)
+                    self.run(pop2SFX)
                     }
                 }
                 //ball.updateEnemySpeed(self.wavesNumber)
@@ -295,7 +295,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
                 if ball.position.y <= 70 {
                     health -= 1
                     if self.soundOn {
-                    self.runAction(pop2SFX)
+                    self.run(pop2SFX)
                     }
                 }
                 //ball.updateBallSpeed(self.wavesNumber)
@@ -306,22 +306,22 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
     func gameOver() {
         /* Game over! */
         
-        state = .Restart
+        state = .restart
         player.pause()
         let skView = self.view as SKView!
         let scene = TutorialScene(fileNamed:"TutorialScene") as TutorialScene!
-        scene.scaleMode = .AspectFit
+        scene?.scaleMode = .aspectFit
         if self.soundOn {
-        self.runAction(pop2SFX)
+        self.run(pop2SFX)
         }
-        let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
-        skView.presentScene(scene, transition: transition)
+        let transition = SKTransition.fade(with: UIColor.darkGray, duration: 0.6)
+        skView?.presentScene(scene!, transition: transition)
 
     }
     
     func gameDone() {
-        playButton2.hidden = false
-        playButtonBack2.hidden = false
+        playButton2.isHidden = false
+        playButtonBack2.isHidden = false
     }
     
     func spawnNewWave(){
@@ -356,7 +356,7 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func createBallGroup(position: CGPoint){
+    func createBallGroup(_ position: CGPoint){
         let newBall = createBall(position)
         let newEnemy = Enemy(imageName: "cloud")
         let enemyPosition = CGPoint (x: newBall.position.x+0, y: newBall.position.y+100)
@@ -366,28 +366,28 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         newEnemy.shootable = newBall
     }
     
-    func createBulletGroup(position: CGPoint) -> Enemy{
+    func createBulletGroup(_ position: CGPoint) -> Enemy{
         let bullet = createBullet(position)
         let enemy = createEnemy(CGPoint(x: bullet.position.x+40, y: bullet.position.y+100))
         enemy.shootable = bullet
         return enemy
     }
     
-    func createBall(position: CGPoint) -> Ball {
+    func createBall(_ position: CGPoint) -> Ball {
         let newBall = Ball()
         newBall.position = position
         obstacleLayer.addChild(newBall)
         return newBall
     }
     
-    func createBullet(position: CGPoint) -> Bullet {
+    func createBullet(_ position: CGPoint) -> Bullet {
         let newBullet = Bullet(waveNumber: wavesNumber)
         newBullet.position = position
         obstacleLayer.addChild(newBullet)
         return newBullet
     }
     
-    func createEnemy(position: CGPoint) -> Enemy {
+    func createEnemy(_ position: CGPoint) -> Enemy {
         let newEnemy = Enemy(imageName: "wingMan3")
         newEnemy.position = position
         obstacleLayer.addChild(newEnemy)
@@ -400,18 +400,18 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         
         let wavePositionsX = [60, 150, 240, 140, 190]
         var index = 0
-        let wait = SKAction.waitForDuration(1.6)
-        let run = SKAction.runBlock {
+        let wait = SKAction.wait(forDuration: 1.6)
+        let run = SKAction.run {
             self.createBallGroup(CGPoint(x: wavePositionsX[index], y: 650))
             index += 1
             
         }
-        let finish = SKAction.runBlock {
+        let finish = SKAction.run {
             self.waveFinished = true
             self.wavesNumber += 1
         }
         
-        self.runAction(SKAction.sequence([run, wait, run, wait, run, wait, run, run, finish]))
+        self.run(SKAction.sequence([run, wait, run, wait, run, wait, run, run, finish]))
         
     }
     
@@ -421,9 +421,9 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         
         let wavePositionsX = [60, 155]
         var index = 0
-        let wait = SKAction.waitForDuration(4.5)
+        let wait = SKAction.wait(forDuration: 4.5)
         
-        let run = SKAction.runBlock {
+        let run = SKAction.run {
             
             let enemy = self.createBulletGroup(CGPoint(x: wavePositionsX[index], y: 650))
             
@@ -432,12 +432,12 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
             index += 1
         }
         
-        let finish = SKAction.runBlock {
+        let finish = SKAction.run {
             self.waveFinished = true
             self.wavesNumber += 1
         }
         
-        self.runAction(SKAction.sequence([run, wait, run, wait, finish]))
+        self.run(SKAction.sequence([run, wait, run, wait, finish]))
         
     }
     
@@ -445,17 +445,17 @@ class TutorialScene: SKScene, SKPhysicsContactDelegate {
         
         self.waveFinished = false
         
-        let run = SKAction.runBlock {
+        let run = SKAction.run {
             let enemy = self.createBulletGroup(CGPoint(x: 240, y: 490))
             enemy.goLeftSlow()
         }
         
-        let finish = SKAction.runBlock {
+        let finish = SKAction.run {
             self.waveFinished = true
             self.wavesNumber += 1
         }
         
-        self.runAction(SKAction.sequence([run, finish]))
+        self.run(SKAction.sequence([run, finish]))
         
     }
     

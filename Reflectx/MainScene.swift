@@ -20,25 +20,25 @@ class MainScene: SKScene {
     var audioButton: MSButtonNode!
     var goldNumber: SKLabelNode!
     var soundOn: Bool = true
-    var state: GameState = .Title
+    var state: GameState = .title
     let buttonSFX = SKAction.playSoundFileNamed("button1", waitForCompletion: false)
     let playSFX = SKAction.playSoundFileNamed("play", waitForCompletion: false)
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         /* Setup your scene here */
                 
-        playButton = self.childNodeWithName("playButton") as! MSButtonNode
-        playButtonBack = self.childNodeWithName("playButtonBack") as! MSButtonNode
-        highScoreButton = self.childNodeWithName("highScoreButton") as! MSButtonNode
-        rateButton = self.childNodeWithName("rateButton") as! MSButtonNode
-        shopButton = self.childNodeWithName("shopButton") as! MSButtonNode
-        infoButton = self.childNodeWithName("infoButton") as! MSButtonNode
-        tutorialButton = self.childNodeWithName("tutorialButton") as! MSButtonNode
-        audioButton = self.childNodeWithName("audioButton") as! MSButtonNode
-        goldNumber = self.childNodeWithName("goldNumber") as! SKLabelNode
+        playButton = self.childNode(withName: "playButton") as! MSButtonNode
+        playButtonBack = self.childNode(withName: "playButtonBack") as! MSButtonNode
+        highScoreButton = self.childNode(withName: "highScoreButton") as! MSButtonNode
+        rateButton = self.childNode(withName: "rateButton") as! MSButtonNode
+        shopButton = self.childNode(withName: "shopButton") as! MSButtonNode
+        infoButton = self.childNode(withName: "infoButton") as! MSButtonNode
+        tutorialButton = self.childNode(withName: "tutorialButton") as! MSButtonNode
+        audioButton = self.childNode(withName: "audioButton") as! MSButtonNode
+        goldNumber = self.childNode(withName: "goldNumber") as! SKLabelNode
         
-        if NSUserDefaults.standardUserDefaults().objectForKey("soundOn") != nil {
-            soundOn = NSUserDefaults.standardUserDefaults().boolForKey("soundOn")
+        if UserDefaults.standard.object(forKey: "soundOn") != nil {
+            soundOn = UserDefaults.standard.bool(forKey: "soundOn")
         }
         else {
             soundOn = true
@@ -47,7 +47,7 @@ class MainScene: SKScene {
         audioUpdate()
         soundOnUpdate()
         
-        let savedCoins: Int = NSUserDefaults.standardUserDefaults().integerForKey("savedCoins")
+        let savedCoins: Int = UserDefaults.standard.integer(forKey: "savedCoins")
         goldNumber.text = "\(savedCoins)"
         
         playButton.selectedHandler = playButtonClicked
@@ -63,32 +63,32 @@ class MainScene: SKScene {
     
     func rateButtonClicked () {
         if soundOn == true {
-            self.runAction(playSFX)
+            self.run(playSFX)
         }
-            UIApplication.sharedApplication().openURL(NSURL(string : "itms-apps://itunes.apple.com/app/id1141987144")!);
+            UIApplication.shared.openURL(URL(string : "itms-apps://itunes.apple.com/app/id1141987144")!);
     }
     
     func playButtonClicked () {
         
         if soundOn == true {
-        self.runAction(playSFX)
+        self.run(playSFX)
         }
-        self.state = .Playing
+        self.state = .playing
         let skView = self.view as SKView!
         let scene = GameScene(fileNamed:"GameScene") as GameScene!
-        scene.scaleMode = .AspectFit
-        skView.showsPhysics = false
-        skView.showsDrawCount = false
-        skView.showsFPS = false
-        let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
-        skView.presentScene(scene, transition: transition)
+        scene?.scaleMode = .aspectFit
+        skView?.showsPhysics = false
+        skView?.showsDrawCount = false
+        skView?.showsFPS = false
+        let transition = SKTransition.fade(with: UIColor.darkGray, duration: 0.6)
+        skView?.presentScene(scene!, transition: transition)
         
     }
 
     func soundOnUpdate() {
         
-        NSUserDefaults().setBool(soundOn, forKey: "soundOn")
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults().set(soundOn, forKey: "soundOn")
+        UserDefaults.standard.synchronize()
     }
     
     func audioButtonClicked () {
@@ -96,7 +96,7 @@ class MainScene: SKScene {
         
         audioUpdate()
         if soundOn {
-            self.runAction(buttonSFX)
+            self.run(buttonSFX)
         }
         soundOnUpdate()
     }
@@ -115,73 +115,73 @@ class MainScene: SKScene {
     func playButtonBackClicked () {
         
         if soundOn == true {
-            self.runAction(buttonSFX)
+            self.run(buttonSFX)
         }
-        self.state = .Playing
+        self.state = .playing
         let skView = self.view as SKView!
         let scene = GameScene(fileNamed:"GameScene") as GameScene!
-        scene.scaleMode = .AspectFit
-        skView.showsPhysics = false
-        skView.showsDrawCount = false
-        skView.showsFPS = false
-        let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
-        skView.presentScene(scene, transition: transition)
+        scene?.scaleMode = .aspectFit
+        skView?.showsPhysics = false
+        skView?.showsDrawCount = false
+        skView?.showsFPS = false
+        let transition = SKTransition.fade(with: UIColor.darkGray, duration: 0.6)
+        skView?.presentScene(scene!, transition: transition)
         
     }
     
     func highScoreButtonClicked () {
         
         if soundOn == true {
-            self.runAction(buttonSFX)
+            self.run(buttonSFX)
         }
-        self.state = .Browse
+        self.state = .browse
         let skView = self.view as SKView!
         let scene = HighScoreScene(fileNamed:"HighScoreScene") as HighScoreScene!
-        scene.scaleMode = .AspectFit
-        let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
-        skView.presentScene(scene, transition: transition)
+        scene?.scaleMode = .aspectFit
+        let transition = SKTransition.fade(with: UIColor.darkGray, duration: 0.6)
+        skView?.presentScene(scene!, transition: transition)
         
     }
     
     func tutorialButtonClicked () {
         
         if soundOn == true {
-            self.runAction(buttonSFX)
+            self.run(buttonSFX)
         }
-        self.state = .Browse
+        self.state = .browse
         let skView = self.view as SKView!
         let scene = TutorialScene(fileNamed:"TutorialScene") as TutorialScene!
-        scene.scaleMode = .AspectFit
-        let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
-        skView.presentScene(scene, transition: transition)
+        scene?.scaleMode = .aspectFit
+        let transition = SKTransition.fade(with: UIColor.darkGray, duration: 0.6)
+        skView?.presentScene(scene!, transition: transition)
         
     }
     
     func shopButtonClicked () {
         
         if soundOn == true {
-            self.runAction(buttonSFX)
+            self.run(buttonSFX)
         }
-        self.state = .Browse
+        self.state = .browse
         let skView = self.view as SKView!
         let scene = ShopScene(fileNamed:"ShopScene") as ShopScene!
-        scene.scaleMode = .AspectFit
-        let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
-        skView.presentScene(scene, transition: transition)
+        scene?.scaleMode = .aspectFit
+        let transition = SKTransition.fade(with: UIColor.darkGray, duration: 0.6)
+        skView?.presentScene(scene!, transition: transition)
         
     }
     
     func infoButtonClicked () {
         
         if soundOn == true {
-            self.runAction(buttonSFX)
+            self.run(buttonSFX)
         }
-        self.state = .Browse
+        self.state = .browse
         let skView = self.view as SKView!
         let scene = InfoScene(fileNamed:"InfoScene") as InfoScene!
-        scene.scaleMode = .AspectFit
-        let transition = SKTransition.fadeWithColor(UIColor.darkGrayColor(), duration: 0.6)
-        skView.presentScene(scene, transition: transition)
+        scene?.scaleMode = .aspectFit
+        let transition = SKTransition.fade(with: UIColor.darkGray, duration: 0.6)
+        skView?.presentScene(scene!, transition: transition)
         
     }
 }

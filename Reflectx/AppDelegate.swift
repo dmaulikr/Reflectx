@@ -6,8 +6,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    func application(application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?)
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?)
         -> Bool {
             FIRApp.configure()
             return true

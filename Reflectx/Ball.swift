@@ -21,7 +21,7 @@ class Ball: Shootable {
         
     }
     
-    func updateBallSpeed(waveNumber: Int) {
+    func updateBallSpeed(_ waveNumber: Int) {
         switch waveNumber {
         case 0...4:
             if position.y < 620 && position.y > 500 {

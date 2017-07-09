@@ -13,11 +13,11 @@ import GoogleMobileAds
 import Social
 
 class Social {
-    func shareScore(scene: SKScene) {
+    func shareScore(_ scene: SKScene) {
         let postText: String = "Check out my score! Can you beat it? "
         let postImage: UIImage = getScreenshot(scene)
         let postGame: String = "https://itunes.apple.com/app/id1141987144"
-        let activityItems = [postText, postImage, postGame]
+        let activityItems = [postText, postImage, postGame] as [Any]
         let activityController = UIActivityViewController(
             activityItems: activityItems,
             applicationActivities: nil
@@ -25,22 +25,22 @@ class Social {
         
         let controller: UIViewController = scene.view!.window!.rootViewController!
         
-        controller.presentViewController(
+        controller.present(
             activityController,
             animated: true,
             completion: nil
         )
     }
     
-    func getScreenshot(scene: SKScene) -> UIImage {
-        let snapshotView = scene.view!.snapshotViewAfterScreenUpdates(true)
-        let bounds = UIScreen.mainScreen().bounds
+    func getScreenshot(_ scene: SKScene) -> UIImage {
+        let snapshotView = scene.view!.snapshotView(afterScreenUpdates: true)
+        let bounds = UIScreen.main.bounds
         
         UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0)
         
-        snapshotView.drawViewHierarchyInRect(bounds, afterScreenUpdates: true)
+        snapshotView?.drawHierarchy(in: bounds, afterScreenUpdates: true)
         
-        let screenshotImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        let screenshotImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         
         UIGraphicsEndImageContext()
         
@@ -57,17 +57,17 @@ class GameViewController: UIViewController {
         shareToFacebook.completionHandler = {
             result in
             switch result {
-            case SLComposeViewControllerResult.Cancelled:
+            case SLComposeViewControllerResult.cancelled:
                 break
                 
-            case SLComposeViewControllerResult.Done:
+            case SLComposeViewControllerResult.done:
                 break
             }
         }
 
         shareToFacebook.setInitialText("Check out this game: https://itunes.apple.com/app/id1141987144")
-        shareToFacebook.addImage(UIImage(named: "IconPic.png"))
-        self.presentViewController(shareToFacebook, animated: true, completion: nil)
+        shareToFacebook.add(UIImage(named: "IconPic.png"))
+        self.present(shareToFacebook, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -78,7 +78,7 @@ class GameViewController: UIViewController {
         bannerView.rootViewController = self
         bannerView.loadRequest(GADRequest()) */
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.shareToFacebook), name: "postToFacebook", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GameViewController.shareToFacebook), name: NSNotification.Name(rawValue: "postToFacebook"), object: nil)
 
         
         if let scene = MainScene(fileNamed:"MainScene") {
@@ -91,21 +91,21 @@ class GameViewController: UIViewController {
             skView.ignoresSiblingOrder = true
             
             /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFit
+            scene.scaleMode = .aspectFit
             
             skView.presentScene(scene)
         }
     }
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return true
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return .AllButUpsideDown
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return .allButUpsideDown
         } else {
-            return .All
+            return .all
         }
     }
     
@@ -114,7 +114,7 @@ class GameViewController: UIViewController {
         // Release any cached data, images, etc that aren't in use.
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
